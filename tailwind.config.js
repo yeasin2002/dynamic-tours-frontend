@@ -19,7 +19,7 @@ module.exports = {
         actionBlue: "#2986FE",
         textBlack: "#101010",
         plainWhite: "#FFFFFF",
-        offWhite: "F9F9FB",
+        offWhite: "#F9F9FB",
       },
     },
   },

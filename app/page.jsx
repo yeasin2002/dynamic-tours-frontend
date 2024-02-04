@@ -8,7 +8,7 @@ export default function Home() {
         <Nav />
       </nav>
       <main>
-        <section className=" hero ">
+        <section className="hero">
           <Hero />
         </section>
       </main>

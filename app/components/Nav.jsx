@@ -7,7 +7,6 @@ import { useState } from "react";
 
 export default function Nav() {
   const [isNavShowed, setIsNavShowed] = useState();
-
   return (
     <>
       <nav className="container p-4 py-6">
@@ -28,18 +27,24 @@ export default function Nav() {
             ))}
           </ul>
 
-          <div className="bg-red-300">
-            <Bars3Icon
-              className={`h-8 w-8 hover:scale-110 ${
-                isNavShowed ? "hidden" : "block"
-              } hover:duration-75 hover:cursor-pointer md:hidden`}
-              onClick={() => {
-                setIsNavShowed((prev) => !prev);
-              }}
-            />
-
+          <div className=" relative md:hidden w-[60%]">
+            {!isNavShowed ? (
+              <Bars3Icon
+                className={`h-8 w-8 hover:scale-110 float-right hover:duration-75 hover:cursor-pointer md:hidden`}
+                onClick={() => {
+                  setIsNavShowed((prev) => !prev);
+                }}
+              />
+            ) : (
+              <XMarkIcon
+                className={`h-8 w-8 hover:scale-110 float-right hover:duration-75 hover:cursor-pointer md:hidden`}
+                onClick={() => {
+                  setIsNavShowed((prev) => !prev);
+                }}
+              />
+            )}
             <div
-              className={`fadeIn absolute right-0 bg-green-200   z-10  ${
+              className={`fadeIn absolute top-10 right-0 bg-offWhite rounded-lg z-10  ${
                 !isNavShowed ? "hidden" : "block"
               } absolute w-full  p-6 top-0 right-0`}
             >
@@ -54,14 +59,6 @@ export default function Nav() {
                     </a>
                   </li>
                 ))}
-                <XMarkIcon
-                  className={`h-8 w-8 hover:scale-110 ${
-                    isNavShowed ? "block" : "hidden"
-                  } hover:duration-75 hover:cursor-pointer md:hidden`}
-                  onClick={() => {
-                    setIsNavShowed((prev) => !prev);
-                  }}
-                />
               </ul>
             </div>
           </div>
