@@ -24,3 +24,15 @@ body {
     text-wrap: balance;
   }
 }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+.fadeIn {
+  animation: fadeIn .5s ;
+}

@@ -36,7 +36,7 @@ export default function Nav() {
             }}
           />
           <div
-            className={` bg-green-200 ${
+            className={` bg-green-200 fadeIn ${
               !isNavShowed ? "hidden" : "block"
             } absolute w-full  p-6 top-0 right-0`}
           >
