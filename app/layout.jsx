@@ -4,7 +4,7 @@ import "./globals.css";
 const dmSans = DM_Sans({ weight: ["400", "500", "700"], subsets: ["latin"] });
 
 export const metadata = {
-  title: "Dynamic Tours",
+  title: "Dynamic Travel",
   description: "Explore new traveling opportunity",
 };
 
