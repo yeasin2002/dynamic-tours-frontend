@@ -26,7 +26,7 @@ export default function Hero() {
         </div>
 
         <div
-          className="lg:h-[751px] md:h-[480px] h-[360px] rounded-3xl"
+          className="lg:h-[780px] md:h-[480px] h-[360px] rounded-3xl"
           style={{
             backgroundImage: `url(${hero.src})`,
             width: "100%",
@@ -42,15 +42,15 @@ export default function Hero() {
             />
           </div>
 
-          <div className=" knowmore lg:absolute bottom-0 right-6  bg-green-300">
-            <div className=" bg-red-300 flex flex-col">
-              <div className="  flex justify-end ">
-                <div className="bg-offWhite flex relative items-center curve w-3/5 group hover:cursor-pointer justify-around rounded-full p-4 rounded-br-none">
+          <div className=" knowmore lg:absolute bottom-0 right-6">
+            <div className=" flex md:flex-col flex-col-reverse md:py-0 py-6">
+              <div className="  flex justify-end bg-green-300">
+                <div className="bg-offWhite flex relative items-center  w-3/5 group hover:cursor-pointer justify-around  rounded-bl-none p-4 rounded-tl-3xl  rounded-br-none  ">
                   <p className=" text-lg font-bold">Know More</p>
                   <ArrowRightIcon className="w-[25x] h-[25px] p-1 group-hover:translate-x-1 group-hover:duration-300  rounded-full bg-actionBlue  text-plainWhite box-border" />
                 </div>
               </div>
-              <div className=" bg-gray-300 flex p-5 rounded-full  rounded-tr-none">
+              <div className=" bg-red-400 flex p-5 rounded-full  md:rounded-tl-3xl md:rounded-tr-none  md:rounded-br-none md:rounded-bl-none ">
                 <div className=" image-list flex">
                   {oceanImage.map((image, i) => (
                     <div
