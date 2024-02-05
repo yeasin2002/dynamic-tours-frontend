@@ -1,8 +1,9 @@
 import hero from "@/public/hero.png";
-import plane from "@/public/plane2.png";
+import plane from "@/public/plane.png";
 import Image from "next/image";
 import { PlayIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
 import Action from "./Action";
+import { oceanImage } from "../constant/constant";
 
 export default function Hero() {
   return (
@@ -41,11 +42,40 @@ export default function Hero() {
             />
           </div>
 
-          <div className=" knowmore lg:absolute bottom-0 right-5  bg-green-300">
-            <div>
-              <div className="bg-blue-300 flex items-center right-10 gap-10 roundedfu p-4">
-                <p className=" text-lg font-bold">Know More</p>
-                <ArrowRightIcon className="w-[25x] h-[25px] p-1 rounded-full bg-actionBlue text-plainWhite box-border" />
+          <div className=" knowmore lg:absolute bottom-0 right-6  bg-green-300">
+            <div className=" bg-red-300 flex flex-col">
+              <div className="  flex justify-end ">
+                <div className="bg-offWhite flex relative items-center curve w-3/5 group hover:cursor-pointer justify-around rounded-full p-4 rounded-br-none">
+                  <p className=" text-lg font-bold">Know More</p>
+                  <ArrowRightIcon className="w-[25x] h-[25px] p-1 group-hover:translate-x-1 group-hover:duration-300  rounded-full bg-actionBlue  text-plainWhite box-border" />
+                </div>
+              </div>
+              <div className=" bg-gray-300 flex p-5 rounded-full  rounded-tr-none">
+                <div className=" image-list flex">
+                  {oceanImage.map((image, i) => (
+                    <div
+                      key={image.id}
+                      className={`${i > 0 ? "-translate-x-6" : ""} ${
+                        i === 2 ? "-translate-x-[48px]" : ""
+                      }`}
+                    >
+                      <Image
+                        src={image.image}
+                        width={65}
+                        height={65}
+                        className="object-cover rounded-full border-[3px] border-offWhite"
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                <div className=" -translate-x-4">
+                  <p className="text-base font-bold pb-1">Awesome places</p>
+                  <p className="text-sm font-medium text-textBlack">
+                    Discover The World One <br />
+                    Adventure At A Time
+                  </p>
+                </div>
               </div>
             </div>
           </div>

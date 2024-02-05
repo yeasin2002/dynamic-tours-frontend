@@ -36,3 +36,16 @@ body {
 .fadeIn {
   animation: fadeIn .5s ;
 }
+
+
+.curve::before {
+  content: '';
+  width: 5px;
+  background: red;
+  padding: 15px;
+  height: 5px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-top-right-radius: 100%;
+}

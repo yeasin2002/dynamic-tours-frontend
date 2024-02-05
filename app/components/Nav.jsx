@@ -44,7 +44,7 @@ export default function Nav() {
               />
             )}
             <div
-              className={`fadeIn absolute top-10 right-0 bg-offWhite rounded-lg z-10  ${
+              className={`fadeIn absolute top-10 right-0 z-30 bg-offWhite bg-gradient-to-br from-blue-400 to-blue-500 rounded-lg  ${
                 !isNavShowed ? "hidden" : "block"
               } absolute w-full  p-6 top-0 right-0`}
             >
@@ -53,7 +53,7 @@ export default function Nav() {
                   <li key={link.id}>
                     <a
                       href={link.href}
-                      className=" text-black px-4 uppercase lg:px-6 py-2 hover:bg-black hover:text-white rounded-full hover:duration-200 "
+                      className=" text-white px-4 uppercase lg:px-6 py-2 hover:bg-black hover:text-white rounded-full hover:duration-200 "
                     >
                       {link.name}
                     </a>
