@@ -1,9 +1,8 @@
-import { socialLinks } from "../constant/constant";
-
+import { socialLinks } from "@/app/constant/constant";
 export default function SocialLinks() {
   return (
     <>
-      <div className=" border-2 bg-white p-3 md:rounded-none md:border-none rounded-full border-gray-200  flex justify-around items-center">
+      <div className=" bg-white p-3  border-gray-200  flex justify-around items-center">
         <p className="font-medium  text-textBlack mr-2">Follow</p>
         <div className=" flex justify-center items-center">
           {socialLinks.map((icon) => (
