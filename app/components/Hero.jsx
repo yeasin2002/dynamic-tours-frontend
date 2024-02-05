@@ -1,15 +1,18 @@
 import hero from "@/public/hero.png";
 import plane from "@/public/plane.png";
 import Image from "next/image";
-import { PlayIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
+import { FaPlayCircle } from "react-icons/fa";
+
+import { FaArrowRight } from "react-icons/fa";
 import Action from "./Action";
 import { oceanImage } from "../constant/constant";
+import SocialLinks from "./SocialLinks";
 
 export default function Hero() {
   return (
     <>
       <div className="px-7 relative flex justify-center items-center flex-col md:flex-row  ">
-        <div className=" p-4 md:absolute container   z-20 ">
+        <div className=" p-4 md:absolute  container z-20 ">
           <p className=" uppercase text-sm font-medium text-textBlack">
             Elevate your travel journey
           </p>
@@ -20,7 +23,7 @@ export default function Hero() {
             <Action href={"/booking"}>Book A Trip Now</Action>
 
             <div className="p-[12px] cursor-pointer  bg-offWhite rounded-full">
-              <PlayIcon className="w-[20x] h-[20px] p-1 rounded-full bg-actionBlue text-plainWhite box-border" />
+              <FaPlayCircle className="w-7 h-7 text-center rounded-full text-actionBlue box-border" />
             </div>
           </div>
         </div>
@@ -42,16 +45,17 @@ export default function Hero() {
             />
           </div>
 
-          <div className=" knowmore lg:absolute bottom-0 right-6">
+          <div className=" knowmore lg:absolute bottom-0 right-0  lg:pr-7">
             <div className=" flex md:flex-col flex-col-reverse md:py-0 py-6">
-              <div className="  flex justify-end bg-green-300">
-                <div className="bg-offWhite flex relative items-center  w-3/5 group hover:cursor-pointer justify-around  rounded-bl-none p-4 rounded-tl-3xl  rounded-br-none  ">
+              <div className="  flex justify-end flex-col-reverse sm:flex-row gap-2 md:gap-0">
+                <SocialLinks />
+                <div className="flex bg-offWhite relative items-center  w-3/5 group hover:cursor-pointer justify-around   p-4 mt-2 sm:mt-0">
                   <p className=" text-lg font-bold">Know More</p>
-                  <ArrowRightIcon className="w-[25x] h-[25px] p-1 group-hover:translate-x-1 group-hover:duration-300  rounded-full bg-actionBlue  text-plainWhite box-border" />
+                  <FaArrowRight className="p-1.5 h-7 w-7 group-hover:translate-x-1 group-hover:duration-300  rounded-full bg-actionBlue  text-plainWhite box-border" />
                 </div>
               </div>
-              <div className=" bg-red-400 flex p-5 rounded-full  md:rounded-tl-3xl md:rounded-tr-none  md:rounded-br-none md:rounded-bl-none ">
-                <div className=" image-list flex">
+              <div className="bg-offWhite flex p-2 lg:p-5  md:rounded-b-none md:rounded-tr-none  ">
+                <div className=" image-list flex justify-center items-center">
                   {oceanImage.map((image, i) => (
                     <div
                       key={image.id}

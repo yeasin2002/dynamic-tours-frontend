@@ -1,5 +1,7 @@
 "use client";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { FaXmark } from "react-icons/fa6";
+import { FiMenu } from "react-icons/fi";
+
 import Image from "next/image";
 import logo from "../../public/logo.svg";
 import { navMenu } from "../constant/constant";
@@ -29,14 +31,14 @@ export default function Nav() {
 
           <div className=" relative md:hidden w-[60%]">
             {!isNavShowed ? (
-              <Bars3Icon
+              <FiMenu
                 className={`h-8 w-8 hover:scale-110 float-right hover:duration-75 hover:cursor-pointer md:hidden`}
                 onClick={() => {
                   setIsNavShowed((prev) => !prev);
                 }}
               />
             ) : (
-              <XMarkIcon
+              <FaXmark
                 className={`h-8 w-8 hover:scale-110 float-right hover:duration-75 hover:cursor-pointer md:hidden`}
                 onClick={() => {
                   setIsNavShowed((prev) => !prev);
