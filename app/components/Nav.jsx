@@ -11,7 +11,7 @@ export default function Nav() {
   const [isNavShowed, setIsNavShowed] = useState();
   return (
     <>
-      <nav className="container p-4 py-6">
+      <nav className="container  py-6">
         <div className="flex justify-between items-center px-2">
           <a href="/">
             <Image src={logo} height={50} width={125} alt="Brand logo" />

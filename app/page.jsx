@@ -12,7 +12,7 @@ export default function Home() {
         <section>
           <Hero />
         </section>
-        <section className=" py-8 bg-purple-400 container">
+        <section className=" py-10 bg-green-500 container">
           <Destination />
         </section>
       </main>
