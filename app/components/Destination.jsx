@@ -59,6 +59,16 @@ export default function Destination() {
           </div>
         ))}
       </div>
+
+      <div className=" flex flex-col items-center">
+        <h3 className=" text-4xl text-center pb-4 font-bold text-black">
+          Journey To The Sky Made Simple !
+        </h3>
+        <p className=" text-sm px-4 text-textBlack text-center tracking-wider w-full md:w-3/6 lg:w-2/6 ">
+          Travelling Is A Wonderfull Way To Explore New Places. Learn About
+          Different Culture And Gain New Exeperience
+        </p>
+      </div>
     </>
   );
 }
