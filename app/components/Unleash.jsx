@@ -43,7 +43,7 @@ export default function Unleash() {
       </div>
 
       <div className="flex items-center flex-col md:flex-row gap-2 pt-4 md:pt-2">
-        <div className="  w-full md:w-2/6 flex  items-center p-7 justify-around  rounded-3xl bg-offWhite">
+        <div className=" w-full md:w-2/6 flex  items-center p-7 justify-around  rounded-3xl bg-offWhite">
           <h3 className=" text-actionBlue uppercase font-bold text-4xl lg:text-5xl">
             20% OFF
           </h3>
