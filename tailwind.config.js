@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     container: {
       center: true,
-      padding: "20",
+      padding: "16px",
     },
     extend: {
       backgroundImage: {
