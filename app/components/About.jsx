@@ -37,7 +37,7 @@ export default function About() {
       </div>
 
       <div className=" flex md:justify-center justify-between md:flex-row  gap-6 md:gap-12  py-10 flex-col flex-wrap">
-        <div className=" rounded-[50px] p-14 md:p-20 text-center bg-offWhite">
+        <div className=" rounded-[50px] p-14 md:p-20 text-center bg-offWhite flex-grow">
           <h3 className=" text-8xl md:text-9xl font-thin text-actionBlue pb-6 tracking-wide">
             10+
           </h3>
@@ -45,7 +45,7 @@ export default function About() {
             Year Experience
           </p>
         </div>
-        <div className=" rounded-[50px] p-14 md:p-20  text-center bg-offWhite">
+        <div className=" rounded-[50px] p-14 md:p-20  text-center bg-offWhite flex-grow">
           <h3 className=" text-8xl md:text-9xl font-thin text-actionBlue pb-6 tracking-wide">
             12K
           </h3>
@@ -53,7 +53,7 @@ export default function About() {
             Customer
           </p>
         </div>
-        <div className=" rounded-[50px] p-14 md:p-20  text-center bg-offWhite">
+        <div className=" rounded-[50px] p-14 md:p-20  text-center bg-offWhite flex-grow">
           <h3 className="text-8xl md:text-9xl font-thin text-actionBlue pb-6 tracking-wide">
             4.8
           </h3>

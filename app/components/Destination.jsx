@@ -3,22 +3,20 @@ import {
   FaArrowLeft,
   FaStar,
   FaCaretRight,
-  FaCreditCard,
 } from "react-icons/fa";
-import cardImage from "@/public/ocean1.png";
-
-import { CiCreditCard2 } from "react-icons/ci";
 
 import { IoTicketOutline } from "react-icons/io5";
-import { IoLocationSharp } from "react-icons/io5";
-import { GrMapLocation } from "react-icons/gr";
 
+import { IoLocationSharp } from "react-icons/io5";
 import Image from "next/image";
 import Link from "next/link";
 import { oceanImage } from "../constant/constant";
+
 import image1 from "@/public/image/image1.jpg";
 import image2 from "@/public/image/image2.jpg";
 import image3 from "@/public/image/image3.jpg";
+
+import { journeyData } from "../constant/constant";
 
 const image = [image1, image2, image3];
 
@@ -81,14 +79,14 @@ export default function Destination() {
       </div>
 
       <div className="  py-4 md:py-10 flex flex-col flex-wrap  md:flex-row items-center md:items-end justify-center gap-5 md:gap-6  ">
-        {oceanImage.map((img, i) => (
+        {journeyData.map((data) => (
           <div
-            key={i}
+            key={data.id}
             className="group hover:bg-actionBlue bg-offWhite relative duration-500 text-white p-12  rounded-[30px] overflow-hidden md:max-w-[320px] lg:max-w-[400px] shadow-slate-600 drop-shadow-lg flex flex-col gap-3"
           >
             <div
               style={{
-                backgroundImage: `url(${img.image.src})`,
+                backgroundImage: `url(${data.image.src})`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
@@ -96,16 +94,16 @@ export default function Destination() {
               className=" absolute -top-24 -right-16 w-[230px] rounded-full h-[230px]  "
             ></div>
 
-            <IoTicketOutline className=" w-16 h-16 p-4 group-hover:border-white group-hover:text-white rounded-full border-textBlack border-[2px]  text-textBlack" />
+            <data.icon className=" w-16 h-16 p-4 group-hover:border-white group-hover:text-white rounded-full border-textBlack border-[2px]  text-textBlack" />
 
             <h3 className=" text-2xl font-medium group-hover:text-white text-textBlack w-2/4 group-hover:pt-3 pt-3 ">
-              Find Your Destination
+              {data.title}
             </h3>
 
             <p className=" text-sm w-4/5 group-hover:text-white text-textBlack font-thin  leading-6 duration-300 ">
-              Travelling Is A Wonderfull Way To Explore New Places. Learn About
-              Different Culture And Gain New Exeperience
+              {data.description}
             </p>
+
             <Link
               href={"#"}
               className="pt-6 flex  items-center text-base font-thin group-hover:text-offWhite text-actionBlue uppercase tracking-wide gap-2"
