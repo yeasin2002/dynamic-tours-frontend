@@ -15,7 +15,7 @@ export default function Hero() {
           <p className=" uppercase text-sm font-medium text-textBlack">
             Elevate your travel journey
           </p>
-          <h2 className=" lg:text-6xl lg:leading-[1.2] text-4xl py-3 font-semibold leading-[1.1] ">
+          <h2 className=" lg:text-7xl lg:leading-[1.2] text-4xl py-3 font-semibold leading-[1.1] ">
             Exeperience <br /> The Magic Of <br /> Flight!
           </h2>
           <div className=" flex py-6 gap-4">
