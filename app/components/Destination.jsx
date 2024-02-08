@@ -80,11 +80,11 @@ export default function Destination() {
         </p>
       </div>
 
-      <div className="  py-4 md:py-10 flex flex-col flex-wrap  md:flex-row items-center md:items-end justify-center gap-5 md:gap-6 xl:gap-0 ">
+      <div className="  py-4 md:py-10 flex flex-col flex-wrap  md:flex-row items-center md:items-end justify-center gap-5 md:gap-6  ">
         {oceanImage.map((img, i) => (
           <div
             key={i}
-            className="group  bg-actionBlue relative duration-300 text-white p-12  rounded-b-none rounded-[30px] overflow-hidden md:max-w-[320px] max-w-[390px] flex flex-col gap-3"
+            className="group  bg-offWhite relative duration-300 text-white p-12  rounded-[30px] overflow-hidden md:max-w-[320px] lg:max-w-[400px] shadow-slate-600 drop-shadow-lg flex flex-col gap-3"
           >
             <div
               style={{
@@ -96,19 +96,19 @@ export default function Destination() {
               className=" absolute -top-24 -right-16 w-[230px] h-[230px] rounded-full "
             ></div>
 
-            <IoTicketOutline className=" w-16 h-16 p-4  rounded-full border-white border-[1px]  text-white" />
+            <IoTicketOutline className=" w-16 h-16 p-4  rounded-full border-textBlack border-[2px]  text-textBlack" />
 
-            <h3 className=" text-2xl font-medium   w-2/4 group-hover:pt-3 pt-3 ">
+            <h3 className=" text-2xl font-medium text-textBlack w-2/4 group-hover:pt-3 pt-3 ">
               Find Your Destination
             </h3>
 
-            <p className=" text-sm w-4/5  font-thin leading-6 duration-300  text-offWhite">
+            <p className=" text-sm w-4/5 text-textBlack font-thin  leading-6 duration-300 ">
               Travelling Is A Wonderfull Way To Explore New Places. Learn About
               Different Culture And Gain New Exeperience
             </p>
             <Link
               href={"#"}
-              className="pt-6 flex  items-center text-base font-thin uppercase tracking-wide gap-2"
+              className="pt-6 flex  items-center text-base font-thin text-actionBlue uppercase tracking-wide gap-2"
             >
               Learn More <FaCaretRight />
             </Link>
