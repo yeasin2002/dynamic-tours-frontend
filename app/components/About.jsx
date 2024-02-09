@@ -53,7 +53,7 @@ export default function About() {
             Customer
           </p>
         </div>
-        <div className=" rounded-[50px] p-14 md:p-20  text-center bg-offWhite xk:flex-grow">
+        <div className=" rounded-[50px] p-14 md:p-20  text-center bg-offWhite xl:flex-grow">
           <h3 className="text-8xl md:text-9xl font-thin text-actionBlue pb-6 tracking-wide">
             4.8
           </h3>

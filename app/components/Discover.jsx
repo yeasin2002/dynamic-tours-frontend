@@ -27,10 +27,10 @@ export default function Discover() {
     <>
       <div className=" ">
         <div className="  flex justify-center flex-col gap-4 items-center">
-          <h3 className=" text-4xl font-bold pb-3 text-center">
+          <h3 className=" text-4xl font-bold pb-2 text-center">
             Discover The World From Above
           </h3>
-          <p className=" text-sm text-textBlack md:w-2/4 text-center">
+          <p className=" text-sm text-textBlack md:w-[40%] text-center">
             Travelling Is A Wonderfull Way To Explore New Places. Learn About
             Different Culture And Gain New Exeperience
           </p>
@@ -39,11 +39,11 @@ export default function Discover() {
         <div className="  flex flex-col lg:flex-row justify-center gap-6 lg:gap-12 mt-6 lg:p-8 lg:px-14">
           {data.map((item) => (
             <div
-              className="flex flex-col items-center  text-center gap-3"
+              className="flex flex-col items-center  px-5  text-center gap-3"
               key={item.id}
             >
               <item.icon className=" w-16 h-16 p-3 text-actionBlue bg-offWhite rounded-full" />
-              <h3 className="text-2xl font-bold w-full xl:w-[40%] pt-3">
+              <h3 className="text-2xl font-bold w-full xl:w-[40%] py-2">
                 {item.title}
               </h3>
               <p className=" text-sm text-textBlack">{item.description}</p>

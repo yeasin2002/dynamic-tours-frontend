@@ -4,6 +4,7 @@ import Destination from "./components/Destination";
 import Unleash from "./components/Unleash";
 import About from "./components/About";
 import Discover from "./components/Discover";
+import Reviews from "./components/Reviews";
 
 export default function Home() {
   return (
@@ -24,8 +25,11 @@ export default function Home() {
         <section className=" py-10 container">
           <About />
         </section>
-        <section className=" p-10 container">
+        <section className=" py-10 container">
           <Discover />
+        </section>
+        <section className=" py-10 container">
+          <Reviews />
         </section>
       </main>
     </>
