@@ -5,12 +5,9 @@ import {
   FaCaretRight,
 } from "react-icons/fa";
 
-import { IoTicketOutline } from "react-icons/io5";
-
 import { IoLocationSharp } from "react-icons/io5";
 import Image from "next/image";
 import Link from "next/link";
-import { oceanImage } from "../constant/constant";
 
 import image1 from "@/public/image/image1.jpg";
 import image2 from "@/public/image/image2.jpg";
