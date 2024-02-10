@@ -79,7 +79,7 @@ export default function Destination() {
         {journeyData.map((data) => (
           <div
             key={data.id}
-            className="group hover:bg-actionBlue bg-offWhite relative duration-500 text-white p-12  rounded-[30px] overflow-hidden md:max-w-[320px] lg:max-w-[450px] shadow-slate-600 drop-shadow-lg flex flex-col gap-3"
+            className="group hover:bg-actionBlue bg-offWhite relative duration-500 text-white p-12  rounded-[30px] overflow-hidden md:max-w-[320px] lg:max-w-[400px] shadow-slate-600 drop-shadow-md flex flex-col gap-3"
           >
             <div
               style={{
@@ -88,7 +88,7 @@ export default function Destination() {
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
-              className=" absolute -top-24 -right-16 w-[230px] rounded-full h-[230px]  "
+              className=" absolute -top-24 -right-16 w-[240px] rounded-full h-[240px]  "
             ></div>
 
             <data.icon className=" w-16 h-16 p-4 group-hover:border-white group-hover:text-white rounded-full border-textBlack border-[2px]  text-textBlack" />
