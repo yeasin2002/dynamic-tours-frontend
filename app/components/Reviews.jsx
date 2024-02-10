@@ -11,11 +11,11 @@ export default function Reviews() {
         <h3 className=" text-center text-4xl font-bold pb-8">
           Loved By Over Thousand Travelers
         </h3>
-        <div className=" flex  gap-10">
+        <div className=" flex  flex-col  md:flex-row">
           {oceanImage.map((item) => (
             <div key={item.id} className="">
               <div className="group hover:bg-actionBlue duration-300 flex flex-col gap-3 p-3  rounded-3xl bg-offWhite">
-                <div className=" bg-white p-12 rounded-3xl">
+                <div className=" bg-white p-8 rounded-3xl">
                   <div className="flex gap-3 pb-5 text-actionBlue">
                     <FaStar className=" w-7 h-7" />
                     <FaStar className=" w-7 h-7" />
@@ -23,7 +23,7 @@ export default function Reviews() {
                     <FaStar className=" w-7 h-7" />
                   </div>
 
-                  <p className=" text-xl text-textBlack font-extralight">
+                  <p className=" text-lg  text-textBlack font-normal">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Quae expedita, doloribus consequatur eveniet excepturi ex,
                     eaque modi, dolore magnam perspiciatis est veritatis vero
@@ -32,7 +32,7 @@ export default function Reviews() {
                   </p>
                 </div>
 
-                <div className=" flex items-center px-10 py-4 gap-4">
+                <div className=" flex items-center px-8 gap-4">
                   <Image
                     src={item.image}
                     width={70}
