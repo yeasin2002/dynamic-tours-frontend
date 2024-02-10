@@ -26,9 +26,7 @@ export default function Reviews() {
                   <p className=" text-lg  text-textBlack font-thin">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Quae expedita, doloribus consequatur eveniet excepturi ex,
-                    eaque modi, dolore magnam perspiciatis est veritatis vero
-                    nihil velit architecto necessitatibus qui quos ipsa. Illum,
-                    enim atque voluptas nostrum blanditiis vero
+                    eaque modi, dolore magnam...
                   </p>
                 </div>
 
