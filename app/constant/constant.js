@@ -100,7 +100,8 @@ export const journeyData = [
 
 export const footerData = [
   {
-    company: [
+    title: "Company",
+    links: [
       {
         id: "c1",
         title: "About Us",
@@ -125,7 +126,8 @@ export const footerData = [
   },
 
   {
-    resource: [
+    title: "Resources",
+    links: [
       {
         id: "r1",
         title: "Free eBooks",
@@ -149,7 +151,8 @@ export const footerData = [
     ],
   },
   {
-    extra: [
+    title: "Extra Links",
+    links: [
       {
         id: "e1",
         title: "Customer Support",

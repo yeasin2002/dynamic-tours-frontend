@@ -37,7 +37,7 @@ export default function Home() {
           <Explore />
         </section>
       </main>
-      <footer className=" py-10  bg-offWhite">
+      <footer className=" pt-10  bg-offWhite">
         <Footer />
       </footer>
     </>

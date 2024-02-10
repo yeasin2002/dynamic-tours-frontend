@@ -1,8 +1,12 @@
 import { socialLinks } from "@/app/constant/constant";
-export default function SocialLinks() {
+export default function SocialLinks({ rounded }) {
   return (
     <>
-      <div className=" bg-white p-3  border-gray-200  flex justify-around items-center">
+      <div
+        className={` bg-white p-3  border-gray-200 ${
+          rounded ? " rounded-full" : ""
+        } flex justify-around items-center`}
+      >
         <p className="font-medium  text-textBlack mr-2">Follow</p>
         <div className=" flex justify-center items-center">
           {socialLinks.map((icon) => (
