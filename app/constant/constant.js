@@ -97,3 +97,74 @@ export const journeyData = [
           Different Culture And Gain New Exeperience`,
   },
 ];
+
+export const footerData = [
+  {
+    company: [
+      {
+        id: "c1",
+        title: "About Us",
+        link: "#",
+      },
+      {
+        id: "c2",
+        title: "Tour Guide",
+        link: "#",
+      },
+      {
+        id: "c3",
+        title: "Package",
+        link: "#",
+      },
+      {
+        id: "c4",
+        title: "Contact",
+        link: "#",
+      },
+    ],
+  },
+
+  {
+    resource: [
+      {
+        id: "r1",
+        title: "Free eBooks",
+        link: "#",
+      },
+      {
+        id: "r2",
+        title: "Community",
+        link: "#",
+      },
+      {
+        id: "r3",
+        title: "Blogs",
+        link: "#",
+      },
+      {
+        id: "r4",
+        title: "Safety Guidelines",
+        link: "#",
+      },
+    ],
+  },
+  {
+    extra: [
+      {
+        id: "e1",
+        title: "Customer Support",
+        link: "#",
+      },
+      {
+        id: "e2",
+        title: "Terms & Conditions",
+        link: "#",
+      },
+      {
+        id: "e3",
+        title: "Privacy Policy",
+        link: "#",
+      },
+    ],
+  },
+];
