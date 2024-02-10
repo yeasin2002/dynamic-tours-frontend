@@ -79,7 +79,7 @@ export default function Destination() {
         {journeyData.map((data) => (
           <div
             key={data.id}
-            className="group hover:bg-actionBlue bg-offWhite relative duration-500 text-white p-12  rounded-[30px] overflow-hidden md:max-w-[320px] lg:max-w-[400px] shadow-slate-600 drop-shadow-lg flex flex-col gap-3"
+            className="group hover:bg-actionBlue bg-offWhite relative duration-500 text-white p-12  rounded-[30px] overflow-hidden md:max-w-[320px] lg:max-w-[450px] shadow-slate-600 drop-shadow-lg flex flex-col gap-3"
           >
             <div
               style={{

@@ -6,6 +6,7 @@ import About from "./components/About";
 import Discover from "./components/Discover";
 import Reviews from "./components/Reviews";
 import Explore from "./components/Explore";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
@@ -36,6 +37,9 @@ export default function Home() {
           <Explore />
         </section>
       </main>
+      <footer className=" py-10  bg-offWhite">
+        <Footer />
+      </footer>
     </>
   );
 }
