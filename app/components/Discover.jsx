@@ -25,7 +25,7 @@ const data = [
 export default function Discover() {
   return (
     <>
-      <div className=" ">
+      <div>
         <div className="  flex justify-center flex-col gap-4 items-center">
           <h3 className=" text-4xl font-bold pb-2 text-center">
             Discover The World From Above
