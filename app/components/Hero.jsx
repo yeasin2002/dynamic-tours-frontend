@@ -39,6 +39,7 @@ export default function Hero() {
         >
           <div className="p-2 h-full flex items-center">
             <Image
+              alt="plane"
               src={plane}
               className="h-auto lg:w-[60%] md:w-[65%] w-[85%] absolute float-right right-0"
             />

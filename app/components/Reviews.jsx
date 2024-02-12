@@ -35,6 +35,7 @@ export default function Reviews() {
                     src={item.image}
                     width={60}
                     height={60}
+                    alt="item"
                     className=" rounded-full "
                   />
                   <div className=" group-hover:text-white py-3">

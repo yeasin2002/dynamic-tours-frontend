@@ -12,6 +12,7 @@ export default function Explore() {
             src={oceanImage[1].image}
             width={120}
             height={120}
+            alt="explore"
             className="rounded-full "
           />
           <h3 className=" text-3xl font-bold">
@@ -24,6 +25,7 @@ export default function Explore() {
             src={oceanImage[2].image}
             width={120}
             height={120}
+            alt="explore"
             className=" rounded-full"
           />
           <p className="text-textBlack text-center text-lg">
