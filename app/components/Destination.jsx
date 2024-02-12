@@ -53,9 +53,9 @@ export default function Destination() {
               slidesPerView: 2,
               spaceBetween: 20,
             },
-            1024: {
+            1280: {
               slidesPerView: 3,
-              spaceBetween: 40,
+              spaceBetween: 30,
             },
           }}
           onSlideChange={() => console.log("slide change")}
@@ -129,7 +129,7 @@ export default function Destination() {
               {data.title}
             </h3>
 
-            <p className=" text-sm w-4/5 group-hover:text-white text-textBlack font-thin  leading-6 duration-300 ">
+            <p className=" text-sm w-4/5 group-hover:text-white text-textBlack font-normal  leading-6 duration-300 ">
               {data.description}
             </p>
 
