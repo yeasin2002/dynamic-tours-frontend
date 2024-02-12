@@ -1,3 +1,4 @@
+"use client";
 import {
   FaArrowRight,
   FaArrowLeft,
@@ -12,6 +13,12 @@ import Link from "next/link";
 import image1 from "@/public/image/image1.jpg";
 import image2 from "@/public/image/image2.jpg";
 import image3 from "@/public/image/image3.jpg";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 import { journeyData } from "../constant/constant";
 
@@ -31,38 +38,63 @@ export default function Destination() {
         </div>
         <div className="sm:flex items-center gap-3 hidden ">
           <button>
-            <FaArrowLeft className=" w-10 h-10 p-2.5 bg-textBlack text-white rounded-full hover:bg-actionBlue duration-300 cursor-pointer active:opacity-50" />
+            <FaArrowLeft className=" prev-slide  w-10 h-10 p-2.5 bg-textBlack text-white rounded-full hover:bg-actionBlue duration-300 cursor-pointer active:opacity-50" />
           </button>
           <button>
-            <FaArrowRight className=" w-10 h-10 p-2.5  bg-textBlack text-white rounded-full hover:bg-actionBlue duration-300 cursor-pointer active:opacity-50" />
+            <FaArrowRight className=" next-slide w-10 h-10 p-2.5  bg-textBlack text-white rounded-full hover:bg-actionBlue duration-300 cursor-pointer active:opacity-50" />
           </button>
         </div>
       </div>
+      <div className="py-8 justify-center cursor-pointer md:gap-4">
+        <Swiper
+          slidesPerView={1}
+          breakpoints={{
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 40,
+            },
+          }}
+          onSlideChange={() => console.log("slide change")}
+          onSwiper={(swiper) => console.log(swiper)}
+          modules={[Pagination, Navigation]}
+          navigation={{ nextEl: ".next-slide", prevEl: ".prev-slide" }}
+          pagination={{ clickable: true }}
+          loop={true}
+        >
+          {image.map((img, i) => (
+            <SwiperSlide>
+              <div key={i} className="p-3">
+                <Image
+                  src={img}
+                  alt="slide-image"
+                  className=" w-full object-cover rounded-3xl"
+                />
 
-      <div className="py-8 flex flex-col md:flex-row justify-center cursor-pointer md:gap-4">
-        {image.map((img, i) => (
-          <div key={i} className="p-3">
-            <Image src={img} className=" w-full  object-cover rounded-3xl" />
+                <div className=" py-5 px-5 flex md:flex-col gap-2 lg:flex-row items-center justify-between">
+                  <div>
+                    <h4 className=" font-bold text-lg tracking-wide pb-1.5">
+                      Forest Wild Life
+                    </h4>
+                    <p className=" flex items-center gap-2 text-textBlack">
+                      <IoLocationSharp /> Nrt Indonesia
+                    </p>
+                  </div>
 
-            <div className=" py-5 px-5 flex md:flex-col gap-2 lg:flex-row items-center justify-between">
-              <div>
-                <h4 className=" font-bold text-lg tracking-wide pb-1.5">
-                  Forest Wild Life
-                </h4>
-                <p className=" flex items-center gap-2 text-textBlack">
-                  <IoLocationSharp /> Nrt Indonesia
-                </p>
+                  <div>
+                    <p className=" font-medium flex items-center gap-1.5 text-white bg-actionBlue px-3 py-1.5 rounded-2xl">
+                      <FaStar />
+                      4.6
+                    </p>
+                  </div>
+                </div>
               </div>
-
-              <div>
-                <p className=" font-medium flex items-center gap-1.5 text-white bg-actionBlue px-3 py-1.5 rounded-2xl">
-                  <FaStar />
-                  4.6
-                </p>
-              </div>
-            </div>
-          </div>
-        ))}
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
 
       <div className=" flex flex-col items-center py-3">

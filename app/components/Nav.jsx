@@ -16,7 +16,7 @@ export default function Nav() {
           <a href="/">
             <Image src={logo} height={50} width={125} alt="Brand logo" />
           </a>
-          <ul className="gap-3 md:flex hidden">
+          <ul className="gap-3 px-4 rounded-full  md:flex hidden">
             {navMenu.map((link) => (
               <li key={link.id}>
                 <a

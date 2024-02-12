@@ -55,7 +55,7 @@ export default function About() {
         </div>
         <div className=" rounded-[50px] p-14 md:p-20  text-center bg-offWhite xl:flex-grow">
           <h3 className="text-8xl md:text-9xl font-thin text-actionBlue pb-6 tracking-wide">
-            4.8
+            4.7
           </h3>
           <p className=" uppercase text-lg font-thin text-textBlack tracking-wide">
             Overall Rating

@@ -24,16 +24,16 @@ export default function Home() {
         <section className=" py-10 container">
           <Unleash />
         </section>
-        <section className=" py-10 container">
+        <section id="about" className=" py-10 container">
           <About />
         </section>
         <section className=" py-10 container">
           <Discover />
         </section>
-        <section className=" py-10 container">
+        <section className=" py-10 container 0">
           <Reviews />
         </section>
-        <section className=" py-10 container">
+        <section className=" py-20 container">
           <Explore />
         </section>
       </main>
