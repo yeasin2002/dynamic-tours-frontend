@@ -4,11 +4,6 @@ import { Navigation, Pagination } from "swiper/modules";
 import { FaArrowRight, FaArrowLeft, FaStar } from "react-icons/fa";
 import Image from "next/image";
 import { IoLocationSharp } from "react-icons/io5";
-import image1 from "@/public/image/image1.jpg";
-import image2 from "@/public/image/image2.jpg";
-import image3 from "@/public/image/image3.jpg";
-
-const image = [image1, image2, image3];
 
 export default function TourSlider({ bestTours }) {
   return (
@@ -31,7 +26,7 @@ export default function TourSlider({ bestTours }) {
           </button>
         </div>
       </div>
-      <div className=" bg-green-200 justify-center cursor-pointer md:gap-4">
+      <div className="py-6 justify-center cursor-pointer md:gap-4">
         <Swiper
           slidesPerView={1}
           breakpoints={{
@@ -46,10 +41,9 @@ export default function TourSlider({ bestTours }) {
           }}
           onSlideChange={() => console.log("slide change")}
           onSwiper={(swiper) => console.log(swiper)}
-          modules={[Pagination, Navigation]}
+          modules={[Navigation, Pagination]}
           navigation={{ nextEl: ".next-slide", prevEl: ".prev-slide" }}
           pagination={{ clickable: true }}
-          loop={true}
         >
           {bestTours.data.map((tour) => (
             <SwiperSlide key={tour.id}>
