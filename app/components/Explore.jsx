@@ -1,5 +1,4 @@
 import Image from "next/image";
-import orderNow from "@/public/image/orderButton.svg";
 import { oceanImage } from "../constant/constant";
 import Link from "next/link";
 
