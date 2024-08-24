@@ -7,7 +7,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import { journeyData } from "../constant/constant";
-import { getAllTours } from "../libs/getAllTours";
+import { getAllTours } from "../../libs/getAllTours";
 
 export default async function Destination() {
   const allTours = await getAllTours();
@@ -27,11 +27,14 @@ export default async function Destination() {
         </p>
       </div>
 
-      <div className="  py-4 md:py-10 flex flex-col flex-wrap  md:flex-row items-center md:items-end justify-center gap-5 md:gap-6  ">
+      <div
+        className="  py-4 md:py-10 flex flex-col  lg:flex-row 
+       md:items-end justify-center gap-5 md:gap-6  "
+      >
         {journeyData.map((data) => (
           <div
             key={data.id}
-            className="group hover:bg-actionBlue bg-offWhite relative duration-500 text-white p-12  rounded-[30px] overflow-hidden md:max-w-[320px] lg:max-w-[400px] shadow-slate-600 drop-shadow-md flex flex-col gap-3"
+            className="group hover:bg-actionBlue bg-offWhite relative duration-500 text-white p-12  rounded-[30px] overflow-hidden   shadow-slate-600 drop-shadow-md flex flex-col gap-3"
           >
             <div
               style={{
