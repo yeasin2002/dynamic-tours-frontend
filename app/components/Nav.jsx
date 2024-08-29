@@ -5,10 +5,11 @@ import { FiMenu } from "react-icons/fi";
 import Image from "next/image";
 import logo from "../../public/logo.svg";
 import { navMenu } from "../constant/constant";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Nav() {
-  const [isNavShowed, setIsNavShowed] = useState();
+  const [isNavShowed, setIsNavShowed] = useState(false);
+
   return (
     <>
       <nav className="container  py-6">
@@ -32,6 +33,7 @@ export default function Nav() {
           <div className=" relative md:hidden w-[60%]">
             {!isNavShowed ? (
               <FiMenu
+                id="nav_open"
                 className={`h-8 w-8 hover:scale-110 float-right hover:duration-75 hover:cursor-pointer md:hidden`}
                 onClick={() => {
                   setIsNavShowed((prev) => !prev);
@@ -45,7 +47,9 @@ export default function Nav() {
                 }}
               />
             )}
+
             <div
+              id="nav_menu"
               className={`fadeIn absolute top-10 right-0 z-30 bg-offWhite bg-gradient-to-br from-blue-400 to-blue-500 rounded-lg  ${
                 !isNavShowed ? "hidden" : "block"
               } absolute w-full  p-6 top-0 right-0`}

@@ -28,7 +28,7 @@ export default async function Destination() {
       </div>
 
       <div
-        className="  py-4 md:py-10 flex flex-col  lg:flex-row 
+        className="  py-4 md:py-10 flex flex-col lg:flex-row 
        md:items-end justify-center gap-5 md:gap-6  "
       >
         {journeyData.map((data) => (

@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Places() {
   return (
     <>
-      <div className="bg-white flex p-2 lg:p-5 border-b-2 pb-3 lg:border-none  md:rounded-b-none md:rounded-tr-none  ">
+      <div className="bg-white rounded-2xl   flex p-2 lg:p-5 pb-3 lg:border-none  md:rounded-b-none md:rounded-tr-none  ">
         <div className=" image-list flex justify-center items-center">
           {oceanImage.map((image, i) => (
             <div
