@@ -5,7 +5,7 @@ import { FiMenu } from "react-icons/fi";
 import Image from "next/image";
 import logo from "../../public/logo.svg";
 import { navMenu } from "../constant/constant";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Nav() {
   const [isNavShowed, setIsNavShowed] = useState(false);
@@ -70,10 +70,10 @@ export default function Nav() {
           </div>
 
           <a
-            href="#"
-            className="bg-textBlack text-white hidden md:block px-8 py-2 rounded-full"
+            href="/register"
+            className="bg-textBlack text-white hidden md:block hover:duration-300 hover:scale-95 px-8 py-2 rounded-full"
           >
-            Book Trip
+            Join Now
           </a>
         </div>
       </nav>
