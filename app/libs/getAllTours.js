@@ -1,7 +1,10 @@
-export const getAllTours = async function () {
-  const res = await fetch(`http://localhost:4000/api/v1/tours`);
-  if (!res.ok) throw new Error("something went wrong");
-  const data = await res.json();
+import axios from "axios";
 
-  return data;
+export const getAllTours = async function () {
+  try {
+    const tourData = await axios.get(`http://localhost:4000/api/v1/tour`);
+    return tourData.data?.data;
+  } catch (error) {
+    console.log(error);
+  }
 };

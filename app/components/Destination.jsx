@@ -11,10 +11,11 @@ import { getAllTours } from "../libs/getAllTours";
 
 export default async function Destination() {
   const allTours = await getAllTours();
+
   return (
     <>
       {/* {tourslider here} */}
-      <TourSlider bestTours={allTours?.data} />
+      <TourSlider bestTours={allTours} />
 
       <div className=" flex flex-col items-center py-3">
         <h3 className=" text-4xl text-center pb-4 font-bold text-black">

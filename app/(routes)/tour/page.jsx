@@ -10,12 +10,12 @@ export default function Tour() {
       <div className="container border-2 border-red-300">
         <Nav />
         <Container>
-          <div id="main" className=" flex flex-col">
+          <div id="main" className=" flex flex-col h-[calc(100vh-100px)]">
             <div className=" flex justify-end">
               <Search />
             </div>
-            <div className=" bg-green-400 flex  gap-4">
-              <div className=" bg-pink-200 hidden lg:flex h-screen w-[300px]">
+            <div className=" bg-green-400 flex h-full gap-4">
+              <div className=" bg-pink-200 hidden lg:flex w-[300px]">
                 <Filter />
               </div>
               <div className=" bg-red-300 flex-grow">

@@ -45,11 +45,11 @@ export default function TourSlider({ bestTours }) {
           navigation={{ nextEl: ".next-slide", prevEl: ".prev-slide" }}
           pagination={{ clickable: true }}
         >
-          {bestTours.data.map((tour) => (
+          {bestTours?.tour?.map((tour) => (
             <SwiperSlide key={tour.id}>
               <div className="p-3">
                 <Image
-                  src={`http://localhost:4000/img/tours/${tour.imageCover}`}
+                  src={tour?.coverImage}
                   alt="slide-image"
                   width={380}
                   height={400}
@@ -59,10 +59,10 @@ export default function TourSlider({ bestTours }) {
                 <div className=" py-5 px-5 flex md:flex-col gap-2 lg:flex-row items-center justify-between">
                   <div>
                     <h4 className=" font-bold text-lg tracking-wide pb-1.5">
-                      {tour.name}
+                      {tour.title}
                     </h4>
                     <p className=" flex items-center gap-2 text-textBlack">
-                      <IoLocationSharp /> Nrt Indonesia
+                      <IoLocationSharp /> {tour.startLocation?.address}
                     </p>
                   </div>
 
