@@ -1,14 +1,15 @@
 "use client";
 import { FaXmark } from "react-icons/fa6";
 import { FiMenu } from "react-icons/fi";
-
 import Image from "next/image";
 import logo from "../../public/logo.svg";
 import { navMenu } from "../constant/constant";
 import { useState } from "react";
+import { Avatar, Typography } from "@material-tailwind/react";
 
 export default function Nav() {
   const [isNavShowed, setIsNavShowed] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   return (
     <>
@@ -69,12 +70,24 @@ export default function Nav() {
             </div>
           </div>
 
-          <a
-            href="/register"
-            className="bg-textBlack text-white hidden md:block hover:duration-300 hover:scale-95 px-8 py-2 rounded-full"
-          >
-            Join Now
-          </a>
+          {!isLoggedIn ? (
+            <a
+              href="/register"
+              className="bg-textBlack text-white hidden md:block hover:duration-300 hover:scale-95 px-8 py-2 rounded-full"
+            >
+              Join Now
+            </a>
+          ) : (
+            <div className=" flex gap-3 items-center ">
+              <Typography variant="paragraph" color="inherit">
+                Welcome {"Sabbir,"}
+              </Typography>
+              <Avatar
+                src="https://docs.material-tailwind.com/img/face-2.jpg"
+                alt="avatar"
+              />
+            </div>
+          )}
         </div>
       </nav>
     </>
