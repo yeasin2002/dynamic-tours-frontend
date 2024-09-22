@@ -15,7 +15,7 @@ export default function Nav() {
   return (
     <>
       <Container>
-        <nav className="py-6">
+        <nav className="py-4">
           <div className="flex justify-between items-center px-2 md:px-0">
             <a href="/">
               <Image src={logo} height={50} width={125} alt="Brand logo" />

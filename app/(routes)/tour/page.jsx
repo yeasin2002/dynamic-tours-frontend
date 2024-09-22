@@ -7,7 +7,7 @@ import Container from "@/app/components/extra/Container";
 export default function Tour() {
   return (
     <>
-      <div className="container border-2 border-red-300">
+      <div className="container border-2 ">
         <Nav />
         <Container>
           <div id="main" className=" flex flex-col h-[calc(100vh-100px)]">
@@ -18,7 +18,7 @@ export default function Tour() {
               <div className=" bg-pink-200 hidden lg:flex w-[300px]">
                 <Filter />
               </div>
-              <div className=" bg-red-300 flex-grow">
+              <div className="  flex-grow">
                 <TourList />
               </div>
             </div>
