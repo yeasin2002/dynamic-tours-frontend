@@ -18,6 +18,14 @@ module.exports = withMt({
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      screens: {
+        xs: "480px", // Custom screen size for extra small devices
+        sm: "640px", // Default small
+        md: "768px", // Default medium
+        lg: "1024px", // Default large
+        xl: "1280px", // Default extra-large
+        "2xl": "1440px", // New 2xl custom screen size
+      },
       colors: {
         actionBlue: "#2986FE",
         textBlack: "#101010",

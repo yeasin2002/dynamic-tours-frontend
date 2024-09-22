@@ -10,7 +10,7 @@ export default function Tour() {
       <div className="container border-2 ">
         <Nav />
         <Container>
-          <div id="main" className=" flex flex-col h-[calc(100vh-100px)]">
+          <div id="main" className=" flex flex-col h-[calc(100vh-84px)]">
             <div className=" flex justify-end">
               <Search />
             </div>
