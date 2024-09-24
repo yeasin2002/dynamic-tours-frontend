@@ -4,6 +4,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import { FaArrowRight, FaArrowLeft, FaStar } from "react-icons/fa";
 import Image from "next/image";
 import { IoLocationSharp } from "react-icons/io5";
+import Link from "next/link";
 
 export default function TourSlider({ bestTours }) {
   return (
@@ -47,33 +48,37 @@ export default function TourSlider({ bestTours }) {
         >
           {bestTours?.tour?.map((tour) => (
             <SwiperSlide key={tour.id}>
-              <div className="p-3">
-                <Image
-                  src={tour?.coverImage}
-                  alt="slide-image"
-                  width={380}
-                  height={400}
-                  className=" w-full object-cover rounded-3xl"
-                />
-
-                <div className=" py-5 px-5 flex md:flex-col gap-2 lg:flex-row items-center justify-between">
-                  <div>
-                    <h4 className=" font-bold text-lg tracking-wide pb-1.5">
-                      {tour.title}
-                    </h4>
-                    <p className=" flex items-center gap-2 text-textBlack">
-                      <IoLocationSharp /> {tour.startLocation?.address}
-                    </p>
+              <Link href={`/tour/${tour.id}`}>
+                <div className="p-3">
+                  <div className="h-[270px] w-full">
+                    <Image
+                      src={tour?.coverImage}
+                      alt="slide-image"
+                      width={380}
+                      height={250}
+                      className=" rounded-lg h-full w-full object-cover "
+                    />
                   </div>
 
-                  <div>
-                    <p className=" font-medium flex items-center gap-1.5 text-white bg-actionBlue px-3 py-1.5 rounded-2xl">
-                      <FaStar />
-                      {tour.ratingsAverage}
-                    </p>
+                  <div className=" py-5 px-5 flex md:flex-col gap-2 lg:flex-row items-center justify-between">
+                    <div>
+                      <h4 className=" font-bold text-lg tracking-wide pb-1.5">
+                        {tour.title}
+                      </h4>
+                      <p className=" flex items-center gap-2 text-textBlack">
+                        <IoLocationSharp /> {tour.startLocation?.address}
+                      </p>
+                    </div>
+
+                    <div>
+                      <p className=" font-medium flex items-center gap-1.5 text-white bg-actionBlue px-3 py-1.5 rounded-2xl">
+                        <FaStar />
+                        {tour.ratingsAverage}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>

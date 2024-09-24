@@ -7,32 +7,100 @@ import {
   Button,
 } from "@material-tailwind/react";
 import Image from "next/image";
+import Link from "next/link";
+import {
+  HiHeart,
+  HiLocationMarker,
+  HiUser,
+  HiStar,
+  HiFlag,
+} from "react-icons/hi";
+import { IoIosPricetag } from "react-icons/io";
 
 export default function TourList({ tourData }) {
+  console.log(tourData);
   return (
     <>
-      <div className=" grid grid-cols-3 bg-offWhite p-3">
-        <Card className="w-80">
-          <CardBody className=" p-5">
-            <Image
-              src={`https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80`}
-              width={400}
-              height={250}
-              className="rounded-xl"
-            />
-            <Typography variant="h5" color="blue-gray" className="my-2">
-              UI/UX Review Check
-            </Typography>
-            <Typography>
-              The place is close to Barceloneta Beach and bus stop just 2 min by
-              walk and near to &quot;Naviglio&quot; where you can enjoy the main
-              night life in Barcelona.
-            </Typography>
-          </CardBody>
-          <CardFooter className="pt-0">
-            <Button>Read More</Button>
-          </CardFooter>
-        </Card>
+      <div className=" grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3  gap-x-2 gap-y-7 py-4 overflow-auto">
+        {tourData?.tour?.map((item) => (
+          <Card
+            key={item?.id}
+            className="w-full xl:w-[310px] flex flex-col justify-between 2xl:w-[350px] bg-white "
+          >
+            <CardBody className=" flex flex-col  h-full ">
+              <div className=" w-full h-[250px]">
+                <Image
+                  src={item?.coverImage}
+                  width={400}
+                  height={250}
+                  className="rounded-xl w-full h-full object-cover "
+                />
+              </div>
+
+              <div>
+                <Typography variant="h5" className="mb-2 mt-3 text-black">
+                  {item?.title}
+                </Typography>
+                <Typography className="text-offGray">
+                  {item?.description}
+                </Typography>
+              </div>
+
+              <div className=" pt-4 grid grid-cols-2 gap-3 mt-auto ">
+                <Typography
+                  variant="small"
+                  className="  text-offGray   gap-1  flex items-center  "
+                >
+                  <HiLocationMarker className="w-6 h-6 text-actionBlue" />
+                  {item?.startLocation?.address}
+                </Typography>
+                <Typography
+                  variant="small"
+                  className="text-offGray gap-1 flex items-center  "
+                >
+                  <HiUser className="w-6 h-6 text-actionBlue" />
+                  {`${item?.totalParticipant} People`}
+                </Typography>
+
+                <Typography
+                  variant="small"
+                  className="  text-offGray   gap-1  flex items-center  "
+                >
+                  <HiFlag className="w-6 h-6 text-actionBlue" />
+                  {`${item?.locations.length} Stop`}
+                </Typography>
+                <Typography
+                  variant="small"
+                  className="  text-offGray   gap-1  flex items-center  "
+                >
+                  <HiStar className="w-6 h-6 text-actionBlue" />
+                  {item?.ratingsAverage}
+                </Typography>
+              </div>
+            </CardBody>
+
+            <CardFooter className="pt-0 flex justify-between">
+              <Typography
+                variant="paragraph"
+                className="  text-green-500   gap-1  flex items-center  "
+              >
+                <IoIosPricetag className="w-6 h-6 text-green-500" />
+                {`$ ${item?.price}`}
+              </Typography>
+              <div>
+                <Button size="sm" color="blue-gray" className=" mr-3">
+                  <HiHeart className="w-4 h-4" />
+                </Button>
+
+                <Link href={`/tour/${item?.id}`}>
+                  <Button size="sm" className=" bg-actionBlue font-light">
+                    Details
+                  </Button>
+                </Link>
+              </div>
+            </CardFooter>
+          </Card>
+        ))}
       </div>
     </>
   );
