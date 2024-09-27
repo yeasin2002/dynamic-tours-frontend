@@ -18,7 +18,6 @@ import {
 import { IoIosPricetag } from "react-icons/io";
 
 export default function TourList({ tourData }) {
-  console.log(tourData);
   return (
     <>
       <div className=" grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3  gap-x-2 gap-y-7 py-4 overflow-auto">

@@ -1,10 +1,10 @@
 "use client";
 import { FaXmark } from "react-icons/fa6";
-import { FiMenu } from "react-icons/fi";
+import { FiMenu, FiX } from "react-icons/fi";
 import Image from "next/image";
 import logo from "../../public/logo.svg";
 import { navMenu } from "../constant/constant";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Avatar, collapse, Typography } from "@material-tailwind/react";
 import Container from "./extra/Container";
 import { usePathname } from "next/navigation";
@@ -12,18 +12,37 @@ import { usePathname } from "next/navigation";
 export default function Nav() {
   const [isNavShowed, setIsNavShowed] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [dropNav, setDropNav] = useState(false);
   const pathName = usePathname();
 
-  console.log(pathName);
+  useEffect(() => {
+    let scrollPosition = 0;
+    const scrollHandler = function (event) {
+      if (scrollPosition <= 0 || scrollPosition < window.scrollY) {
+        scrollPosition = window.scrollY;
+        setDropNav(false);
+      } else if (scrollPosition > window.scrollY) {
+        scrollPosition = window.scrollY;
+        setDropNav(true);
+      }
+    };
+
+    if (window) {
+      window.addEventListener("scroll", scrollHandler);
+    }
+
+    return () => window.removeEventListener("scroll", scrollHandler);
+  }, []);
+
   return (
     <>
       <Container>
-        <nav className="py-4">
+        <nav className="py-4 ">
           <div className="flex justify-between items-center px-2 md:px-0">
             <a href="/">
               <Image src={logo} height={50} width={125} alt="Brand logo" />
             </a>
-            <ul className="gap-3 px-4 rounded-full  md:flex hidden">
+            <ul className={`gap-3 p-2 rounded-full md:flex hidden`}>
               {navMenu.map((link) => (
                 <li key={link.id}>
                   <a
@@ -85,7 +104,7 @@ export default function Nav() {
                 Join Now
               </a>
             ) : (
-              <div className=" flex gap-3 items-center ">
+              <div className=" md:flex gap-3 items-center hidden ">
                 <Typography variant="paragraph" color="inherit">
                   Welcome {"Sabbir,"}
                 </Typography>
