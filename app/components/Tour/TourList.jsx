@@ -27,13 +27,14 @@ export default function TourList({ tourData }) {
             key={item?.id}
             className="w-full xl:w-[310px] flex flex-col justify-between 2xl:w-[350px] bg-white "
           >
-            <CardBody className=" flex flex-col  h-full ">
-              <div className=" w-full h-[250px]">
+            <CardBody className=" flex flex-col">
+              <div className=" h-[250px]">
                 <Image
                   src={item?.coverImage}
-                  width={400}
-                  height={250}
-                  className="rounded-xl w-full h-full object-cover "
+                  width={650}
+                  height={380}
+                  alt={"tourImage"}
+                  className="rounded-xl w-full h-full object-cover"
                 />
               </div>
 
@@ -82,9 +83,9 @@ export default function TourList({ tourData }) {
             <CardFooter className="pt-0 flex justify-between">
               <Typography
                 variant="paragraph"
-                className="  text-green-500   gap-1  flex items-center  "
+                className="  text-green-600   gap-1  flex items-center  "
               >
-                <IoIosPricetag className="w-6 h-6 text-green-500" />
+                <IoIosPricetag className="w-6 h-6 text-green-600" />
                 {`$ ${item?.price}`}
               </Typography>
               <div>

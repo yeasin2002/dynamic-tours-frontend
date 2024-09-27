@@ -5,13 +5,16 @@ import Image from "next/image";
 import logo from "../../public/logo.svg";
 import { navMenu } from "../constant/constant";
 import { useState } from "react";
-import { Avatar, Typography } from "@material-tailwind/react";
+import { Avatar, collapse, Typography } from "@material-tailwind/react";
 import Container from "./extra/Container";
+import { usePathname } from "next/navigation";
 
 export default function Nav() {
   const [isNavShowed, setIsNavShowed] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const pathName = usePathname();
 
+  console.log(pathName);
   return (
     <>
       <Container>
@@ -25,7 +28,9 @@ export default function Nav() {
                 <li key={link.id}>
                   <a
                     href={link.href}
-                    className=" text-black hidden md:block px-4 uppercase lg:px-6 py-2 hover:bg-black hover:text-white rounded-full hover:duration-200 "
+                    className={`hidden md:block px-4 uppercase lg:px-6 py-2 ${
+                      link.href === pathName ? "bg-gray-900 text-white" : ""
+                    } hover:bg-gray-900 hover:text-offWhite rounded-full hover:duration-200`}
                   >
                     {link.name}
                   </a>

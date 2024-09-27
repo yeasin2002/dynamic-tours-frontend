@@ -27,6 +27,7 @@ export default function TourSlider({ bestTours }) {
           </button>
         </div>
       </div>
+
       <div className="py-6 justify-center cursor-pointer md:gap-4">
         <Swiper
           slidesPerView={1}
@@ -50,13 +51,14 @@ export default function TourSlider({ bestTours }) {
             <SwiperSlide key={tour.id}>
               <Link href={`/tour/${tour.id}`}>
                 <div className="p-3">
-                  <div className="h-[270px] w-full">
+                  <div className="">
                     <Image
                       src={tour?.coverImage}
                       alt="slide-image"
-                      width={380}
-                      height={250}
-                      className=" rounded-lg h-full w-full object-cover "
+                      width={700}
+                      height={400}
+                      style={{ objectFit: "cover" }}
+                      className=" rounded-lg h-[270px] w-full "
                     />
                   </div>
 
