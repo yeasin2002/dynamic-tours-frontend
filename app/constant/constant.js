@@ -171,3 +171,37 @@ export const footerData = [
     ],
   },
 ];
+
+export const filterPrice = [
+  {
+    id: "a1",
+    price: "More than $6000",
+  },
+  {
+    id: "a2",
+    price: "More than $4000",
+  },
+  {
+    id: "a3",
+    price: "Less than $3000",
+  },
+  {
+    id: "a4",
+    price: "Less than $1000",
+  },
+];
+
+export const filterLevel = [
+  {
+    id: "a1l",
+    level: "Easy",
+  },
+  {
+    id: "a2l",
+    level: "Medium",
+  },
+  {
+    id: "a3l",
+    level: "Hard",
+  },
+];

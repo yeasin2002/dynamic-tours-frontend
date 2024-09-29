@@ -57,7 +57,7 @@ export default function Tour() {
               <Search />
             </div>
             <div className=" flex justify-between gap-4">
-              <div className=" bg-red-300 lg:flex hidden w-[320px] sticky top-0 h-screen">
+              <div className="lg:flex hidden w-[290px] sticky top-0 h-screen">
                 <Filter />
               </div>
               <div className=" flex-grow p-2">
