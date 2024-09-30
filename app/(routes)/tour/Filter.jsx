@@ -10,12 +10,27 @@ import {
 } from "@material-tailwind/react";
 
 import { filterPrice, filterLevel } from "@/app/constant/constant";
-import { useState } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
 export default function Filter() {
-  const [priceValue, setPriceValue] = useState(null);
-  const priceHandler = function (selectedValue) {
-    console.log(selectedValue);
+  const searchParams = useSearchParams();
+  const { replace } = useRouter();
+  const pathName = usePathname();
+
+  const handlePriceFilter = function (selectedValue) {
+    const params = new URLSearchParams(searchParams);
+    const [name, value] = selectedValue.split("=");
+
+    if (value && name === "max_price") {
+      params.delete("min_price");
+      params.set(name, value);
+    } else if (value && name === "min_price") {
+      params.delete("max_price");
+      params.set(name, value);
+    } else {
+      params.delete(name);
+    }
+    replace(`${pathName}?${params?.toString()}`);
   };
 
   return (
@@ -40,6 +55,8 @@ export default function Filter() {
                       name="vertical-list"
                       id={`vertical-list-${item.id}`}
                       ripple={false}
+                      value={item.value}
+                      onChange={(e) => handlePriceFilter(e.target.value)}
                       className="hover:before:opacity-0"
                       containerProps={{
                         className: "p-0",
@@ -62,7 +79,7 @@ export default function Filter() {
             className="text-textBlack font-medium  border-b-2 p-4 py-2 "
             variant="h4"
           >
-            Level
+            Location
           </Typography>
           <List>
             {filterLevel.map((item) => (

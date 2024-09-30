@@ -1,8 +1,8 @@
 "use client";
 import Nav from "@/app/components/landingPage/Nav";
-import Filter from "@/app/components/Tour/Filter";
-import Search from "@/app/components/Tour/Search";
-import TourList from "@/app/components/Tour/TourList";
+import Filter from "@/app/(routes)/tour/Filter";
+import Search from "@/app/(routes)/tour/Search";
+import TourList from "@/app/(routes)/tour/TourList";
 import Container from "@/app/components/extra/Container";
 import { getFilteredData } from "@/app/libs/getFilteredTour";
 import { useSearchParams } from "next/navigation";
@@ -57,11 +57,11 @@ export default function Tour() {
               <Search />
             </div>
             <div className=" flex justify-between gap-4">
-              <div className="lg:flex hidden w-[290px] sticky top-0 h-screen">
+              <div className="lg:flex hidden w-[300px] sticky px-2 top-0 overflow-auto h-screen ">
                 <Filter />
               </div>
-              <div className=" flex-grow p-2">
-                <TourList tourData={tourData && tourData} />
+              <div className=" flex-grow ">
+                {tourData && <TourList tourData={tourData} />}
               </div>
             </div>
           </div>
