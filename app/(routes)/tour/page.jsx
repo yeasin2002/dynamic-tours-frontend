@@ -1,5 +1,5 @@
 "use client";
-import Nav from "@/app/components/Nav";
+import Nav from "@/app/components/landingPage/Nav";
 import Filter from "@/app/components/Tour/Filter";
 import Search from "@/app/components/Tour/Search";
 import TourList from "@/app/components/Tour/TourList";

@@ -2,11 +2,11 @@
 import { FaXmark } from "react-icons/fa6";
 import { FiMenu, FiX } from "react-icons/fi";
 import Image from "next/image";
-import logo from "../../public/logo.svg";
-import { navMenu } from "../constant/constant";
+import logo from "@/public/logo.svg";
+import { navMenu } from "../../constant/constant";
 import { useEffect, useState } from "react";
 import { Avatar, collapse, Typography } from "@material-tailwind/react";
-import Container from "./extra/Container";
+import Container from "../extra/Container";
 import { usePathname } from "next/navigation";
 
 export default function Nav() {

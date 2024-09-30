@@ -1,6 +1,6 @@
 import logo from "@/public/logo.svg";
-import SocialLinks from "./extra/SocialLinks";
-import { footerData } from "../constant/constant";
+import SocialLinks from "../extra/SocialLinks";
+import { footerData } from "../../constant/constant";
 import Image from "next/image";
 import Link from "next/link";
 

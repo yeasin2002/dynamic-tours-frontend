@@ -3,9 +3,9 @@ import plane from "@/public/plane.png";
 import Image from "next/image";
 import { FaPlayCircle } from "react-icons/fa";
 import Action from "./Action";
-import { oceanImage } from "../constant/constant";
-import KnowMore from "./extra/KnowMore";
-import Places from "./extra/Places";
+import { oceanImage } from "../../constant/constant";
+import KnowMore from "../extra/KnowMore";
+import Places from "../extra/Places";
 
 export default function Hero() {
   return (

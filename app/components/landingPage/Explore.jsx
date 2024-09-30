@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { oceanImage } from "../constant/constant";
+import { oceanImage } from "../../constant/constant";
 import Link from "next/link";
 
 export default function Explore() {

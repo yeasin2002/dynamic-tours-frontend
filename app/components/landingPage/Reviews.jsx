@@ -1,6 +1,6 @@
 import { FaStar } from "react-icons/fa";
 import Image from "next/image";
-import { oceanImage } from "../constant/constant";
+import { oceanImage } from "../../constant/constant";
 
 const rating = 4;
 
