@@ -10,18 +10,23 @@ import { useEffect, useState } from "react";
 import { HiFilter } from "react-icons/hi";
 import { Button, Select, Option } from "@material-tailwind/react";
 
+import FilterTour from "@/app/util/FilterTour";
+
 export default function Tour() {
   const [tourData, setTourData] = useState(null);
   const searchParams = useSearchParams();
-  const query = searchParams.get("query")?.split(" ")?.join("+");
+  const filterTour = new FilterTour(searchParams);
+  filterTour.init();
+  const query = filterTour.getServerQuery();
 
   useEffect(() => {
     const getData = async () => {
       const data = query
-        ? await getFilteredData(`query=${query}`)
+        ? await getFilteredData(query)
         : await getFilteredData();
-      if (data) setTourData(data);
+
       console.log(data);
+      if (data) setTourData(data);
     };
     getData();
   }, [query]);

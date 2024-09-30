@@ -185,13 +185,13 @@ export const filterPrice = [
   },
   {
     id: "a3",
-    price: "Less than $3000",
-    value: "max_price=3000",
+    price: "Less than $2000",
+    value: "max_price=2000",
   },
   {
     id: "a4",
-    price: "Less than $1000",
-    value: "max_price=1000",
+    price: "Less than $1500",
+    value: "max_price=1500",
   },
 ];
 
