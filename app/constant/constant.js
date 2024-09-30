@@ -195,17 +195,25 @@ export const filterPrice = [
   },
 ];
 
-export const filterLevel = [
+export const filterRatings = [
   {
-    id: "a1l",
-    level: "Easy",
+    id: "rate4.5",
+    rate: "4.5 and above",
+    value: "min_ratings=4.5",
   },
   {
-    id: "a2l",
-    level: "Medium",
+    id: "rate3.5",
+    rate: "3.5 and above",
+    value: "min_ratings=3.5",
   },
   {
     id: "a3l",
-    level: "Hard",
+    rate: "3.0 and above",
+    value: "min_rating=3.0",
+  },
+  {
+    id: "ratebelow",
+    rate: "3.0 and below",
+    value: "max_ratings=3.0",
   },
 ];

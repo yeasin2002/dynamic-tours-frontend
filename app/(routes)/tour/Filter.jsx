@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 
-import { filterPrice, filterLevel } from "@/app/constant/constant";
+import { filterPrice, filterRatings } from "@/app/constant/constant";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
 export default function Filter() {
@@ -26,6 +26,22 @@ export default function Filter() {
       params.set(name, value);
     } else if (value && name === "min_price") {
       params.delete("max_price");
+      params.set(name, value);
+    } else {
+      params.delete(name);
+    }
+    replace(`${pathName}?${params?.toString()}`);
+  };
+
+  const handleRatingsFilter = function (ratings) {
+    const params = new URLSearchParams(searchParams);
+    const [name, value] = ratings.split?.("=");
+
+    if (value && name === "max_ratings") {
+      params.delete("min_ratings");
+      params.set(name, value);
+    } else if (value && name === "min_ratings") {
+      params.delete("max_ratings");
       params.set(name, value);
     } else {
       params.delete(name);
@@ -79,27 +95,33 @@ export default function Filter() {
             className="text-textBlack font-medium  border-b-2 p-4 py-2 "
             variant="h4"
           >
-            Location
+            Ratings
           </Typography>
           <List>
-            {filterLevel.map((item) => (
+            {filterRatings.map((item) => (
               <ListItem key={item.id} className="p-0">
                 <label
-                  htmlFor={`vertical-${item.id}`}
+                  htmlFor={`vertical-list-${item.id}`}
                   className="flex w-full cursor-pointer items-center px-3 py-2"
                 >
                   <ListItemPrefix className="mr-3">
-                    <Checkbox
-                      id={`vertical-${item.id}`}
+                    <Radio
+                      name="vertical-list"
+                      id={`vertical-list-${item.id}`}
                       ripple={false}
+                      value={item.value}
+                      onChange={(e) => handleRatingsFilter(e.target.value)}
                       className="hover:before:opacity-0"
                       containerProps={{
                         className: "p-0",
                       }}
                     />
                   </ListItemPrefix>
-                  <Typography color="blue-gray" className="font-medium">
-                    {item.level}
+                  <Typography
+                    color="blue-gray"
+                    className="font-normal text-[#000000cb]"
+                  >
+                    {item.rate}
                   </Typography>
                 </label>
               </ListItem>

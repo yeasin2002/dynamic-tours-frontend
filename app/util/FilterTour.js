@@ -20,6 +20,14 @@ class FilterTour {
           this.apiURL.push(`query=${entry[1]}`);
           break;
         }
+        case "max_ratings": {
+          this.apiURL.push(`ratingsAverage[lte]=${entry[1]}`);
+          break;
+        }
+        case "min_ratings": {
+          this.apiURL.push(`ratingsAverage[gte]=${entry[1]}`);
+          break;
+        }
       }
     }
   }
