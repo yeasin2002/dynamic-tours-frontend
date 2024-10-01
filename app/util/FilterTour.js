@@ -3,6 +3,7 @@ class FilterTour {
     this.searchParams = searchParams;
     this.apiURL = [];
     this.entry = [];
+    this.activeFilter = {};
   }
 
   init() {
@@ -12,11 +13,13 @@ class FilterTour {
         case "min_price": {
           this.apiURL.push(`price[gte]=${entry[1]}`);
           this.entry.push(`min_price=${entry[1]}`);
+          this.activeFilter.Price = "min_price";
           break;
         }
         case "max_price": {
           this.apiURL.push(`price[lte]=${entry[1]}`);
           this.entry.push(`max_price=${entry[1]}`);
+          this.activeFilter.Price = "max_price";
           break;
         }
         case "query": {
@@ -26,11 +29,13 @@ class FilterTour {
         case "max_ratings": {
           this.apiURL.push(`ratingsAverage[lte]=${entry[1]}`);
           this.entry.push(`max_ratings=${entry[1]}`);
+          this.activeFilter.Ratings = "max_ratings";
           break;
         }
         case "min_ratings": {
           this.apiURL.push(`ratingsAverage[gte]=${entry[1]}`);
           this.entry.push(`min_ratings=${entry[1]}`);
+          this.activeFilter.Ratings = "min_ratings";
           break;
         }
       }
@@ -42,6 +47,9 @@ class FilterTour {
   }
   getFilteredEntry() {
     return this.entry;
+  }
+  getActiveFilter() {
+    return this.activeFilter;
   }
 }
 
