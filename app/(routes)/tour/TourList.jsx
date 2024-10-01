@@ -77,7 +77,7 @@ export default function TourList({ tourData }) {
                   className="  text-offGray   gap-1  flex items-center  "
                 >
                   <HiStar className="w-6 h-6 mr-0.5 text-actionBlue" />
-                  {item?.ratingsAverage}
+                  {`${item?.ratingsAverage} (${item.totalRating})`}
                 </Typography>
               </div>
               <div className="flex justify-between">

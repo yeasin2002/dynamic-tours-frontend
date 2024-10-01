@@ -1,12 +1,12 @@
 "use client";
 import {
   Radio,
-  Checkbox,
   Card,
   List,
   ListItem,
   ListItemPrefix,
   Typography,
+  Button,
 } from "@material-tailwind/react";
 
 import { filterPrice, filterRatings } from "@/app/constant/constant";
@@ -130,6 +130,16 @@ export default function Filter({ filteredEntry }) {
             ))}
           </List>
         </Card>
+
+        <div>
+          <Button
+            className=" flex items-center lg:hidden px-4 gap-1 "
+            size="md"
+            variant="gradient"
+          >
+            Clear Filter
+          </Button>
+        </div>
       </div>
     </>
   );

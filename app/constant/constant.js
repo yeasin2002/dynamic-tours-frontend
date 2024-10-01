@@ -209,7 +209,7 @@ export const filterRatings = [
   {
     id: "a3l",
     rate: "3.0 and above",
-    value: "min_rating=3.0",
+    value: "min_ratings=3.0",
   },
   {
     id: "ratebelow",
