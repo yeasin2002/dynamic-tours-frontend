@@ -18,6 +18,7 @@ export default function Tour() {
   const filterTour = new FilterTour(searchParams);
   filterTour.init();
   const query = filterTour.getServerQuery();
+  const filteredEntry = filterTour.getFilteredEntry();
 
   useEffect(() => {
     const getData = async () => {
@@ -63,7 +64,7 @@ export default function Tour() {
             </div>
             <div className=" flex justify-between gap-4">
               <div className="lg:flex hidden w-[300px] sticky px-2 top-0 overflow-auto h-screen ">
-                <Filter />
+                <Filter filteredEntry={filteredEntry} />
               </div>
               <div className=" flex-grow ">
                 {tourData && <TourList tourData={tourData} />}

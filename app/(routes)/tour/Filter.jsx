@@ -12,7 +12,7 @@ import {
 import { filterPrice, filterRatings } from "@/app/constant/constant";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
-export default function Filter() {
+export default function Filter({ filteredEntry }) {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathName = usePathname();
@@ -68,10 +68,11 @@ export default function Filter() {
                 >
                   <ListItemPrefix className="mr-3">
                     <Radio
-                      name="vertical-list"
+                      name="price-filter"
                       id={`vertical-list-${item.id}`}
                       ripple={false}
                       value={item.value}
+                      checked={filteredEntry?.includes(item.value)}
                       onChange={(e) => handlePriceFilter(e.target.value)}
                       className="hover:before:opacity-0"
                       containerProps={{
@@ -106,10 +107,11 @@ export default function Filter() {
                 >
                   <ListItemPrefix className="mr-3">
                     <Radio
-                      name="vertical-list"
+                      name="ratings-filter"
                       id={`vertical-list-${item.id}`}
                       ripple={false}
                       value={item.value}
+                      checked={filteredEntry?.includes(item.value)}
                       onChange={(e) => handleRatingsFilter(e.target.value)}
                       className="hover:before:opacity-0"
                       containerProps={{
