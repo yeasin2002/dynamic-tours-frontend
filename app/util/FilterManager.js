@@ -28,6 +28,13 @@ export default function filterManager(searchParams, filterType, selectedValue) {
       checkParamsAndModify(compareValue.ratings);
       break;
     }
+    case "Sort": {
+      if (name) {
+        params.set(name, value);
+      } else {
+        params.delete(name);
+      }
+    }
   }
   return params;
 }

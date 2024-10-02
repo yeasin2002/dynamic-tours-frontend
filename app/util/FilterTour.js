@@ -2,7 +2,7 @@ class FilterTour {
   constructor(searchParams) {
     this.searchParams = searchParams;
     this.apiURL = [];
-    this.entry = [];
+    this.entry = []; // inside entry we are storing a key value pair like this max_rating[0] = 3000[1] and later converting it to server API
     this.activeFilter = {};
   }
 
@@ -37,6 +37,18 @@ class FilterTour {
           this.entry.push(`min_ratings=${entry[1]}`);
           this.activeFilter.Ratings = "min_ratings";
           break;
+        }
+        case "sort": {
+          if (entry[1] === "latest") {
+            this.apiURL.push(`sort=createdAt`);
+            this.activeFilter.Sort = "sort";
+          } else if (entry[1] === "top_rated") {
+            this.apiURL.push(`sort=-ratingsAverage`);
+            this.activeFilter.Sort = "sort";
+          } else if (entry[1] === "most_reviewed") {
+            this.apiURL.push(`sort=-totalRating`);
+            this.activeFilter.Sort = "sort";
+          }
         }
       }
     }

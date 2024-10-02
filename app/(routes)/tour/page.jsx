@@ -6,20 +6,24 @@ import TourList from "@/app/(routes)/tour/TourList";
 import Container from "@/app/components/extra/Container";
 import { getFilteredData } from "@/app/libs/getFilteredTour";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { act, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { HiFilter } from "react-icons/hi";
 import {
   Button,
   Select,
   Option,
   Chip,
-  collapse,
+  Typography,
+  Card,
 } from "@material-tailwind/react";
 import { filterSort } from "@/app/constant/constant";
 import FilterTour from "@/app/util/FilterTour";
+import filterManager from "@/app/util/FilterManager";
 
 export default function Tour() {
   const [tourData, setTourData] = useState(null);
+  const [selectedSort, setSelectedSort] = useState(null);
+
   const searchParams = useSearchParams();
   const pathName = usePathname();
   const { replace } = useRouter();
@@ -30,7 +34,6 @@ export default function Tour() {
 
   const filteredEntry = filterTour.getFilteredEntry();
   const activeFilter = filterTour.getActiveFilter();
-  console.log(activeFilter);
 
   useEffect(() => {
     const getData = async () => {
@@ -38,7 +41,6 @@ export default function Tour() {
         ? await getFilteredData(query)
         : await getFilteredData();
 
-      console.log(data);
       if (data) setTourData(data);
     };
     getData();
@@ -49,12 +51,16 @@ export default function Tour() {
     const params = new URLSearchParams(searchParams);
     params.delete(activeFilter[filteredBy]);
     replace(`${pathName}?${params?.toString()}`);
+    setSelectedSort(null);
   };
 
   const sortHandler = function (selectedValue) {
-    console.log(selectedValue);
+    const modifiedParams = filterManager(searchParams, "Sort", selectedValue);
+    replace(`${pathName}?${modifiedParams?.toString()}`);
+    setSelectedSort(selectedValue);
   };
 
+  console.log(filteredEntry);
   return (
     <>
       <div>
@@ -75,6 +81,7 @@ export default function Tour() {
                 <div className=" hidden md:flex">
                   <div className="flex flex-col gap-6">
                     <Select
+                      value={selectedSort}
                       onChange={(value) => sortHandler(value)}
                       color="gray"
                       label="Sort By"
@@ -110,7 +117,26 @@ export default function Tour() {
                     />
                   ))}
                 </div>
-                {tourData && <TourList tourData={tourData} />}
+                {tourData?.total > 0 && <TourList tourData={tourData} />}
+                {tourData?.total < 1 && (
+                  <Card className="py-5 h-[400px] flex items-center justify-center">
+                    <div>
+                      <Typography
+                        variant="h3"
+                        className=" text-center text-gray-800 mb-2"
+                      >
+                        No tour was found !
+                      </Typography>
+                      <Typography
+                        variant="paragraph"
+                        className=" text-center text-blue-gray-700"
+                      >
+                        We are adding more tours to increase
+                        <br /> Our customer satisfaction
+                      </Typography>
+                    </div>
+                  </Card>
+                )}
               </div>
             </div>
           </div>

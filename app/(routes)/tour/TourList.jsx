@@ -14,7 +14,6 @@ import {
   HiUser,
   HiStar,
   HiFlag,
-  HiClock,
 } from "react-icons/hi";
 
 import { IoIosPricetag } from "react-icons/io";

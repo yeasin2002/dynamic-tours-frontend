@@ -222,16 +222,16 @@ export const filterSort = [
   {
     id: "sort1",
     title: "Latest",
-    value: "latest",
+    value: "sort=latest",
   },
   {
     id: "sort2",
     title: "Top Rated",
-    value: "top_rated",
+    value: "sort=top_rated",
   },
   {
     id: "sort3",
     title: "Most Reviewed",
-    value: "most_reviewed",
+    value: "sort=most_reviewed",
   },
 ];
