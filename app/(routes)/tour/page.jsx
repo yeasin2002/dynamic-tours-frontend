@@ -19,10 +19,13 @@ import {
 import { filterSort } from "@/app/constant/constant";
 import FilterTour from "@/app/util/FilterTour";
 import filterManager from "@/app/util/FilterManager";
+import Loading from "@/app/ui/Loading";
+import NotFound from "./NotFound";
 
 export default function Tour() {
   const [tourData, setTourData] = useState(null);
   const [selectedSort, setSelectedSort] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const searchParams = useSearchParams();
   const pathName = usePathname();
@@ -30,18 +33,22 @@ export default function Tour() {
 
   const filterTour = new FilterTour(searchParams);
   filterTour.init();
-  const query = filterTour.getServerQuery();
 
+  const query = filterTour.getServerQuery();
   const filteredEntry = filterTour.getFilteredEntry();
   const activeFilter = filterTour.getActiveFilter();
 
   useEffect(() => {
     const getData = async () => {
+      setLoading(true);
       const data = query
         ? await getFilteredData(query)
         : await getFilteredData();
 
-      if (data) setTourData(data);
+      if (data) {
+        setTourData(data);
+        setLoading(false);
+      }
     };
     getData();
   }, [query]);
@@ -68,7 +75,7 @@ export default function Tour() {
         <Container>
           <div id="main" className=" flex flex-col">
             <div className=" flex justify-between items-center">
-              <div className=" flex gap-3 ">
+              <div className=" hidden  md:flex gap-3 ">
                 <Button
                   className=" flex items-center px-4 gap-1 "
                   size="md"
@@ -78,7 +85,7 @@ export default function Tour() {
                   <HiFilter />
                 </Button>
 
-                <div className=" hidden md:flex">
+                <div className="  md:flex">
                   <div className="flex flex-col gap-6">
                     <Select
                       value={selectedSort}
@@ -117,24 +124,14 @@ export default function Tour() {
                     />
                   ))}
                 </div>
-                {tourData?.total > 0 && <TourList tourData={tourData} />}
-                {tourData?.total < 1 && (
-                  <Card className="py-5 h-[400px] flex items-center justify-center">
-                    <div>
-                      <Typography
-                        variant="h3"
-                        className=" text-center text-gray-800 mb-2"
-                      >
-                        No tour was found !
-                      </Typography>
-                      <Typography
-                        variant="paragraph"
-                        className=" text-center text-blue-gray-700"
-                      >
-                        We are adding more tours to increase
-                        <br /> Our customer satisfaction
-                      </Typography>
-                    </div>
+
+                {tourData?.total > 0 && !loading && (
+                  <TourList tourData={tourData} />
+                )}
+                {tourData?.total < 1 && !loading && <NotFound />}
+                {loading && (
+                  <Card className="h-[400px]">
+                    <Loading />
                   </Card>
                 )}
               </div>

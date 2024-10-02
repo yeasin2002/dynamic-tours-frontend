@@ -27,7 +27,11 @@ export default function Search() {
             type="text"
             label="Search here"
             className="pr-20"
-            onChange={(e) => handleSearch(e.target.value)}
+            onChange={(e) =>
+              setTimeout(() => {
+                handleSearch(e.target.value);
+              }, 500)
+            }
             defaultValue={searchParams.get("query")?.toString()}
             containerProps={{
               className: "min-w-0",
