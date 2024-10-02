@@ -8,8 +8,14 @@ import { getFilteredData } from "@/app/libs/getFilteredTour";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { act, useEffect, useState } from "react";
 import { HiFilter } from "react-icons/hi";
-import { Button, Select, Option, Chip } from "@material-tailwind/react";
-
+import {
+  Button,
+  Select,
+  Option,
+  Chip,
+  collapse,
+} from "@material-tailwind/react";
+import { filterSort } from "@/app/constant/constant";
 import FilterTour from "@/app/util/FilterTour";
 
 export default function Tour() {
@@ -45,6 +51,10 @@ export default function Tour() {
     replace(`${pathName}?${params?.toString()}`);
   };
 
+  const sortHandler = function (selectedValue) {
+    console.log(selectedValue);
+  };
+
   return (
     <>
       <div>
@@ -64,10 +74,17 @@ export default function Tour() {
 
                 <div className=" hidden md:flex">
                   <div className="flex flex-col gap-6">
-                    <Select color="gray" label="Sort By" variant="outlined">
-                      <Option>Latest</Option>
-                      <Option>Top Rated</Option>
-                      <Option>Most Reviewed</Option>
+                    <Select
+                      onChange={(value) => sortHandler(value)}
+                      color="gray"
+                      label="Sort By"
+                      variant="outlined"
+                    >
+                      {filterSort?.map((item) => (
+                        <Option key={item.id} value={item.value}>
+                          {item.title}
+                        </Option>
+                      ))}
                     </Select>
                   </div>
                 </div>

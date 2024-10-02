@@ -217,3 +217,21 @@ export const filterRatings = [
     value: "max_ratings=3.0",
   },
 ];
+
+export const filterSort = [
+  {
+    id: "sort1",
+    title: "Latest",
+    value: "latest",
+  },
+  {
+    id: "sort2",
+    title: "Top Rated",
+    value: "top_rated",
+  },
+  {
+    id: "sort3",
+    title: "Most Reviewed",
+    value: "most_reviewed",
+  },
+];

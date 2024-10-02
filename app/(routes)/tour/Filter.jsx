@@ -11,6 +11,7 @@ import {
 
 import { filterPrice, filterRatings } from "@/app/constant/constant";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import filterManager from "@/app/util/FilterManager";
 
 export default function Filter({ filteredEntry }) {
   const searchParams = useSearchParams();
@@ -18,35 +19,17 @@ export default function Filter({ filteredEntry }) {
   const pathName = usePathname();
 
   const handlePriceFilter = function (selectedValue) {
-    const params = new URLSearchParams(searchParams);
-    const [name, value] = selectedValue.split("=");
-
-    if (value && name === "max_price") {
-      params.delete("min_price");
-      params.set(name, value);
-    } else if (value && name === "min_price") {
-      params.delete("max_price");
-      params.set(name, value);
-    } else {
-      params.delete(name);
-    }
-    replace(`${pathName}?${params?.toString()}`);
+    const modifiedParams = filterManager(searchParams, "Price", selectedValue);
+    replace(`${pathName}?${modifiedParams?.toString()}`);
   };
 
-  const handleRatingsFilter = function (ratings) {
-    const params = new URLSearchParams(searchParams);
-    const [name, value] = ratings.split?.("=");
-
-    if (value && name === "max_ratings") {
-      params.delete("min_ratings");
-      params.set(name, value);
-    } else if (value && name === "min_ratings") {
-      params.delete("max_ratings");
-      params.set(name, value);
-    } else {
-      params.delete(name);
-    }
-    replace(`${pathName}?${params?.toString()}`);
+  const handleRatingsFilter = function (selectedValue) {
+    const modifiedParams = filterManager(
+      searchParams,
+      "Ratings",
+      selectedValue
+    );
+    replace(`${pathName}?${modifiedParams?.toString()}`);
   };
 
   return (
