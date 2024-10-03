@@ -108,6 +108,13 @@ export function Login() {
             <Button type="submit" size="lg" color="gray" fullWidth>
               Login
             </Button>
+            <h1>{value}</h1>
+            <Button onClick={increaseCount} size="lg" color="gray" fullWidth>
+              Increase
+            </Button>
+            <Button onClick={decreaseCount} size="lg" color="gray" fullWidth>
+              Decrease
+            </Button>
 
             <Typography
               variant="small"
