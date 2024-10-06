@@ -2,7 +2,7 @@ import { Typography } from "@/app/ui/materialExport";
 export default function SmallGuide({ guides }) {
   return (
     <>
-      <div className="bg-green-400 py-2 flex items-center ">
+      <div className="flex items-center py-2 ">
         <div className="flex">
           <img
             src="https://docs.material-tailwind.com/img/face-2.jpg"
@@ -27,7 +27,7 @@ export default function SmallGuide({ guides }) {
         </div>
         <Typography
           variant="paragraph"
-          className="text-[#434343] text-base font-semibold tracking-wide -translate-x-4"
+          className="text-shadeBlack text-base font-medium tracking-wide -translate-x-4"
         >
           35+ More guides available
         </Typography>

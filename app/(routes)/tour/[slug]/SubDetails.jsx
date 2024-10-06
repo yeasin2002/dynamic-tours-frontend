@@ -3,6 +3,7 @@ import {
   HiOutlineFlag,
   HiOutlineLocationMarker,
   HiOutlineUser,
+  HiOutlineGlobe,
 } from "react-icons/hi";
 import { Button, Typography } from "@/app/ui/materialExport";
 
@@ -37,6 +38,18 @@ export default function SubDetails({ tour }) {
             className="text-shadeBlack"
             variant="paragraph"
           >{`Places : ${tour?.locations?.length}`}</Typography>
+        </div>
+      </div>
+
+      <div>
+        <div className="flex items-center gap-2 py-2">
+          <HiOutlineGlobe className="text-shadeBlack w-5 h-5 " />
+          <Typography
+            className="text-shadeBlack tracking-wide"
+            variant="paragraph"
+          >
+            English, Spanish, French, Portuguese and more
+          </Typography>
         </div>
       </div>
     </>
