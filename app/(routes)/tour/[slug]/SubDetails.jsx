@@ -5,6 +5,8 @@ import {
   HiOutlineUser,
   HiOutlineGlobe,
 } from "react-icons/hi";
+import { HiOutlineCurrencyDollar } from "react-icons/hi2";
+
 import { Button, Typography } from "@/app/ui/materialExport";
 
 export default function SubDetails({ tour }) {
@@ -50,6 +52,33 @@ export default function SubDetails({ tour }) {
           >
             English, Spanish, French, Portuguese and more
           </Typography>
+        </div>
+        <div className="py-2">
+          <div className="flex items-center gap-2">
+            <HiOutlineCurrencyDollar className="text-shadeBlack w-5 h-5 " />
+            <Typography
+              className="text-shadeBlack tracking-wide"
+              variant="paragraph"
+            >
+              {tour?.discountPrice ? (
+                <s>Price : ${tour?.price}</s>
+              ) : (
+                `Price : $${tour?.price}`
+              )}
+            </Typography>
+          </div>
+
+          {tour?.discountPrice && (
+            <div className="flex items-center gap-2 mt-4">
+              <HiOutlineCurrencyDollar className="text-actionBlue w-5 h-5 stroke-2 " />
+              <Typography
+                className="text-actionBlue tracking-wide font-bold"
+                variant="paragraph"
+              >
+                Discount Price : ${tour?.discountPrice}
+              </Typography>
+            </div>
+          )}
         </div>
       </div>
     </>
