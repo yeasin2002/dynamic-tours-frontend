@@ -11,6 +11,8 @@ import SubDetails from "./SubDetails";
 import SmallGuide from "./SmallGuide";
 import FaqSection from "./FaqSection";
 
+import BookingMenu from "./BookingMenu";
+
 export default async function SingleTour({ params }) {
   const { tour } = await getTour(params.slug);
   console.log(tour);
@@ -63,11 +65,20 @@ export default async function SingleTour({ params }) {
           </div>
 
           {/* Details */}
-          <div className=" py-3 flex flex-col lg:flex-row justify-between">
-            <Typography className="text-textBlack tracking-wide font-medium lg:text-3xl text-2xl">
-              {tour?.title}
-            </Typography>
-            <div className="gap-2 hidden lg:flex">
+          <div className=" py-3 flex flex-col lg:flex-row  justify-between">
+            <div>
+              <Typography className="text-textBlack tracking-wide font-medium lg:text-3xl text-2xl">
+                {tour?.title}
+              </Typography>
+              <Typography
+                className="text-shadeBlack tracking-wide py-2"
+                variant="paragraph"
+              >
+                {tour?.summery}
+              </Typography>
+            </div>
+
+            <div className="gap-3 hidden lg:flex h-[40px]">
               <Button
                 variant="outlined"
                 className="rounded-md px-4 flex items-center gap-2"
@@ -77,7 +88,7 @@ export default async function SingleTour({ params }) {
               </Button>
               <Button
                 variant="outlined"
-                className="rounded-md px-4 flex items-center gap-2"
+                className="rounded-md px-4  flex items-center gap-2"
               >
                 <HiOutlineShare />
                 Share
@@ -110,8 +121,12 @@ export default async function SingleTour({ params }) {
             </div>
           </div>
 
-          <SubDetails tour={tour} />
+          <div className="lg:relative">
+            <SubDetails tour={tour} />
+            <BookingMenu />
+          </div>
           <SmallGuide />
+
           <FaqSection tour={tour} />
           {/* reviews */}
           <Review />

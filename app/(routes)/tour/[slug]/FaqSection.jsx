@@ -7,7 +7,8 @@ import {
   AccordionBody,
   AccordionHeader,
 } from "@/app/ui/materialExport";
-import { HiOutlineChevronDown, HiOutlineChevronUp } from "react-icons/hi";
+import { HiOutlineChevronDown } from "react-icons/hi";
+
 export default function FaqSection({ tour }) {
   const [open, setOpen] = useState(0);
   const [alwaysOpen, setAlwaysOpen] = useState(true);
@@ -24,7 +25,7 @@ export default function FaqSection({ tour }) {
             onClick={handleAlwaysOpen}
           >
             <div className="w-full flex items-center justify-between">
-              About the place ?
+              Description about the place
               <HiOutlineChevronDown
                 className={`${
                   alwaysOpen
@@ -38,18 +39,8 @@ export default function FaqSection({ tour }) {
             {tour?.description}
           </AccordionBody>
         </Accordion>
-        <Accordion open={open === 1}>
-          <AccordionHeader onClick={() => handleOpen(1)}>
-            How to ?
-          </AccordionHeader>
-          <AccordionBody>
-            We&apos;re not always in the position that we want to be at.
-            We&apos;re constantly growing. We&apos;re constantly making
-            mistakes. We&apos;re constantly trying to express ourselves and
-            actualize our dreams.
-          </AccordionBody>
-        </Accordion>
-        <Accordion open={open === 2}>
+
+        {/* <Accordion open={open === 2}>
           <AccordionHeader onClick={() => handleOpen(2)}>
             What ?
           </AccordionHeader>
@@ -59,7 +50,7 @@ export default function FaqSection({ tour }) {
             mistakes. We&apos;re constantly trying to express ourselves and
             actualize our dreams.
           </AccordionBody>
-        </Accordion>
+        </Accordion> */}
       </section>
     </>
   );
