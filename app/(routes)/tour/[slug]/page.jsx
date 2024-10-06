@@ -6,10 +6,12 @@ import { Button, Typography } from "@/app/ui/materialExport";
 import Container from "@/app/components/extra/Container";
 import { HiOutlineHeart, HiOutlineShare, HiStar } from "react-icons/hi";
 import Link from "next/link";
+import Review from "./Reviews";
+import SubDetails from "./SubDetails";
 
 export default async function SingleTour({ params }) {
   const { tour } = await getTour(params.slug);
-  console.log(tour.coverImage);
+  console.log(tour);
   return (
     <>
       <Nav />
@@ -28,7 +30,7 @@ export default async function SingleTour({ params }) {
             <div className="lg:flex-grow hidden lg:flex lg:w-[25%] w-full flex-col  justify-between ">
               <div className="flex flex-col gap-2  ">
                 <Image
-                  src={tour?.coverImage}
+                  src={tour?.images[0]}
                   width={500}
                   height={300}
                   quality={100}
@@ -36,7 +38,7 @@ export default async function SingleTour({ params }) {
                   className=" w-full h-[230px] object-cover rounded-2xl"
                 />
                 <Image
-                  src={tour?.coverImage}
+                  src={tour?.images[1]}
                   width={500}
                   height={300}
                   quality={100}
@@ -46,8 +48,13 @@ export default async function SingleTour({ params }) {
               </div>
 
               <div>
-                <Button fullWidth className=" bg-actionBlue ">
-                  7 MORE PHOTOS
+                <Button
+                  fullWidth
+                  className=" bg-actionBlue font-normal text-sm tracking-wide "
+                >
+                  {`${
+                    tour?.images.length - 2 ? tour?.images.length - 2 : ""
+                  } MORE PHOTOS`}
                 </Button>
               </div>
             </div>
@@ -100,6 +107,10 @@ export default async function SingleTour({ params }) {
               </Link>
             </div>
           </div>
+
+          <SubDetails tour={tour} />
+          {/* reviews */}
+          <Review />
         </Container>
       </main>
       <Footer />

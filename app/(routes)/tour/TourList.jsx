@@ -21,11 +21,11 @@ import { IoIosPricetag } from "react-icons/io";
 export default function TourList({ tourData }) {
   return (
     <>
-      <div className=" grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 justify-items-center  gap-x-2 gap-y-6  py-4 ">
+      <div className=" grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 justify-items-center  gap-x-4 gap-y-6  py-4 ">
         {tourData?.tour?.map((item) => (
           <Card
             key={item?.id}
-            className="w-full xl:w-[310px] flex flex-col justify-between 2xl:w-[350px] bg-white "
+            className="w-full xl:w-[310px] flex flex-col justify-between 2xl:w-[400px] bg-white "
           >
             <CardBody className=" flex flex-col">
               <div className=" h-[250px]">
