@@ -1,29 +1,63 @@
 import { Typography } from "@/app/ui/materialExport";
 export default function SmallGuide({ guides }) {
+  console.log(guides);
+  let demo = [
+    {
+      _id: "661fa187f2faa1f9b873f4f5",
+      firstName: "Sabbir",
+      lastName: "Hossain",
+      userName: "mojabbir",
+      email: "email@gmail.com",
+      profileImage:
+        "https://res.cloudinary.com/dquhkvjxf/image/upload/v1724824977/profile/661fa187f2faa1f9b873f4f5/o3b7h0cfelmac80voygg.png",
+      createdAt: "2024-04-17T10:16:38.954Z",
+      isActive: true,
+      __v: 0,
+      fullName: "Sabbir Hossain",
+      id: "661fa187f2faa1f9b873f4f5",
+    },
+    {
+      _id: "661fa187f2faa1f9b873f4f5",
+      firstName: "Sabbir",
+      lastName: "Hossain",
+      userName: "mojabbir",
+      email: "email@gmail.com",
+      profileImage:
+        "https://res.cloudinary.com/dquhkvjxf/image/upload/v1724824977/profile/661fa187f2faa1f9b873f4f5/o3b7h0cfelmac80voygg.png",
+      createdAt: "2024-04-17T10:16:38.954Z",
+      isActive: true,
+      __v: 0,
+      fullName: "Sabbir Hossain",
+      id: "661fa187f2faa1f9b873f4f5",
+    },
+    {
+      _id: "661fa187f2faa1f9b873f4f5",
+      firstName: "Sabbir",
+      lastName: "Hossain",
+      userName: "mojabbir",
+      email: "email@gmail.com",
+      profileImage:
+        "https://res.cloudinary.com/dquhkvjxf/image/upload/v1724824977/profile/661fa187f2faa1f9b873f4f5/o3b7h0cfelmac80voygg.png",
+      createdAt: "2024-04-17T10:16:38.954Z",
+      isActive: true,
+      __v: 0,
+      fullName: "Sabbir Hossain",
+      id: "661fa187f2faa1f9b873f4f5",
+    },
+  ];
   return (
     <>
       <div className="flex items-center py-2 ">
         <div className="flex">
-          <img
-            src="https://docs.material-tailwind.com/img/face-2.jpg"
-            alt="guides-image"
-            className="w-11 h-11 rounded-full border-2 border-transparent"
-          />
-          <img
-            src="https://docs.material-tailwind.com/img/face-3.jpg"
-            alt="guides-image"
-            className="w-11 h-11 rounded-full border-2 border-transparent -translate-x-3"
-          />
-          <img
-            src="https://docs.material-tailwind.com/img/face-4.jpg"
-            alt="guides-image"
-            className="w-11 h-11 rounded-full border-2 border-transparent -translate-x-6"
-          />
-          <img
-            src="https://docs.material-tailwind.com/img/face-5.jpg"
-            alt="guides-image"
-            className="w-11 h-11 rounded-full border-2 border-transparent -translate-x-9"
-          />
+          {demo?.map((item, i) => (
+            <img
+              src={item?.profileImage}
+              alt="guides-image"
+              className={`w-11 h-11 rounded-full border-2 border-transparent -translate-x-${
+                i === 0 ? 0 : i * 3
+              } `}
+            />
+          ))}
         </div>
         <Typography
           variant="paragraph"

@@ -14,7 +14,8 @@ import FaqSection from "./FaqSection";
 import BookingMenu from "./BookingMenu";
 
 export default async function SingleTour({ params }) {
-  const { tour } = await getTour(params.slug);
+  const tourData = await getTour(params.slug);
+  let tour = tourData?.tour;
   console.log(tour);
   return (
     <>
@@ -125,7 +126,7 @@ export default async function SingleTour({ params }) {
             <SubDetails tour={tour} />
             <BookingMenu />
           </div>
-          <SmallGuide />
+          <SmallGuide guides={tour?.guides} />
 
           <FaqSection tour={tour} />
           {/* reviews */}
