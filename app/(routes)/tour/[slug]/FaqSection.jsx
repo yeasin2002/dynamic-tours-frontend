@@ -29,7 +29,7 @@ export default function FaqSection({ tour }) {
                 className={`${
                   alwaysOpen
                     ? "rotate-180 h-5 w-5 transition-transform "
-                    : "rotate-0 h-5 w-5 transition-transform"
+                    : "rotate- h-5 w-5 transition-transform"
                 }`}
               />
             </div>

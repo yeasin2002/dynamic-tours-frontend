@@ -43,7 +43,7 @@ export default function TourList({ tourData }) {
                   {item?.title}
                 </Typography>
                 <Typography className="text-offGray">
-                  {item?.description}
+                  {item?.summery}
                 </Typography>
               </div>
             </CardBody>
