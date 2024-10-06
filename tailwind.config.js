@@ -24,7 +24,7 @@ module.exports = withMt({
         md: "768px", // Default medium
         lg: "1024px", // Default large
         xl: "1280px", // Default extra-large
-        "2xl": "1440px", // New 2xl custom screen size
+        "2xl": "1536px", // New 2xl custom screen size
       },
       colors: {
         actionBlue: "#2986FE",
