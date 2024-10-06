@@ -32,6 +32,7 @@ module.exports = withMt({
         plainWhite: "#FFFFFF",
         offWhite: "#F9F9FB",
         offGray: "#555555",
+        shadeBlack: "#64676b",
       },
     },
   },
