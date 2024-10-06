@@ -8,6 +8,8 @@ import { HiOutlineHeart, HiOutlineShare, HiStar } from "react-icons/hi";
 import Link from "next/link";
 import Review from "./Reviews";
 import SubDetails from "./SubDetails";
+import SmallGuide from "./SmallGuide";
+import FaqSection from "./FaqSection";
 
 export default async function SingleTour({ params }) {
   const { tour } = await getTour(params.slug);
@@ -109,6 +111,8 @@ export default async function SingleTour({ params }) {
           </div>
 
           <SubDetails tour={tour} />
+          <SmallGuide />
+          <FaqSection tour={tour} />
           {/* reviews */}
           <Review />
         </Container>
