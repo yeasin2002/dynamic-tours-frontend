@@ -1,16 +1,17 @@
 import axios from "axios";
 
 export const loginHandler = async function (emailOrUsername, password) {
-  console.log(password, email);
+  let user;
   try {
     const res = await axios.post(`http://localhost:4000/api/v1/login`, {
       emailOrUsername,
       password,
     });
-    console.log(res);
+    user = res.data;
   } catch (err) {
-    console.error(err);
+    throw new Error("User not found from authticate");
   }
+  return user;
 };
 
 export const register = function () {};
