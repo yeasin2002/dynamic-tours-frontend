@@ -9,6 +9,7 @@ import {
   Card,
   Select,
   Option,
+  Avatar,
 } from "@material-tailwind/react";
 
 export {
@@ -20,4 +21,5 @@ export {
   Card,
   Select,
   Option,
+  Avatar,
 };

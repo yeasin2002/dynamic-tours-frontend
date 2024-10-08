@@ -15,11 +15,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
 
   callbacks: {
-    async signIn({ account, profile }) {
+    async signIn({ user, account, profile, email, credentials }) {
       if (account.provider === "google") {
         console.log(profile);
 
-        // check if user have an account using this email or apiKey
+        // check if user have an account using thi  s email or apiKey
 
         // if user don't have an account create new one
 
@@ -28,6 +28,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         // return profile.email_verified && profile.email.endsWith("@example.com");
       }
       return true; // Do different verification for other providers that don't have `email_verified`
+    },
+
+    async redirect({ url, baseUrl }) {
+      return baseUrl;
+    },
+    async session({ session, user, token }) {
+      return session;
+    },
+    async jwt({ token, user, account, profile, isNewUser }) {
+      return token;
     },
   },
 });
