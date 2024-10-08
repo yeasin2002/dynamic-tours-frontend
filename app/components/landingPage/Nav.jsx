@@ -8,11 +8,14 @@ import { useEffect, useState } from "react";
 import { Avatar, collapse, Typography } from "@material-tailwind/react";
 import Container from "../extra/Container";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export default function Nav() {
   const [isNavShowed, setIsNavShowed] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const session = useSession();
+
   const [dropNav, setDropNav] = useState(false);
+
   const pathName = usePathname();
 
   useEffect(() => {
@@ -96,9 +99,9 @@ export default function Nav() {
               </div>
             </div>
 
-            {!isLoggedIn ? (
+            {!session ? (
               <a
-                href="/register"
+                href="/login"
                 className="bg-textBlack text-white hidden md:block hover:duration-300 hover:scale-95 px-8 py-2 rounded-full"
               >
                 Join Now
@@ -106,12 +109,9 @@ export default function Nav() {
             ) : (
               <div className=" md:flex gap-3 items-center hidden ">
                 <Typography variant="paragraph" color="inherit">
-                  Welcome {"Sabbir,"}
+                  Welcome back, {session?.data?.user?.name?.split(" ")[0]}
                 </Typography>
-                <Avatar
-                  src="https://docs.material-tailwind.com/img/face-2.jpg"
-                  alt="avatar"
-                />
+                <Avatar src={session?.data?.user?.image} alt="avatar" />
               </div>
             )}
           </div>
