@@ -13,7 +13,7 @@ export const credentialsLoginHandler = async function (
     });
     user = res.data;
   } catch (err) {
-    throw new Error("User not found from authticate");
+    throw new Error("Invalid email or password");
   }
   return user;
 };
@@ -33,7 +33,7 @@ export const getAuthenticatedUserData = async function (token) {
     );
     userData = res.data?.data?.user;
   } catch (err) {
-    throw new Error("User not found from authticate");
+    throw new Error("No user found");
   }
 
   return userData;

@@ -28,24 +28,26 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       authorize: async (credentials) => {
         let user = null;
         // calling the backend api to login with credentials
+        try {
+          const res = await credentialsLoginHandler(
+            credentials?.email,
+            credentials?.password
+          );
+          console.log(res);
 
-        const loginData = await credentialsLoginHandler(
-          credentials?.email,
-          credentials?.password
-        );
+          const userData = await getAuthenticatedUserData(res?.data?.token);
+          user = userData;
 
-        const userData = await getAuthenticatedUserData(loginData?.data?.token);
-        if (!userData) return;
-        user = userData;
-
-        if (!user) {
-          // No user found, so this is their first attempt to login
-          // meaning this is also the place you could do registration
-          throw new Error("User not found.");
+          if (!user) {
+            // No user found, so this is their first attempt to login
+            // meaning this is also the place you could do registration
+            throw new Error("User not found.");
+          }
+          // return user object with their profile data
+          return user;
+        } catch (error) {
+          throw new Error(error);
         }
-
-        // return user object with their profile data
-        return user;
       },
     }),
   ],

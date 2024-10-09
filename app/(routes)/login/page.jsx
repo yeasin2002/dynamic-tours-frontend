@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Card,
@@ -14,6 +15,7 @@ import {
 import { signInAction } from "@/app/action/signInAction";
 
 export function Login() {
+  const [status, setStatus] = useState({ loading: false, error: null });
   const {
     register,
     handleSubmit,
@@ -26,9 +28,16 @@ export function Login() {
     formdata.set("email", data?.email);
     formdata.set("password", data?.password);
     console.log(data);
-
-    const isLogin = await signInAction(formdata);
-    console.log("---login", isLogin);
+    try {
+      setStatus((prev) => {
+        return { ...prev, loading: true };
+      });
+      const isLogin = await signInAction(formdata);
+    } catch (err) {
+      setStatus((prev) => {
+        return { ...prev, error: err.message, loading: false };
+      });
+    }
   };
 
   return (
@@ -39,6 +48,7 @@ export function Login() {
             onSubmit={handleSubmit(registerHandler)}
             className="flex flex-col gap-4 "
           >
+            {status.error && <h4 className="text-red-300">{status.error}</h4>}
             <div>
               <label htmlFor="email">
                 <Typography
@@ -99,7 +109,9 @@ export function Login() {
                 </p>
               )}
             </div>
-            <Button type="submit">Login</Button>
+            <Button loading={status.loading} type="submit">
+              Login
+            </Button>
 
             <Typography
               variant="small"
