@@ -13,6 +13,7 @@ import { useSession } from "next-auth/react";
 export default function Nav() {
   const [isNavShowed, setIsNavShowed] = useState(false);
   const session = useSession();
+  console.log(session);
 
   const [dropNav, setDropNav] = useState(false);
 

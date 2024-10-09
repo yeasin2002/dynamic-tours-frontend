@@ -1,5 +1,10 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
+import Credentials from "next-auth/providers/credentials";
+import {
+  credentialsLoginHandler,
+  getAuthenticatedUserData,
+} from "./app/libs/authenticate";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -12,10 +17,41 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         },
       },
     }),
+
+    Credentials({
+      // You can specify which fields should be submitted, by adding keys to the `credentials` object.
+      // e.g. domain, username, password, 2FA token, etc.
+      credentials: {
+        email: {},
+        password: {},
+      },
+      authorize: async (credentials) => {
+        let user = null;
+        // calling the backend api to login with credentials
+
+        const loginData = await credentialsLoginHandler(
+          credentials?.email,
+          credentials?.password
+        );
+
+        const userData = await getAuthenticatedUserData(loginData?.data?.token);
+        if (!userData) return;
+        user = userData;
+
+        if (!user) {
+          // No user found, so this is their first attempt to login
+          // meaning this is also the place you could do registration
+          throw new Error("User not found.");
+        }
+
+        // return user object with their profile data
+        return user;
+      },
+    }),
   ],
 
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn({ user, account, profile, email, credentials, session }) {
       if (account.provider === "google") {
         console.log(profile);
 
@@ -27,17 +63,34 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         // return profile.email_verified && profile.email.endsWith("@example.com");
       }
+      if (account.provider === "credentials") {
+        // console.log(user, account, profile, email);
+      }
       return true; // Do different verification for other providers that don't have `email_verified`
     },
 
     async redirect({ url, baseUrl }) {
       return baseUrl;
     },
-    async session({ session, user, token }) {
-      return session;
-    },
+
     async jwt({ token, user, account, profile, isNewUser }) {
+      // modifying the token to modify the session
+      if (user) {
+        token.name = user.fullName;
+        token.role = user.role;
+        token.image = user.profileImage;
+      }
+
       return token;
+    },
+    async session({ session, user, token }) {
+      // modifying the session data
+      if (token.name && token.role) {
+        session.user.name = token.name;
+        session.user.image = token.image;
+        session.user.role = token.role;
+      }
+      return session;
     },
   },
 });
