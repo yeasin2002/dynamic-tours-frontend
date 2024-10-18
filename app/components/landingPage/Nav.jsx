@@ -9,11 +9,14 @@ import { Avatar, collapse, Typography } from "@material-tailwind/react";
 import Container from "../extra/Container";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { Button } from "@/app/ui/materialExport";
+import { signOutAction } from "@/app/action/signInAction";
 
 export default function Nav() {
   const [isNavShowed, setIsNavShowed] = useState(false);
   const session = useSession();
-  console.log(session);
+
+  console.log(session, "session-------------");
 
   const [dropNav, setDropNav] = useState(false);
 
@@ -100,7 +103,7 @@ export default function Nav() {
               </div>
             </div>
 
-            {!session ? (
+            {!session.data ? (
               <a
                 href="/login"
                 className="bg-textBlack text-white hidden md:block hover:duration-300 hover:scale-95 px-8 py-2 rounded-full"
@@ -113,6 +116,7 @@ export default function Nav() {
                   Welcome back, {session?.data?.user?.name?.split(" ")[0]}
                 </Typography>
                 <Avatar src={session?.data?.user?.image} alt="avatar" />
+                <Button onClick={async () => signOutAction()}>Logout</Button>
               </div>
             )}
           </div>

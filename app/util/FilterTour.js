@@ -23,7 +23,7 @@ class FilterTour {
           break;
         }
         case "query": {
-          this.apiURL.push(`query=${entry[1]}`);
+          this.apiURL.push(`query=${entry[1].toString()}`);
           break;
         }
         case "max_ratings": {

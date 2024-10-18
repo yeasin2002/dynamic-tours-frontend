@@ -1,5 +1,19 @@
 import axios from "axios";
-import jwt from "jsonwebtoken";
+
+export const getAuthenticatedUserData = async function (token) {
+  let userData;
+  try {
+    const res = await axios.get(`http://localhost:4000/api/v1/getMe`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    userData = res.data?.data?.user;
+    return userData;
+  } catch (error) {
+    throw error.response;
+  }
+};
 
 export const credentialsLoginHandler = async function (
   emailOrUsername,
@@ -11,32 +25,14 @@ export const credentialsLoginHandler = async function (
       emailOrUsername,
       password,
     });
-    user = res.data;
-  } catch (err) {
-    throw new Error("Invalid email or password");
+    const resUser = await getAuthenticatedUserData(res.data.data.token);
+    user = resUser;
+  } catch (error) {
+    console.log(error.response, "form success");
+    throw error.response.data;
   }
+  // it will return the loggedIn userData
   return user;
-};
-
-export const getAuthenticatedUserData = async function (token) {
-  let userData;
-  console.log(token, "token");
-  const decodedData = await jwt.decode(token);
-  try {
-    const res = await axios.get(
-      `http://localhost:4000/api/v1/user/${decodedData?.id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    userData = res.data?.data?.user;
-  } catch (err) {
-    throw new Error("No user found");
-  }
-
-  return userData;
 };
 
 export const credentialsRegisterHandler = function () {};

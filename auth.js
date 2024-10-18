@@ -27,17 +27,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
       authorize: async (credentials) => {
         let user = null;
-        // calling the backend api to login with credentials
+        // calling the backend api to login with credentials for the access token
         try {
-          const res = await credentialsLoginHandler(
+          const userData = await credentialsLoginHandler(
             credentials?.email,
             credentials?.password
           );
-          console.log(res);
-
-          const userData = await getAuthenticatedUserData(res?.data?.token);
+          // if all goes right assinged the user
+          console.log(userData, "user form auth ----------");
           user = userData;
-
           if (!user) {
             // No user found, so this is their first attempt to login
             // meaning this is also the place you could do registration
@@ -46,7 +44,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           // return user object with their profile data
           return user;
         } catch (error) {
-          throw new Error(error);
+          throw new Error(error.message);
         }
       },
     }),
@@ -72,7 +70,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
 
     async redirect({ url, baseUrl }) {
-      return baseUrl;
+      console.log(baseUrl, url);
+      return await baseUrl;
     },
 
     async jwt({ token, user, account, profile, isNewUser }) {
