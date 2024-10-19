@@ -1,10 +1,7 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
-import {
-  credentialsLoginHandler,
-  getAuthenticatedUserData,
-} from "./app/libs/authenticate";
+import { credentialsLoginHandler } from "./app/libs/authenticate";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -34,7 +31,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             credentials?.password
           );
           // if all goes right assinged the user
-          console.log(userData, "user form auth ----------");
           user = userData;
           if (!user) {
             // No user found, so this is their first attempt to login

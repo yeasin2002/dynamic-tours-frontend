@@ -1,8 +1,18 @@
+// {
+//   "compilerOptions": {
+//     "paths": {
+//       "@/*": ["./*"]
+//     },
+//     "target": "ES6"
+//   }
+// }
+
+
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
-    },
-    "target": "ES6"
+      "@/app/*": ["app/*"],
+    }
   }
 }

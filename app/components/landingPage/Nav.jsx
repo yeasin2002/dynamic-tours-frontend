@@ -5,7 +5,7 @@ import Image from "next/image";
 import logo from "@/public/logo.svg";
 import { navMenu } from "../../constant/constant";
 import { useEffect, useState } from "react";
-import { Avatar, collapse, Typography } from "@material-tailwind/react";
+import { Avatar, Typography } from "@material-tailwind/react";
 import Container from "../extra/Container";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -15,8 +15,6 @@ import { signOutAction } from "@/app/action/signInAction";
 export default function Nav() {
   const [isNavShowed, setIsNavShowed] = useState(false);
   const session = useSession();
-
-  console.log(session, "session-------------");
 
   const [dropNav, setDropNav] = useState(false);
 
@@ -102,15 +100,16 @@ export default function Nav() {
                 </ul>
               </div>
             </div>
-
-            {!session.data ? (
+            {session.status === "unauthenticated" && (
               <a
                 href="/login"
                 className="bg-textBlack text-white hidden md:block hover:duration-300 hover:scale-95 px-8 py-2 rounded-full"
               >
                 Join Now
               </a>
-            ) : (
+            )}
+            {session.status === "loading" && <p>Loading...</p>}
+            {session.status === "authenticated" && (
               <div className=" md:flex gap-3 items-center hidden ">
                 <Typography variant="paragraph" color="inherit">
                   Welcome back, {session?.data?.user?.name?.split(" ")[0]}

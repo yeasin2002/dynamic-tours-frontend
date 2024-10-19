@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 
 export default auth((req) => {
-  console.log(req.auth, "-----middleware---");
+  // console.log(req.auth, "-----middleware---");
   console.log(req.nextUrl.origin);
 
   // if (!req.auth && req.nextUrl.pathname !== "/login") {

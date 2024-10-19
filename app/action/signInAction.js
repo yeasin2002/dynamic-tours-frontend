@@ -4,7 +4,7 @@ import { signIn, signOut } from "@/auth";
 
 export const signInAction = async function (formData) {
   try {
-    await signIn("credentials", formData, { redirectTo: "/" });
+    await signIn("credentials", formData);
   } catch (error) {
     if (isRedirectError(error)) {
       throw error;
