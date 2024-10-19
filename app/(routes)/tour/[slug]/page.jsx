@@ -130,7 +130,11 @@ export default async function SingleTour({ params }) {
 
           <FaqSection tour={tour} />
           {/* reviews */}
-          <Review />
+          <Review
+            totalRating={tour?.totalRating}
+            ratingsAverage={tour?.ratingsAverage}
+            reviews={tour?.reviews}
+          />
         </Container>
       </main>
       <Footer />
