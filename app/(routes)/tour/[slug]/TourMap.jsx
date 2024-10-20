@@ -9,9 +9,7 @@ import {
 } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { HiLocationMarker } from "react-icons";
 import markerIcon from "@/public/marker.png";
-console.log(markerIcon);
 
 const customIcon = new L.Icon({
   iconUrl: markerIcon?.src, // Replace with your icon path
@@ -21,8 +19,10 @@ const customIcon = new L.Icon({
 });
 
 const TourMap = ({ locations }) => {
-  const defaultPosition = [locations[0].lat, locations[0].lng];
-
+  const defaultPosition = [
+    locations[0].coordinates[1],
+    locations[0].coordinates[0],
+  ];
   return (
     <MapContainer
       center={defaultPosition}
@@ -33,15 +33,15 @@ const TourMap = ({ locations }) => {
         url="https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png"
         attribution='Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      {locations.map((location, index) => (
+      {locations.map((item, index) => (
         <Marker
           key={index}
-          position={[location.lat, location.lng]}
+          position={[item?.coordinates[1], item?.coordinates[0]]}
           icon={customIcon}
         >
           <Popup>
             <div>
-              <h3>{location.name}</h3>
+              <h3>{item?.description}</h3>
             </div>
           </Popup>
         </Marker>

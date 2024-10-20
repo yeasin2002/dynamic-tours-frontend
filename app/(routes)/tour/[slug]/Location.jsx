@@ -1,6 +1,7 @@
 import { Typography } from "@/app/ui/materialExport";
 import TourMap from "./TourMap";
 export default function Location({ places }) {
+  console.log(places);
   const locations = [
     {
       lat: 37.7749,
@@ -33,7 +34,7 @@ export default function Location({ places }) {
         </Typography>
       </div>
       <div>
-        <TourMap locations={locations} />
+        <TourMap locations={places} />
       </div>
     </>
   );
