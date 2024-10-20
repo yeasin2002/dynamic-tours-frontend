@@ -1,12 +1,6 @@
 "use client";
-import React from "react";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  Polyline,
-} from "react-leaflet";
+import React, { useState } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import markerIcon from "@/public/marker.png";
@@ -23,10 +17,15 @@ const TourMap = ({ locations }) => {
     locations[0].coordinates[1],
     locations[0].coordinates[0],
   ];
+
+  const [position, setPosition] = useState(defaultPosition);
+
   return (
     <MapContainer
       center={defaultPosition}
       zoom={13}
+      maxZoom={16}
+      minZoom={10}
       style={{ height: "600px", width: "100%" }}
     >
       <TileLayer
