@@ -13,6 +13,9 @@
     --color : black
   }
 }
+.leaflet-routing-container {
+  display: none !important;  /* Hides the directions panel */
+}
 
 body {
   color: var(--color);

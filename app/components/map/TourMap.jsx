@@ -4,11 +4,12 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import markerIcon from "@/public/marker.png";
+import RoutingMachine from "./RoutingMachine";
 
 const customIcon = new L.Icon({
   iconUrl: markerIcon?.src, // Replace with your icon path
   iconSize: [46, 46], // Size of the icon
-  iconAnchor: [23, 46], // Anchor the icon at its bottom center
+  iconAnchor: [20, 35], // Anchor the icon at its bottom center
   popupAnchor: [0, -46], // Adjust popup position if using popups
 });
 
@@ -24,8 +25,8 @@ const TourMap = ({ locations }) => {
     <MapContainer
       center={defaultPosition}
       zoom={13}
-      maxZoom={16}
-      minZoom={10}
+      maxZoom={18}
+      minZoom={7}
       style={{ height: "600px", width: "100%" }}
     >
       <TileLayer
@@ -45,6 +46,8 @@ const TourMap = ({ locations }) => {
           </Popup>
         </Marker>
       ))}
+
+      <RoutingMachine locations={locations} />
     </MapContainer>
   );
 };

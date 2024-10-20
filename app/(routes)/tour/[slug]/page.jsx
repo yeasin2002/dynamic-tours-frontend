@@ -12,7 +12,7 @@ import SmallGuide from "./SmallGuide";
 import FaqSection from "./FaqSection";
 
 import BookingMenu from "./BookingMenu";
-import Location from "./Location";
+import Location from "@/app/components/map/Location";
 
 export default async function SingleTour({ params }) {
   const tourData = await getTour(params.slug);
