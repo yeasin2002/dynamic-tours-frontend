@@ -130,7 +130,7 @@ export default async function SingleTour({ params }) {
 
           <SmallGuide guides={tour?.guides} />
           <FaqSection tour={tour} />
-          <Location />
+          <Location places={tour?.locations} />
           {/* reviews */}
           <Review
             totalRating={tour?.totalRating}
