@@ -5,7 +5,7 @@ export default function Review({ totalRating, ratingsAverage, reviews }) {
   console.log("well--------", reviews);
   return (
     <>
-      <div className="bg-gray-100 p-8 my-8 rounded-lg text-3xl flex flex-col text-center md:text-left gap-2 md:flex-row  items-center justify-between">
+      <div className="bg-gray-100 p-8 px-4 md:p-12 my-12 rounded-lg text-3xl flex flex-col text-center md:text-left gap-2 md:flex-row  items-center justify-between">
         <div>
           <Typography
             variant="h3"
@@ -27,7 +27,7 @@ export default function Review({ totalRating, ratingsAverage, reviews }) {
       </div>
 
       {/* main review */}
-      <div className="flex flex-col md:flex-row border-b py-5 border-[#1e1e1e61] justify-between gap-4 items-center md:items-end">
+      <div className="flex flex-col px-8 md:px-2 md:flex-row border-b py-5 border-[#1e1e1e61] justify-between gap-4 items-center md:items-end">
         <div className="text-center flex flex-col gap-1 items-center">
           <Typography variant="small" className="text-shadeBlack">
             Overall Ratings
@@ -50,8 +50,8 @@ export default function Review({ totalRating, ratingsAverage, reviews }) {
           </Typography>
         </div>
         <div className=" flex items-center gap-2">
-          <Button>All</Button>
-          <Button>Latest</Button>
+          <Button className=" tracking-wide bg-actionBlue ">All</Button>
+          <Button className>Latest</Button>
           <Button>Positive</Button>
         </div>
       </div>
@@ -79,6 +79,7 @@ export default function Review({ totalRating, ratingsAverage, reviews }) {
                 src={item?.user?.profileImage}
                 alt="avatar"
                 variant="rounded"
+                className="w-14 h-14"
               />
               <div>
                 <Typography variant="h6">{item?.user?.fullName}</Typography>
@@ -94,6 +95,25 @@ export default function Review({ totalRating, ratingsAverage, reviews }) {
           </div>
         </div>
       ))}
+
+      {/* help center */}
+      <div className="bg-blue-400 p-8  px-4 md:p-12 my-20 rounded-lg text-3xl flex flex-col text-center md:text-left gap-2 md:flex-row  items-center justify-between">
+        <div>
+          <Typography variant="h3" className="tracking-wide text-white mb-2">
+            What are you wating for ?
+          </Typography>
+          <Typography variant="p" className="tracking-wide text-offWhite">
+            You've got you covered with our simple booking method <br /> Book
+            the tour right now to experience the most amazing tour
+          </Typography>
+        </div>
+
+        <div>
+          <Button className="flex items-center gap-2 shadow-md font-bold uppercase tracking-wide bg-white text-black ">
+            Book now
+          </Button>
+        </div>
+      </div>
     </>
   );
 }

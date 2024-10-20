@@ -12,6 +12,7 @@ import SmallGuide from "./SmallGuide";
 import FaqSection from "./FaqSection";
 
 import BookingMenu from "./BookingMenu";
+import Location from "./Location";
 
 export default async function SingleTour({ params }) {
   const tourData = await getTour(params.slug);
@@ -126,9 +127,10 @@ export default async function SingleTour({ params }) {
             <SubDetails tour={tour} />
             <BookingMenu />
           </div>
-          <SmallGuide guides={tour?.guides} />
 
+          <SmallGuide guides={tour?.guides} />
           <FaqSection tour={tour} />
+          <Location />
           {/* reviews */}
           <Review
             totalRating={tour?.totalRating}
