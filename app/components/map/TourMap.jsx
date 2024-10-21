@@ -24,9 +24,9 @@ const TourMap = ({ locations }) => {
   return (
     <MapContainer
       center={defaultPosition}
-      zoom={13}
+      zoom={14}
       maxZoom={18}
-      minZoom={7}
+      minZoom={8}
       style={{ height: "600px", width: "100%" }}
     >
       <TileLayer

@@ -1,5 +1,5 @@
 import { getTour } from "@/app/libs/getTour";
-import Nav from "@/app/components/landingPage/Nav";
+import Nav from "@/app/components/header/Nav";
 import Footer from "@/app/components/landingPage/Footer";
 import Image from "next/image";
 import { Button, Typography } from "@/app/ui/materialExport";

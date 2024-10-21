@@ -1,4 +1,4 @@
-import Nav from "./components/landingPage/Nav";
+import Nav from "./components/header/Nav";
 import Hero from "./components/landingPage/Hero";
 import Destination from "./components/landingPage/Destination";
 import Unleash from "./components/landingPage/Unleash";

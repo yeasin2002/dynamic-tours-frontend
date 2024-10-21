@@ -11,6 +11,7 @@ import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Button } from "@/app/ui/materialExport";
 import { signOutAction } from "@/app/action/signInAction";
+import { ProfileMenu } from "./ProfileMenu";
 
 export default function Nav() {
   const [isNavShowed, setIsNavShowed] = useState(false);
@@ -43,11 +44,13 @@ export default function Nav() {
     <>
       <Container>
         <nav className="py-4 ">
-          <div className="flex justify-between items-center px-2 md:px-0">
+          <div className="flex justify-between items-center px-2 md:px-0 relative">
             <a href="/">
               <Image src={logo} height={50} width={125} alt="Brand logo" />
             </a>
-            <ul className={`gap-3 p-2 rounded-full md:flex hidden`}>
+            <ul
+              className={`gap-3 p-2  absolute left-1/2  transform -translate-x-1/2 rounded-full md:flex hidden`}
+            >
               {navMenu.map((link) => (
                 <li key={link.id}>
                   <a
@@ -111,11 +114,10 @@ export default function Nav() {
             {session.status === "loading" && <p>Loading...</p>}
             {session.status === "authenticated" && (
               <div className=" md:flex gap-3 items-center hidden ">
-                <Typography variant="paragraph" color="inherit">
-                  Welcome back, {session?.data?.user?.name?.split(" ")[0]}
+                <Typography variant="paragraph" className="text-textBlack">
+                  Welcome Back, {session?.data?.user?.name?.split(" ")[0]}
                 </Typography>
-                <Avatar src={session?.data?.user?.image} alt="avatar" />
-                <Button onClick={async () => signOutAction()}>Logout</Button>
+                <ProfileMenu user={session?.data?.user} />
               </div>
             )}
           </div>
