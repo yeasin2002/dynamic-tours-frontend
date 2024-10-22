@@ -11,7 +11,6 @@ import {
 } from "@material-tailwind/react";
 
 import { signInAction } from "@/app/action/AuthAction";
-import { useRouter } from "next/navigation";
 
 export function Login() {
   const [status, setStatus] = useState({ loading: false, error: null });
@@ -47,7 +46,11 @@ export function Login() {
             onSubmit={handleSubmit(registerHandler)}
             className="flex flex-col gap-4 "
           >
-            {status.error && <h4 className="text-red-300">{status.error}</h4>}
+            {status.error && (
+              <Typography variant="paragraph" className="text-red-400">
+                {status.error?.split(":")[1]}
+              </Typography>
+            )}
             <div>
               <label htmlFor="email">
                 <Typography
@@ -55,16 +58,18 @@ export function Login() {
                   color="blue-gray"
                   className="block font-medium mb-2"
                 >
-                  Email
+                  Email or username
                 </Typography>
               </label>
               <Input
                 id="email"
                 color="gray"
                 size="lg"
-                type="email"
+                type="text"
                 name="email"
-                {...register("email", { required: "Email is required" })}
+                {...register("email", {
+                  required: "Insert your email or Username",
+                })}
                 placeholder="name@mail.com"
                 className="!w-full placeholder:!opacity-100 focus:!border-t-offGray !border-offGray"
                 labelProps={{
@@ -91,7 +96,7 @@ export function Login() {
                 color="gray"
                 size="lg"
                 {...register("password", {
-                  required: "Password is required",
+                  required: "Insert your password",
                   minLength: { value: 8, message: "Password minlength is 8" },
                 })}
                 type="password"

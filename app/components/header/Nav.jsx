@@ -1,15 +1,14 @@
 "use client";
 import { FaXmark } from "react-icons/fa6";
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiMenu } from "react-icons/fi";
 import Image from "next/image";
 import logo from "@/public/logo.svg";
 import { navMenu } from "../../constant/constant";
 import { useEffect, useState } from "react";
-import { Avatar, Typography } from "@material-tailwind/react";
+import { Typography } from "@material-tailwind/react";
 import Container from "../extra/Container";
 import { usePathname } from "next/navigation";
 import { getSession, useSession } from "next-auth/react";
-import { Button } from "@/app/ui/materialExport";
 import { signOutAction } from "@/app/action/AuthAction";
 import { ProfileMenu } from "./ProfileMenu";
 
@@ -19,17 +18,13 @@ export default function Nav() {
   const [AuthStatus, setAuthStatus] = useState(null);
 
   const session = useSession();
-  console.log(session);
-  // console.log("current", session?.data);
   const [dropNav, setDropNav] = useState(false);
   const pathName = usePathname();
 
   useEffect(() => {
     // setting up auth state
     getSession();
-
     setAuthStatus(session.status);
-
     if (session.status === "authenticated") {
       setAuthUser(session.data.user);
     } else {

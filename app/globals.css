@@ -51,6 +51,7 @@ body {
   }
 }
 
+
 .circleAnim {
   animation: circleAnim 10s linear infinite forwards;
 }
