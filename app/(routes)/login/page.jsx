@@ -12,7 +12,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 
-import { signInAction } from "@/app/action/signInAction";
+import { signInAction } from "@/app/action/AuthAction";
 import { useRouter } from "next/navigation";
 
 export function Login() {

@@ -27,6 +27,7 @@ export const credentialsLoginHandler = async function (
     });
     const resUser = await getAuthenticatedUserData(res.data.data.token);
     user = resUser;
+    user.accessToken = res.data.data.token;
   } catch (error) {
     console.log(error.response, "form success");
     throw error.response.data;

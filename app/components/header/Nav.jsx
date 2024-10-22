@@ -10,7 +10,7 @@ import Container from "../extra/Container";
 import { usePathname } from "next/navigation";
 import { getSession, useSession } from "next-auth/react";
 import { Button } from "@/app/ui/materialExport";
-import { signOutAction } from "@/app/action/signInAction";
+import { signOutAction } from "@/app/action/AuthAction";
 import { ProfileMenu } from "./ProfileMenu";
 
 export default function Nav() {
@@ -19,6 +19,7 @@ export default function Nav() {
   const [AuthStatus, setAuthStatus] = useState(null);
 
   const session = useSession();
+  console.log(session);
   // console.log("current", session?.data);
   const [dropNav, setDropNav] = useState(false);
   const pathName = usePathname();
@@ -69,7 +70,9 @@ export default function Nav() {
                   <a
                     href={link.href}
                     className={`hidden md:block px-4 uppercase lg:px-6 py-2 ${
-                      link.href === pathName ? "bg-gray-900 text-white" : ""
+                      pathName.startsWith(link.href)
+                        ? "bg-gray-900 text-white"
+                        : ""
                     } hover:bg-gray-900 hover:text-offWhite rounded-full hover:duration-200`}
                   >
                     {link.name}
