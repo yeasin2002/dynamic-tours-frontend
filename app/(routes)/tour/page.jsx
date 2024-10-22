@@ -1,26 +1,19 @@
 "use client";
-import Nav from "@/app/components/header/Nav";
-import Filter from "@/app/(routes)/tour/Filter";
-import Search from "@/app/(routes)/tour/Search";
-import TourList from "@/app/(routes)/tour/TourList";
+import Nav from "@/app/components/Header/Nav";
+import Filter from "@/app/components/Tour/Filter";
+import Search from "@/app/components/Tour/Search";
+import TourList from "@/app/components/Tour/TourList";
 import Container from "@/app/components/extra/Container";
 import { getFilteredData } from "@/app/libs/getFilteredTour";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { HiFilter } from "react-icons/hi";
-import {
-  Button,
-  Select,
-  Option,
-  Chip,
-  Typography,
-  Card,
-} from "@material-tailwind/react";
+import { Button, Select, Option, Chip, Card } from "@material-tailwind/react";
 import { filterSort } from "@/app/constant/constant";
 import FilterTour from "@/app/util/FilterTour";
 import filterManager from "@/app/util/FilterManager";
 import Loading from "@/app/ui/Loading";
-import NotFound from "./NotFound";
+import NotFound from "../../components/Tour/NotFound";
 
 export default function Tour() {
   const [tourData, setTourData] = useState(null);
