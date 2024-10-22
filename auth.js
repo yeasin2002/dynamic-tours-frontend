@@ -66,11 +66,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
 
     async redirect({ url, baseUrl }) {
-      console.log(baseUrl, url);
-      return await baseUrl;
+      return baseUrl;
     },
 
-    async jwt({ token, user, account, profile, isNewUser }) {
+    async jwt({ token, user, account, profile }) {
       // modifying the token to modify the session
       if (user) {
         token.name = user.fullName;

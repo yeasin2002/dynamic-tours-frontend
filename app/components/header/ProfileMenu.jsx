@@ -7,8 +7,14 @@ import {
   Avatar,
   Typography,
 } from "@material-tailwind/react";
+import { getSession } from "next-auth/react";
+import { useState } from "react";
 
 export function ProfileMenu({ signOut, user }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const openMenu = () => setIsOpen(true);
+  const closeMenu = () => setIsOpen(false);
+
   return (
     <Menu>
       <MenuHandler>
@@ -120,7 +126,14 @@ export function ProfileMenu({ signOut, user }) {
               fill="#90A4AE"
             />
           </svg>
-          <Typography variant="small" className="font-medium">
+          <Typography
+            onClick={async () => {
+              await signOut();
+              await getSession();
+            }}
+            variant="small"
+            className="font-medium"
+          >
             Sign Out
           </Typography>
         </MenuItem>

@@ -8,23 +8,36 @@ import { useEffect, useState } from "react";
 import { Avatar, Typography } from "@material-tailwind/react";
 import Container from "../extra/Container";
 import { usePathname } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import { Button } from "@/app/ui/materialExport";
 import { signOutAction } from "@/app/action/signInAction";
 import { ProfileMenu } from "./ProfileMenu";
 
 export default function Nav() {
   const [isNavShowed, setIsNavShowed] = useState(false);
+  const [AuthUser, setAuthUser] = useState(null);
+  const [AuthStatus, setAuthStatus] = useState(null);
+
   const session = useSession();
-
+  // console.log("current", session?.data);
   const [dropNav, setDropNav] = useState(false);
-
   const pathName = usePathname();
 
   useEffect(() => {
+    // setting up auth state
+    getSession();
+
+    setAuthStatus(session.status);
+
+    if (session.status === "authenticated") {
+      setAuthUser(session.data.user);
+    } else {
+      setAuthUser(null);
+    }
+
     let scrollPosition = 0;
     const scrollHandler = function (event) {
-      if (scrollPosition <= 0 || scrollPosition < window.scrollY) {
+      if (scrollPosition <= 0 || scrollPosition < window?.scrollY) {
         scrollPosition = window.scrollY;
         setDropNav(false);
       } else if (scrollPosition > window.scrollY) {
@@ -38,7 +51,7 @@ export default function Nav() {
     }
 
     return () => window.removeEventListener("scroll", scrollHandler);
-  }, []);
+  }, [session.status]);
 
   return (
     <>
@@ -111,13 +124,13 @@ export default function Nav() {
                 Join Now
               </a>
             )}
-            {session.status === "loading" && <p>Loading...</p>}
-            {session.status === "authenticated" && (
+            {AuthStatus === "loading" && <p>Loading...</p>}
+            {AuthStatus === "authenticated" && (
               <div className=" md:flex gap-3 items-center hidden ">
                 <Typography variant="paragraph" className="text-textBlack">
-                  Welcome Back, {session?.data?.user?.name?.split(" ")[0]}
+                  Welcome Back, {AuthUser.name?.split(" ")[0]}
                 </Typography>
-                <ProfileMenu user={session?.data?.user} />
+                <ProfileMenu signOut={signOutAction} user={AuthUser} />
               </div>
             )}
           </div>

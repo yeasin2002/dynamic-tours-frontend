@@ -13,6 +13,7 @@ import {
 } from "@material-tailwind/react";
 
 import { signInAction } from "@/app/action/signInAction";
+import { useRouter } from "next/navigation";
 
 export function Login() {
   const [status, setStatus] = useState({ loading: false, error: null });
@@ -32,7 +33,7 @@ export function Login() {
       setStatus((prev) => {
         return { ...prev, loading: true };
       });
-      const isLogin = await signInAction(formdata);
+      await signInAction(formdata);
     } catch (err) {
       setStatus((prev) => {
         return { ...prev, error: err.message, loading: false };
