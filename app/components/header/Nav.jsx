@@ -18,7 +18,6 @@ export default function Nav() {
   const [AuthStatus, setAuthStatus] = useState(null);
 
   const session = useSession();
-  console.log(session);
   const [dropNav, setDropNav] = useState(false);
   const pathName = usePathname();
 
@@ -34,7 +33,7 @@ export default function Nav() {
 
     let scrollPosition = 0;
     const scrollHandler = function (event) {
-      if (scrollPosition <= 0 || scrollPosition < window?.scrollY) {
+      if (scrollPosition < 25 || scrollPosition < window?.scrollY) {
         scrollPosition = window.scrollY;
         setDropNav(false);
       } else if (scrollPosition > window.scrollY) {
@@ -42,11 +41,9 @@ export default function Nav() {
         setDropNav(true);
       }
     };
-
     if (window) {
       window.addEventListener("scroll", scrollHandler);
     }
-
     return () => window.removeEventListener("scroll", scrollHandler);
   }, [session.status]);
 
@@ -59,7 +56,11 @@ export default function Nav() {
               <Image src={logo} height={50} width={125} alt="Brand logo" />
             </a>
             <ul
-              className={`gap-3 p-2  absolute left-1/2  transform -translate-x-1/2 rounded-full md:flex hidden`}
+              className={`gap-3 p-2 ${
+                !dropNav
+                  ? " absolute bg-white"
+                  : "fixed z-40 bg-[#000000a9] text-white"
+              }  left-1/2 transform -translate-x-1/2 duration-200 rounded-full md:flex hidden`}
             >
               {navMenu.map((link) => (
                 <li key={link.id}>

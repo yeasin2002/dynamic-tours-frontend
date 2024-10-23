@@ -27,6 +27,9 @@ body {
     text-wrap: balance;
   }
 }
+
+
+
 @keyframes fadeIn {
   from {
     opacity: 0;
