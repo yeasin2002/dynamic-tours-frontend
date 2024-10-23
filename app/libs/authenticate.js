@@ -31,11 +31,29 @@ export const credentialsLoginHandler = async function (
     user = resUser;
     user.accessToken = res.data.data.token;
   } catch (error) {
-    console.log(error.response, "form success");
     throw error.response.data;
   }
   // it will return the loggedIn userData
   return user;
 };
 
-export const credentialsRegisterHandler = function () {};
+export const credentialsRegisterHandler = async function () {
+  const res = await API.post(`api/v1/`);
+};
+
+export const googleSignInHandler = async function (userInfo) {
+  let user;
+  try {
+    const res = await API.post(`api/v1/sign-in-with-google`, {
+      ...userInfo,
+    });
+
+    console.log(res.data);
+  } catch (error) {
+    console.log(error?.response?.data?.message);
+    throw new Error(error?.response?.data?.message);
+  }
+
+  // returning user with the accessToken to add it to the session
+  return user;
+};

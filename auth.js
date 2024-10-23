@@ -1,7 +1,10 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
-import { credentialsLoginHandler } from "./app/libs/authenticate";
+import {
+  credentialsLoginHandler,
+  googleSignInHandler,
+} from "./app/libs/authenticate";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -49,22 +52,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async signIn({ user, account, profile, email, credentials, session }) {
       if (account.provider === "google") {
-        console.log(profile, "profile----");
-        // console.log(account, "account----");
-        // console.log(credentials, "credentials----");
+        // console.log(profile, "profile----");
+        // generating userInfo for registering
+        const userInfo = {
+          firstName: profile.given_name,
+          lastName: profile.family_name,
+          email: profile.email,
+          profileImage: profile.picture,
+        };
 
-        console.log(user.fullName, "------user");
-
-        // check if user have an account using thi  s email or apiKey
-
-        // if user don't have an account create new one
-
-        // if user already have an account login using that account
-
-        // return profile.email_verified && profile.email.endsWith("@example.com");
-      }
-      if (account.provider === "credentials") {
-        // console.log(user, account, profile, email);
+        // this handler will return registerd user Info along with the access token
+        const currentuser = await googleSignInHandler(userInfo);
+        // need to modify the user params to create custom session
       }
       return true; // Do different verification for other providers that don't have `email_verified`
     },
