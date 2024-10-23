@@ -63,6 +63,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         // this handler will return registerd user Info along with the access token
         const currentuser = await googleSignInHandler(userInfo);
+        // console.log(currentuser, "current user -----");
+        user.role = currentuser.role;
+        user.name = currentuser.fullName;
+        user.image = currentuser.profileImage;
+        user.accessToken = currentuser.accessToken;
+        // console.log(user, "session user -----");
         // need to modify the user params to create custom session
       }
       return true; // Do different verification for other providers that don't have `email_verified`
@@ -74,10 +80,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
     async jwt({ token, user, account, profile }) {
       // modifying the token to modify the session
-      if (user) {
+      if (user && token) {
+        token.type = "custom";
         token.name = user.fullName;
         token.role = user.role;
         token.image = user.profileImage;
+        token.accessToken = user.accessToken;
+      }
+      if (account && profile) {
+        token.type = "google";
+        token.name = user.name;
+        token.role = user.role;
+        token.image = user.image;
         token.accessToken = user.accessToken;
       }
 
@@ -85,7 +99,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     async session({ session, user, token }) {
       // modifying the session data
-      if (token.name && token.role) {
+      if (token.type === "custom") {
+        session.user.name = token.name;
+        session.user.image = token.image;
+        session.user.role = token.role;
+        session.accessToken = token.accessToken;
+      }
+      if (token.type === "google") {
         session.user.name = token.name;
         session.user.image = token.image;
         session.user.role = token.role;

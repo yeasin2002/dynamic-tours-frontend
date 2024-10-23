@@ -26,10 +26,11 @@ export const credentialsLoginHandler = async function (
       emailOrUsername,
       password,
     });
+    const token = res.data?.data?.token;
 
-    const resUser = await getAuthenticatedUserData(res.data.data.token);
+    const resUser = await getAuthenticatedUserData(token);
     user = resUser;
-    user.accessToken = res.data.data.token;
+    user.accessToken = token;
   } catch (error) {
     throw error.response.data;
   }
@@ -38,7 +39,7 @@ export const credentialsLoginHandler = async function (
 };
 
 export const credentialsRegisterHandler = async function () {
-  const res = await API.post(`api/v1/`);
+  const res = await API.post(`api/v1/signup`);
 };
 
 export const googleSignInHandler = async function (userInfo) {
@@ -47,8 +48,17 @@ export const googleSignInHandler = async function (userInfo) {
     const res = await API.post(`api/v1/sign-in-with-google`, {
       ...userInfo,
     });
-
-    console.log(res.data);
+    const token = res.data?.data?.token;
+    // if it's create new user we will return the user info
+    if (res.data?.data?.user) {
+      user = res.data?.data?.user;
+      user.accessToken = token;
+    } else {
+      // else we will get the user by sending the access token then return the user
+      const authUser = await getAuthenticatedUserData(token);
+      user = authUser;
+      user.accessToken = token;
+    }
   } catch (error) {
     console.log(error?.response?.data?.message);
     throw new Error(error?.response?.data?.message);
