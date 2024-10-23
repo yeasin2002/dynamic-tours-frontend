@@ -18,6 +18,7 @@ export default function Nav() {
   const [AuthStatus, setAuthStatus] = useState(null);
 
   const session = useSession();
+  console.log(session);
   const [dropNav, setDropNav] = useState(false);
   const pathName = usePathname();
 

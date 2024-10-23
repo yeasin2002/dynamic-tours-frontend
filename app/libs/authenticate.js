@@ -1,4 +1,5 @@
 import axios from "axios";
+import API from "./API";
 
 export const getAuthenticatedUserData = async function (token) {
   let userData;
@@ -21,10 +22,11 @@ export const credentialsLoginHandler = async function (
 ) {
   let user;
   try {
-    const res = await axios.post(`http://localhost:4000/api/v1/login`, {
+    const res = await API.post(`api/v1/login`, {
       emailOrUsername,
       password,
     });
+
     const resUser = await getAuthenticatedUserData(res.data.data.token);
     user = resUser;
     user.accessToken = res.data.data.token;
@@ -37,5 +39,3 @@ export const credentialsLoginHandler = async function (
 };
 
 export const credentialsRegisterHandler = function () {};
-
-export const logout = function () {};

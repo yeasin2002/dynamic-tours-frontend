@@ -33,3 +33,14 @@ export const signOutAction = async function () {
   }
   return status;
 };
+
+export const signInWithGoogleAction = async function () {
+  try {
+    await signIn("google");
+  } catch (error) {
+    if (isRedirectError(error)) {
+      // redirect("/login");
+      throw error;
+    }
+  }
+};

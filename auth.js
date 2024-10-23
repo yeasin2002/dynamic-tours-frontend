@@ -49,7 +49,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async signIn({ user, account, profile, email, credentials, session }) {
       if (account.provider === "google") {
-        console.log(profile);
+        console.log(profile, "profile----");
+        // console.log(account, "account----");
+        // console.log(credentials, "credentials----");
+
+        console.log(user.fullName, "------user");
 
         // check if user have an account using thi  s email or apiKey
 

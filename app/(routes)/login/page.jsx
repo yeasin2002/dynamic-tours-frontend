@@ -9,8 +9,7 @@ import {
   CardBody,
   Typography,
 } from "@material-tailwind/react";
-
-import { signInAction } from "@/app/action/AuthAction";
+import { signInAction, signInWithGoogleAction } from "@/app/action/AuthAction";
 
 export function Login() {
   const [status, setStatus] = useState({ loading: false, error: null });
@@ -36,6 +35,11 @@ export function Login() {
         return { ...prev, error: err.message, loading: false };
       });
     }
+  };
+
+  const googleSignInHandler = async function () {
+    const isSignedIn = await signInWithGoogleAction();
+    console.log(isSignedIn, "from handler--------");
   };
 
   return (
@@ -115,6 +119,9 @@ export function Login() {
             </div>
             <Button loading={status.loading} type="submit">
               Login
+            </Button>
+            <Button onClick={googleSignInHandler} color="blue">
+              Continue with google
             </Button>
 
             <Typography
