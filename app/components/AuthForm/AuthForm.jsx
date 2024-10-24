@@ -1,13 +1,11 @@
 "use client";
 import { usePathname } from "next/navigation";
 import Login from "./Login";
-import SignUp from "./SignUp";
 import authImage from "@/public/image/auth_form.png";
 import Image from "next/image";
 
 export function AuthForm() {
   const pathName = usePathname();
-  console.log(authImage.src);
   return (
     <>
       <div className="w-full h-screen flex items-center justify-center loginGradient">
@@ -18,8 +16,8 @@ export function AuthForm() {
           ></div>
 
           <div className=" w-full 2xl:w-[45%] md:w-1/2 flex items-center">
-            {pathName === "/signup" && <SignUp />}
-            {pathName === "/login" && <Login />}
+            {pathName === "/signup" && <Login pathName={pathName} />}
+            {pathName === "/login" && <Login pathName={pathName} />}
           </div>
         </div>
       </div>

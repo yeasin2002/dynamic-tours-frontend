@@ -2,15 +2,18 @@
 import React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Input, Button, Typography, Checkbox } from "@material-tailwind/react";
+import { Input, Button, Typography } from "@material-tailwind/react";
 import { signInAction, signInWithGoogleAction } from "@/app/action/AuthAction";
 import BrandLogo from "@/public/logo.svg";
 import Image from "next/image";
 import Link from "next/link";
 import googleLogo from "@/public/google_icon.svg";
+import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 
-export function Login() {
+export function Login({ pathName }) {
   const [status, setStatus] = useState({ loading: false, error: null });
+  const [isPasswordShown, setIsPasswordShown] = useState(false);
+  const isLogin = pathName === "/login";
   const {
     register,
     handleSubmit,
@@ -18,7 +21,7 @@ export function Login() {
     formState: { errors },
   } = useForm();
 
-  const registerHandler = async function (data) {
+  const loginHandler = async function (data) {
     const formdata = new FormData();
     formdata.set("email", data?.email);
     formdata.set("password", data?.password);
@@ -34,6 +37,7 @@ export function Login() {
     }
   };
 
+  // login handler
   const googleSignInHandler = async function () {
     const isSignedIn = await signInWithGoogleAction();
   };
@@ -45,12 +49,12 @@ export function Login() {
       </div>
       <div>
         <form
-          onSubmit={handleSubmit(registerHandler)}
+          onSubmit={handleSubmit(loginHandler)}
           className="flex flex-col gap-2 "
         >
           <div className="py-3 ">
-            <Typography variant="h3" className="mb-2 ">
-              Log In
+            <Typography variant="h3" className="mb-2 text-textBlack ">
+              {isLogin ? "Log In" : "Sign Up"}
             </Typography>
             <Typography variant="paragraph" className="tracking-wide">
               Discover a better way of traveling with us
@@ -58,7 +62,7 @@ export function Login() {
           </div>
           <Button
             onClick={googleSignInHandler}
-            className="bg-offWhite rounded-none flex items-center justify-center font-medium shadow-none normal-case text-[15px] text-textBlack tracking-wide"
+            className="!bg-senseWhite rounded-none flex items-center justify-center font-medium shadow-none normal-case text-[15px] text-textBlack tracking-wide"
           >
             <Image
               src={googleLogo}
@@ -67,7 +71,7 @@ export function Login() {
               alt="google_icon"
               className="mr-3 w-6 h-6"
             />
-            Login with Google
+            Sign in with Google
           </Button>
 
           <div className=" border-b border-[#2a2a2a6b] relative my-4 flex items-center justify-center">
@@ -82,13 +86,43 @@ export function Login() {
             </Typography>
           )}
           <div>
-            <label htmlFor="email">
+            <label htmlFor="fullname">
               <Typography
                 variant="small"
                 color="blue-gray"
                 className="block font-medium mb-2"
               >
-                Email or username
+                Full Name
+              </Typography>
+            </label>
+            <Input
+              id="fullname"
+              color="gray"
+              size="lg"
+              type="text"
+              name="fullname"
+              {...register("fullname", {
+                required: "Insert your fullname",
+              })}
+              placeholder="Enter your name"
+              className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack !bg-senseWhite border-none rounded-none focus:!border-t-offGray !border-offGray"
+              labelProps={{
+                className: "hidden",
+              }}
+            />
+            {errors?.fullname && (
+              <p role="alert" className=" text-red-400 mt-2 text-sm">
+                {errors.fullname?.message}
+              </p>
+            )}
+
+            <label htmlFor="email">
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="block font-medium my-2"
+              >
+                Email {isLogin ? "or username" : ""}
               </Typography>
             </label>
             <Input
@@ -98,10 +132,12 @@ export function Login() {
               type="text"
               name="email"
               {...register("email", {
-                required: "Insert your email or Username",
+                required: isLogin
+                  ? "Insert your email or Username"
+                  : "Insert your email",
               })}
               placeholder="Enter your e-mail"
-              className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack rounded-none focus:!border-t-offGray !border-offGray"
+              className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack !bg-senseWhite border-none rounded-none focus:!border-t-offGray !border-offGray"
               labelProps={{
                 className: "hidden",
               }}
@@ -128,10 +164,23 @@ export function Login() {
                 required: "Insert your password",
                 minLength: { value: 8, message: "Password minlength is 8" },
               })}
-              type="password"
+              icon={
+                isPasswordShown ? (
+                  <HiOutlineEyeOff
+                    onClick={() => setIsPasswordShown(false)}
+                    className="w-5 h-5 mr-1 cursor-pointer"
+                  />
+                ) : (
+                  <HiOutlineEye
+                    onClick={() => setIsPasswordShown(true)}
+                    className="w-5 h-5 mr-1 cursor-pointer"
+                  />
+                )
+              }
+              type={isPasswordShown ? "text" : "password"}
               name="password"
               placeholder="Password"
-              className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack rounded-none focus:!border-t-offGray !border-offGray"
+              className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack rounded-none border-none !bg-senseWhite focus:!border-t-offGray !border-offGray"
               labelProps={{
                 className: "hidden",
               }}
@@ -141,24 +190,30 @@ export function Login() {
                 {errors.password?.message}
               </p>
             )}
-            <div className=" my-2 flex items-center justify-between">
-              <Typography
-                color="blue-gray"
-                variant="small"
-                className="flex select-none items-center px-0 gap-2"
-              >
-                <input type="checkbox" defaultChecked />
-                Remember me
-              </Typography>
-              <Button
-                variant="text"
-                className="rounded-none hover:bg-white p-1 my-0 normal-case tracking-wide"
-              >
-                <Typography variant="small" color="blue-gray">
-                  Forgot Password
+            {isLogin && (
+              <div className=" my-2 flex items-center justify-between">
+                <Typography
+                  color="blue-gray"
+                  variant="small"
+                  className="flex select-none items-center px-0 gap-2"
+                >
+                  <input type="checkbox" defaultChecked />
+                  Remember me
                 </Typography>
-              </Button>
-            </div>
+                <Button
+                  variant="text"
+                  className="rounded-none hover:bg-white p-1 my-0 normal-case tracking-wide"
+                >
+                  <Link
+                    color="blue-gray"
+                    className="text-sm font-medium tracking-wide "
+                    href="/forgot-password"
+                  >
+                    Forgot password
+                  </Link>
+                </Button>
+              </div>
+            )}
           </div>
 
           <Button
@@ -166,19 +221,31 @@ export function Login() {
             loading={status.loading}
             type="submit"
           >
-            Login
+            {isLogin ? "Login" : "Sign Up"}
           </Button>
 
           <div className=" my-2">
-            <Typography color="blue-gray" variant="small">
-              Not a member ?{" "}
-              <Link
-                className="underline font-medium tracking-wide text-textBlack"
-                href="/signup"
-              >
-                Create an account
-              </Link>
-            </Typography>
+            {isLogin ? (
+              <Typography color="blue-gray" variant="small">
+                Not a member ?{" "}
+                <Link
+                  className="underline font-medium tracking-wide text-textBlack"
+                  href="/signup"
+                >
+                  Create an account
+                </Link>
+              </Typography>
+            ) : (
+              <Typography color="blue-gray" variant="small">
+                Already have account ?{" "}
+                <Link
+                  className="underline font-medium tracking-wide text-textBlack"
+                  href="/login"
+                >
+                  Login
+                </Link>
+              </Typography>
+            )}
           </div>
 
           <Typography
