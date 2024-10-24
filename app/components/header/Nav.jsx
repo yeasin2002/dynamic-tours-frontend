@@ -59,7 +59,7 @@ export default function Nav() {
               className={`gap-3 p-2 ${
                 !dropNav
                   ? " absolute bg-white"
-                  : "fixed z-40 bg-[#000000dd] text-white"
+                  : "fixed z-[1500] bg-[#000000ae] backdrop-blur-md text-white"
               }  left-1/2 transform -translate-x-1/2 duration-200 rounded-full md:flex hidden`}
             >
               {navMenu.map((link) => (
