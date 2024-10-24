@@ -17,7 +17,7 @@ export function AuthForm() {
             style={{ backgroundImage: `url('${authImage.src}')` }}
           ></div>
 
-          <div className=" w-full md:w-1/2 ">
+          <div className=" w-full md:w-1/2 flex items-center ">
             {pathName === "/signup" && <SignUp />}
             {pathName === "/login" && <Login />}
           </div>

@@ -2,17 +2,11 @@
 import React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-  Card,
-  Input,
-  Button,
-  CardBody,
-  Typography,
-} from "@material-tailwind/react";
+import { Input, Button, Typography, Checkbox } from "@material-tailwind/react";
 import { signInAction, signInWithGoogleAction } from "@/app/action/AuthAction";
-import Link from "next/link";
 import BrandLogo from "@/public/logo.svg";
 import Image from "next/image";
+import Link from "next/link";
 import googleLogo from "@/public/google_icon.svg";
 
 export function Login() {
@@ -45,7 +39,7 @@ export function Login() {
   };
 
   return (
-    <div className="p-8 w-full">
+    <div className="p-8 py-4 w-full">
       <div className="my-4">
         <Image src={BrandLogo} height={50} width={125} alt="brand_logo" />
       </div>
@@ -147,12 +141,22 @@ export function Login() {
                 {errors.password?.message}
               </p>
             )}
-            <div className=" my-1">
+            <div className=" my-2 flex items-center justify-between">
+              <Typography
+                color="blue-gray"
+                variant="small"
+                className="flex select-none items-center px-0 gap-2"
+              >
+                <input type="checkbox" defaultChecked />
+                Remember me
+              </Typography>
               <Button
                 variant="text"
-                className="p-2 rounded-none hover:bg-white my-0 float-right normal-case text-blue-gray-800 tracking-wide"
+                className="rounded-none hover:bg-white p-1 my-0 normal-case tracking-wide"
               >
-                Forgot Password
+                <Typography variant="small" color="blue-gray">
+                  Forgot Password
+                </Typography>
               </Button>
             </div>
           </div>
@@ -164,6 +168,25 @@ export function Login() {
           >
             Login
           </Button>
+
+          <div className=" my-2">
+            <Typography color="blue-gray" variant="small">
+              Not a member ?{" "}
+              <Link
+                className="underline font-medium tracking-wide text-textBlack"
+                href="/signup"
+              >
+                Create an account
+              </Link>
+            </Typography>
+          </div>
+
+          <Typography
+            variant="small"
+            className=" tracking-wide text-shadeBlack text-center mt-2"
+          >
+            &copy; All right reserved by Dynamic Travel
+          </Typography>
         </form>
       </div>
     </div>
