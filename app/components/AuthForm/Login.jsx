@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { get, useForm } from "react-hook-form";
 import { Input, Button, Typography } from "@material-tailwind/react";
 import { signInAction, signInWithGoogleAction } from "@/app/action/AuthAction";
 import BrandLogo from "@/public/logo.svg";
@@ -18,6 +18,7 @@ export function Login({ pathName }) {
     register,
     handleSubmit,
     watch,
+    getValues,
     formState: { errors },
   } = useForm();
 
@@ -41,6 +42,7 @@ export function Login({ pathName }) {
   const googleSignInHandler = async function () {
     const isSignedIn = await signInWithGoogleAction();
   };
+  console.log(errors);
 
   return (
     <div className="p-8 py-4 w-full">
@@ -85,6 +87,7 @@ export function Login({ pathName }) {
               {status.error?.split(":")[1]}
             </Typography>
           )}
+          {/* Form part start */}
           <div>
             <label htmlFor="fullname">
               <Typography
@@ -132,6 +135,10 @@ export function Login({ pathName }) {
               type="text"
               name="email"
               {...register("email", {
+                pattern: {
+                  value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+                  message: "Please enter a valid email address",
+                },
                 required: isLogin
                   ? "Insert your email or Username"
                   : "Insert your email",
@@ -190,6 +197,60 @@ export function Login({ pathName }) {
                 {errors.password?.message}
               </p>
             )}
+            {!isLogin && (
+              <>
+                <label htmlFor="confirmPassword">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="block font-medium my-2 "
+                  >
+                    Confirm Password
+                  </Typography>
+                </label>
+                <Input
+                  id="confirmPassword"
+                  size="lg"
+                  {...register("confirmPassword", {
+                    required: "Confirm your password",
+                    minLength: { value: 8, message: "Password minlength is 8" },
+                    validate: (value) => {
+                      return (
+                        value === getValues("password") ||
+                        "Passwords do not match"
+                      );
+                    },
+                  })}
+                  icon={
+                    isPasswordShown ? (
+                      <HiOutlineEyeOff
+                        onClick={() => setIsPasswordShown(false)}
+                        className="w-5 h-5 mr-1 cursor-pointer"
+                      />
+                    ) : (
+                      <HiOutlineEye
+                        onClick={() => setIsPasswordShown(true)}
+                        className="w-5 h-5 mr-1 cursor-pointer"
+                      />
+                    )
+                  }
+                  type={isPasswordShown ? "text" : "password"}
+                  name="confirmPassword"
+                  placeholder="Password"
+                  className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack rounded-none border-none !bg-senseWhite focus:!border-t-offGray !border-offGray"
+                  labelProps={{
+                    className: "hidden",
+                  }}
+                />
+
+                {errors?.confirmPassword && (
+                  <p role="alert" className=" text-red-400 mt-2 text-sm">
+                    {errors.confirmPassword?.message}
+                  </p>
+                )}
+              </>
+            )}
+
             {isLogin && (
               <div className=" my-2 flex items-center justify-between">
                 <Typography
