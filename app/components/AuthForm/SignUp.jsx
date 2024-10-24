@@ -11,6 +11,7 @@ import {
 } from "@material-tailwind/react";
 import { signInAction, signInWithGoogleAction } from "@/app/action/AuthAction";
 import Link from "next/link";
+import BrandLogo from "@/public/logo.svg";
 
 export function SignUp() {
   const [status, setStatus] = useState({ loading: false, error: null });

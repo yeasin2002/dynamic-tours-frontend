@@ -53,7 +53,7 @@ export default function Nav() {
         <nav className="py-4 ">
           <div className="flex justify-between items-center px-2 md:px-0 relative">
             <a href="/">
-              <Image src={logo} height={50} width={125} alt="Brand logo" />
+              <Image src={logo} height={50} width={125} alt="brand_logo" />
             </a>
             <ul
               className={`gap-3 p-2 ${

@@ -12,7 +12,13 @@
     --background : white;
     --color : black
   }
+} 
+
+
+.loginGradient {
+  background: radial-gradient(circle at 10% 20%, rgb(145, 217, 243) 0%, rgb(147, 164, 243) 90%);
 }
+
 .leaflet-routing-container {
   display: none !important;  /* Hides the directions panel */
 }
