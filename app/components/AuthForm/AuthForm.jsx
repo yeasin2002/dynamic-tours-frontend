@@ -2,20 +2,19 @@
 import { usePathname } from "next/navigation";
 import Login from "./Login";
 import authImage from "@/public/image/auth_form.png";
-import Image from "next/image";
 
 export function AuthForm() {
   const pathName = usePathname();
   return (
     <>
-      <div className="w-full h-screen flex items-center justify-center loginGradient">
-        <div className="flex h-full md:rounded-xl md:h-fit rounded-none  md:w-[90%] lg:w-[85%] xl:w-[70%] 2xl:w-[65%] shadow-xl  bg-white">
+      <div className="w-full min-h-screen flex items-center justify-center loginGradient">
+        <div className="flex w-full h-full md:rounded-xl md:h-fit rounded-none md:w-[95%] xl:w-[85%] 2xl:w-[75%] shadow-xl bg-white">
           <div
-            className="w-1/2 2xl:w-[55%] min-h-[450px] hidden md:block bg-cover bg-center bg-no-repeat rounded-tl-xl rounded-bl-xl"
+            className="w-2/3 2xl:w-[60%] hidden md:block bg-cover bg-center bg-no-repeat rounded-tl-xl rounded-bl-xl"
             style={{ backgroundImage: `url('${authImage.src}')` }}
           ></div>
 
-          <div className=" w-full 2xl:w-[45%] md:w-1/2 flex items-center">
+          <div className=" w-full 2xl:w-[40%] md:w-2/3 flex items-center">
             {pathName === "/signup" && <Login pathName={pathName} />}
             {pathName === "/login" && <Login pathName={pathName} />}
           </div>

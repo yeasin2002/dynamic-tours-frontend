@@ -38,6 +38,11 @@ export function Login({ pathName }) {
     }
   };
 
+  const registrationHandler = async function (data) {
+    // Create a user
+    // After success login the user
+  };
+
   // login handler
   const googleSignInHandler = async function () {
     const isSignedIn = await signInWithGoogleAction();
@@ -45,26 +50,30 @@ export function Login({ pathName }) {
   console.log(errors);
 
   return (
-    <div className="p-8 py-4 w-full">
+    <div className="p-8 py-4 h-full w-full">
       <div className="my-4">
         <Image src={BrandLogo} height={50} width={125} alt="brand_logo" />
       </div>
       <div>
         <form
-          onSubmit={handleSubmit(loginHandler)}
+          onSubmit={handleSubmit(isLogin ? loginHandler : registrationHandler)}
           className="flex flex-col gap-2 "
         >
           <div className="py-3 ">
-            <Typography variant="h3" className="mb-2 text-textBlack ">
+            <Typography variant="h3" color="blue-gray" className="mb-2 ">
               {isLogin ? "Log In" : "Sign Up"}
             </Typography>
-            <Typography variant="paragraph" className="tracking-wide">
+            <Typography
+              variant="paragraph"
+              color="blue-gray"
+              className="tracking-wide"
+            >
               Discover a better way of traveling with us
             </Typography>
           </div>
           <Button
             onClick={googleSignInHandler}
-            className="!bg-senseWhite rounded-none flex items-center justify-center font-medium shadow-none normal-case text-[15px] text-textBlack tracking-wide"
+            className="!bg-senseWhite rounded-none flex items-center justify-center font-medium shadow-none normal-case text-[15px] text-blue-gray-900 tracking-wide"
           >
             <Image
               src={googleLogo}
@@ -77,46 +86,91 @@ export function Login({ pathName }) {
           </Button>
 
           <div className=" border-b border-[#2a2a2a6b] relative my-4 flex items-center justify-center">
-            <p className=" bg-white rounded-full  inline-block px-2 absolute ">
+            <p className=" bg-white rounded-full inline-block px-2 absolute ">
               Or
             </p>
           </div>
 
           {status.error && (
-            <Typography variant="paragraph" className="text-red-400">
+            <Typography variant="paragraph" className="text-red-800">
               {status.error?.split(":")[1]}
             </Typography>
           )}
           {/* Form part start */}
-          <div>
-            <label htmlFor="fullname">
-              <Typography
-                variant="small"
-                color="blue-gray"
-                className="block font-medium mb-2"
-              >
-                Full Name
-              </Typography>
-            </label>
-            <Input
-              id="fullname"
-              color="gray"
-              size="lg"
-              type="text"
-              name="fullname"
-              {...register("fullname", {
-                required: "Insert your fullname",
-              })}
-              placeholder="Enter your name"
-              className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack !bg-senseWhite border-none rounded-none focus:!border-t-offGray !border-offGray"
-              labelProps={{
-                className: "hidden",
-              }}
-            />
-            {errors?.fullname && (
-              <p role="alert" className=" text-red-400 mt-2 text-sm">
-                {errors.fullname?.message}
-              </p>
+          <div className="">
+            {!isLogin && (
+              <>
+                <div className="md:flex justify-between gap-4 items-start">
+                  <div className="w-full">
+                    <label htmlFor="fullname">
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="block font-medium mb-2"
+                      >
+                        Full Name
+                      </Typography>
+                    </label>
+                    <Input
+                      id="fullname"
+                      color="gray"
+                      size="lg"
+                      type="text"
+                      name="fullname"
+                      {...register("fullname", {
+                        required: "Insert your fullname",
+                      })}
+                      placeholder="Enter your name"
+                      className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack !bg-senseWhite border-none rounded-none "
+                      labelProps={{
+                        className: "hidden",
+                      }}
+                    />
+                    {errors?.fullname && (
+                      <Typography
+                        variant="small"
+                        className="opacity-90 tracking-wide text-red-600 mt-1"
+                      >
+                        {errors.fullname?.message}
+                      </Typography>
+                    )}
+                  </div>
+                  <div className="w-full">
+                    <label htmlFor="username">
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="block font-medium md:mt-0 my-2"
+                      >
+                        Username
+                      </Typography>
+                    </label>
+                    <Input
+                      id="username"
+                      color="gray"
+                      size="lg"
+                      type="text"
+                      name="username"
+                      {...register("username", {
+                        required: "Insert your username",
+                      })}
+                      placeholder="Enter your username"
+                      className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack !bg-senseWhite border-none rounded-none "
+                      labelProps={{
+                        className: "hidden",
+                      }}
+                    />
+                    {errors?.username && (
+                      <Typography
+                        variant="small"
+                        className="opacity-90 tracking-wide text-red-600 mt-1"
+                      >
+                        {errors.username?.message}
+                      </Typography>
+                    )}
+                  </div>
+                </div>
+              </>
             )}
 
             <label htmlFor="email">
@@ -135,91 +189,51 @@ export function Login({ pathName }) {
               type="text"
               name="email"
               {...register("email", {
-                pattern: {
-                  value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-                  message: "Please enter a valid email address",
-                },
+                // validating email format using regex
+                pattern: isLogin
+                  ? null
+                  : {
+                      value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+                      message: "Please enter a valid email address",
+                    },
                 required: isLogin
-                  ? "Insert your email or Username"
-                  : "Insert your email",
+                  ? "Insert your e-mail or username"
+                  : "Insert your e-mail",
               })}
               placeholder="Enter your e-mail"
-              className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack !bg-senseWhite border-none rounded-none focus:!border-t-offGray !border-offGray"
+              className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack !bg-senseWhite border-none rounded-none "
               labelProps={{
                 className: "hidden",
               }}
             />
             {errors?.email && (
-              <p role="alert" className=" text-red-400 mt-2 text-sm">
-                {errors?.email?.message}
-              </p>
-            )}
-
-            <label htmlFor="password">
               <Typography
                 variant="small"
-                color="blue-gray"
-                className="block font-medium my-2 "
+                className="opacity-90 tracking-wide text-red-600 mt-1"
               >
-                Password
+                {errors.email?.message}
               </Typography>
-            </label>
-            <Input
-              id="password"
-              size="lg"
-              {...register("password", {
-                required: "Insert your password",
-                minLength: { value: 8, message: "Password minlength is 8" },
-              })}
-              icon={
-                isPasswordShown ? (
-                  <HiOutlineEyeOff
-                    onClick={() => setIsPasswordShown(false)}
-                    className="w-5 h-5 mr-1 cursor-pointer"
-                  />
-                ) : (
-                  <HiOutlineEye
-                    onClick={() => setIsPasswordShown(true)}
-                    className="w-5 h-5 mr-1 cursor-pointer"
-                  />
-                )
-              }
-              type={isPasswordShown ? "text" : "password"}
-              name="password"
-              placeholder="Password"
-              className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack rounded-none border-none !bg-senseWhite focus:!border-t-offGray !border-offGray"
-              labelProps={{
-                className: "hidden",
-              }}
-            />
-            {errors?.password && (
-              <p role="alert" className=" text-red-400 mt-2 text-sm">
-                {errors.password?.message}
-              </p>
             )}
-            {!isLogin && (
-              <>
-                <label htmlFor="confirmPassword">
+
+            {/* passowrd */}
+
+            <div className=" md:flex items-start gap-4 justify-between">
+              <div className=" w-full">
+                <label htmlFor="password">
                   <Typography
                     variant="small"
                     color="blue-gray"
                     className="block font-medium my-2 "
                   >
-                    Confirm Password
+                    Password
                   </Typography>
                 </label>
                 <Input
-                  id="confirmPassword"
+                  id="password"
                   size="lg"
-                  {...register("confirmPassword", {
-                    required: "Confirm your password",
+                  {...register("password", {
+                    required: "Insert your password",
                     minLength: { value: 8, message: "Password minlength is 8" },
-                    validate: (value) => {
-                      return (
-                        value === getValues("password") ||
-                        "Passwords do not match"
-                      );
-                    },
                   })}
                   icon={
                     isPasswordShown ? (
@@ -235,24 +249,88 @@ export function Login({ pathName }) {
                     )
                   }
                   type={isPasswordShown ? "text" : "password"}
-                  name="confirmPassword"
+                  name="password"
                   placeholder="Password"
-                  className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack rounded-none border-none !bg-senseWhite focus:!border-t-offGray !border-offGray"
+                  className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack rounded-none border-none !bg-senseWhite "
                   labelProps={{
                     className: "hidden",
                   }}
                 />
-
-                {errors?.confirmPassword && (
-                  <p role="alert" className=" text-red-400 mt-2 text-sm">
-                    {errors.confirmPassword?.message}
-                  </p>
+                {errors?.password && (
+                  <Typography
+                    variant="small"
+                    className="opacity-90 tracking-wide text-red-600 mt-1"
+                  >
+                    {errors.password?.message}
+                  </Typography>
                 )}
-              </>
-            )}
+              </div>
+
+              {!isLogin && (
+                <>
+                  <div className="w-full">
+                    <label htmlFor="confirmPassword">
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="block font-medium my-2 "
+                      >
+                        Confirm Password
+                      </Typography>
+                    </label>
+                    <Input
+                      id="confirmPassword"
+                      size="lg"
+                      {...register("confirmPassword", {
+                        required: "Confirm your password",
+                        minLength: {
+                          value: 8,
+                          message: "Password minlength is 8",
+                        },
+                        validate: (value) => {
+                          return (
+                            value === getValues("password") ||
+                            "Passwords do not match"
+                          );
+                        },
+                      })}
+                      icon={
+                        isPasswordShown ? (
+                          <HiOutlineEyeOff
+                            onClick={() => setIsPasswordShown(false)}
+                            className="w-5 h-5 mr-1 cursor-pointer"
+                          />
+                        ) : (
+                          <HiOutlineEye
+                            onClick={() => setIsPasswordShown(true)}
+                            className="w-5 h-5 mr-1 cursor-pointer"
+                          />
+                        )
+                      }
+                      type={isPasswordShown ? "text" : "password"}
+                      name="confirmPassword"
+                      placeholder="Password"
+                      className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack rounded-none border-none !bg-senseWhite "
+                      labelProps={{
+                        className: "hidden",
+                      }}
+                    />
+
+                    {errors?.confirmPassword && (
+                      <Typography
+                        variant="small"
+                        className="opacity-90 tracking-wide text-red-600 mt-1"
+                      >
+                        {errors.confirmPassword?.message}
+                      </Typography>
+                    )}
+                  </div>
+                </>
+              )}
+            </div>
 
             {isLogin && (
-              <div className=" my-2 flex items-center justify-between">
+              <div className=" mt-1 flex items-center justify-between">
                 <Typography
                   color="blue-gray"
                   variant="small"
@@ -278,7 +356,7 @@ export function Login({ pathName }) {
           </div>
 
           <Button
-            className="bg-actionBlue rounded-none font-medium shadow-none normal-case text-white text-[15px] tracking-wide"
+            className="bg-actionBlue mt-2 rounded-none font-medium shadow-none normal-case text-white text-[15px] tracking-wide"
             loading={status.loading}
             type="submit"
           >

@@ -38,7 +38,7 @@ export const credentialsLoginHandler = async function (
   return user;
 };
 
-export const credentialsRegisterHandler = async function () {
+export const credentialsRegisterHandler = async function ({ email, password }) {
   const res = await API.post(`api/v1/signup`);
 };
 
