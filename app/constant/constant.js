@@ -235,3 +235,38 @@ export const filterSort = [
     value: "sort=most_reviewed",
   },
 ];
+
+import { HiOutlineHome } from "react-icons/hi";
+
+export const adminNavMenu = [
+  {
+    id: "ad1",
+    title: "Overview",
+    link: "/dashboard/overview",
+    icon: HiOutlineHome,
+  },
+  {
+    id: "ad1",
+    title: "Tours",
+    link: "/dashboard/tours",
+    icon: HiOutlineHome,
+  },
+  {
+    id: "ad2",
+    title: "Guides",
+    link: "/dashboard/guides",
+    icon: HiOutlineHome,
+  },
+  {
+    id: "ad3",
+    title: "Booking",
+    link: "/dashboard/bookings",
+    icon: HiOutlineHome,
+  },
+  {
+    id: "ad4",
+    title: "Sign out",
+    link: "/dashboard/signout",
+    icon: HiOutlineHome,
+  },
+];

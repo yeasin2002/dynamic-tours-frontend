@@ -1,8 +1,8 @@
-export default function Dashboard() {
+export default function page() {
   return (
     <>
       <div>
-        <h2>Admin Dashboard</h2>
+        <h3>First page</h3>
       </div>
     </>
   );
