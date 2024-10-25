@@ -2,7 +2,10 @@ import { auth } from "@/auth";
 
 export default auth((req) => {
   // console.log(req.auth, "-----middleware---");
-  console.log(req.nextUrl.origin);
+  console.log(
+    req.auth.user &&
+      (req.nextUrl.pathname === "/login" || req.nextUrl.pathname === "/signup")
+  );
   // redirecting to home if accessing Dashboard without admin account
 
   if (
@@ -10,6 +13,14 @@ export default auth((req) => {
     req.nextUrl.pathname === "/dashboard"
   ) {
     return Response.redirect(req.nextUrl.origin);
+  }
+
+  if (
+    req.auth?.user &&
+    (req.nextUrl.pathname === "/login" || req.nextUrl.pathname === "/signup")
+  ) {
+    const newUrl = new URL(req.nextUrl.origin);
+    return Response.redirect(newUrl);
   }
 
   // if (!req.auth && req.nextUrl.pathname !== "/login") {
