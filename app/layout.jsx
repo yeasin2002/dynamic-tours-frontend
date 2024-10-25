@@ -1,6 +1,7 @@
 import { SessionProvider } from "next-auth/react";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
+import TopLoader from "./components/extra/TopLoader";
 
 const dmSans = DM_Sans({
   weight: ["300", "400", "500", "700"],
@@ -16,7 +17,10 @@ export default function RootLayout({ children }) {
   return (
     <SessionProvider>
       <html lang="en">
-        <body className={dmSans.className}>{children}</body>
+        <body className={dmSans.className}>
+          <TopLoader />
+          {children}
+        </body>
       </html>
     </SessionProvider>
   );

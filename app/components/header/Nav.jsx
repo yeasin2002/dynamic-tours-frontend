@@ -126,7 +126,7 @@ export default function Nav() {
             )}
             {AuthStatus === "loading" && <p>Loading...</p>}
             {AuthStatus === "authenticated" && (
-              <div className=" md:flex gap-3 items-center hidden ">
+              <div className=" md:flex gap-2 items-center hidden ">
                 <Typography variant="paragraph" className="text-textBlack">
                   Welcome Back, {AuthUser.name?.split(" ")[0]}
                 </Typography>

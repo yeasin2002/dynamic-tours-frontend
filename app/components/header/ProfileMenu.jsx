@@ -10,6 +10,8 @@ import {
 import { getSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
+import defaultProfile from "@/public/default_profile.png";
+import Image from "next/image";
 
 export function ProfileMenu({ signOut, user }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,8 +24,8 @@ export function ProfileMenu({ signOut, user }) {
         <Avatar
           variant="circular"
           alt={user.name}
-          className="cursor-pointer border hover:border-transparent transition duration-400 border-actionBlue w-14 h-14 p-[2px]"
-          src={user?.image}
+          className="cursor-pointer border hover:border-transparent transition duration-400 border-actionBlue"
+          src={user?.image || defaultProfile.src}
         />
       </MenuHandler>
       <MenuList className="text-shadeBlack">
