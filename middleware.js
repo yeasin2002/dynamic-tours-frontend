@@ -1,13 +1,7 @@
 import { auth } from "@/auth";
 
 export default auth((req) => {
-  // console.log(req.auth, "-----middleware---");
-  console.log(
-    req.auth.user &&
-      (req.nextUrl.pathname === "/login" || req.nextUrl.pathname === "/signup")
-  );
   // redirecting to home if accessing Dashboard without admin account
-
   if (
     req?.auth?.user?.role !== "admin" &&
     req.nextUrl.pathname === "/dashboard"

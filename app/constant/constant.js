@@ -236,20 +236,20 @@ export const filterSort = [
   },
 ];
 
-import { HiOutlineHome } from "react-icons/hi";
+import { HiOutlineHome, HiOutlineGlobe } from "react-icons/hi";
 
 export const adminNavMenu = [
   {
     id: "ad1",
     title: "Overview",
-    link: "/dashboard/overview",
+    link: "/dashboard",
     icon: HiOutlineHome,
   },
   {
     id: "ad1",
     title: "Tours",
-    link: "/dashboard/tours",
-    icon: HiOutlineHome,
+    link: "/dashboard/tour-management",
+    icon: HiOutlineGlobe,
   },
   {
     id: "ad2",
