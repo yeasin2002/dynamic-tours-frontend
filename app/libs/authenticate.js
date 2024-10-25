@@ -1,5 +1,5 @@
 import axios from "axios";
-import API from "./API";
+import API from "@/app/libs/API";
 
 export const getAuthenticatedUserData = async function (token) {
   let userData;
@@ -38,8 +38,26 @@ export const credentialsLoginHandler = async function (
   return user;
 };
 
-export const credentialsRegisterHandler = async function ({ email, password }) {
-  const res = await API.post(`api/v1/signup`);
+export const credentialsRegisterHandler = async function (inputData) {
+  let resData;
+  const formData = new FormData();
+  formData.set("fullName", inputData.fullname);
+  formData.set("email", inputData.email);
+  formData.set("userName", inputData.username);
+  formData.set("password", inputData.password);
+  formData.set("confirmPassword", inputData.confirmPassword);
+
+  try {
+    const res = await axios.post(
+      `http://localhost:4000/api/v1/signup`,
+      formData
+    );
+    resData = res.data;
+  } catch (error) {
+    throw error.response?.data;
+  }
+
+  return resData;
 };
 
 export const googleSignInHandler = async function (userInfo) {

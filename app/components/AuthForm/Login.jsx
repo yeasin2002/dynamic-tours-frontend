@@ -1,13 +1,14 @@
 "use client";
 import React from "react";
 import { useState } from "react";
-import { get, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Input, Button, Typography } from "@material-tailwind/react";
 import { signInAction, signInWithGoogleAction } from "@/app/action/AuthAction";
 import BrandLogo from "@/public/logo.svg";
 import Image from "next/image";
 import Link from "next/link";
 import googleLogo from "@/public/google_icon.svg";
+import { credentialsRegisterHandler } from "@/app/libs/authenticate";
 import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 
 export function Login({ pathName }) {
@@ -35,10 +36,38 @@ export function Login({ pathName }) {
       setStatus((prev) => {
         return { ...prev, error: err.message, loading: false };
       });
+    } finally {
+      setStatus((prev) => {
+        return { ...prev, loading: false };
+      });
     }
   };
 
-  const registrationHandler = async function (data) {
+  const registrationHandler = async function (inputData) {
+    const loginForm = new FormData();
+    loginForm.set("email", inputData.email);
+    loginForm.set("password", inputData.password);
+    try {
+      setStatus((prev) => {
+        return { ...prev, loading: true };
+      });
+      const response = await credentialsRegisterHandler(inputData);
+      console.log(response, "res-------");
+      // checking if account created successfully
+      if (response.data?.token && response.status === "success") {
+        // if succeed login as created user
+        await signInAction(loginForm);
+      }
+    } catch (error) {
+      console.log(error.message, "error-------");
+      setStatus((prev) => {
+        return { ...prev, error: error.message, loading: false };
+      });
+    } finally {
+      setStatus((prev) => {
+        return { ...prev, loading: false };
+      });
+    }
     // Create a user
     // After success login the user
   };
@@ -47,7 +76,8 @@ export function Login({ pathName }) {
   const googleSignInHandler = async function () {
     const isSignedIn = await signInWithGoogleAction();
   };
-  console.log(errors);
+
+  console.log(status);
 
   return (
     <div className="p-8 py-4 h-full w-full">
@@ -93,7 +123,9 @@ export function Login({ pathName }) {
 
           {status.error && (
             <Typography variant="paragraph" className="text-red-800">
-              {status.error?.split(":")[1]}
+              {typeof status.error === "string"
+                ? status.error
+                : "Something went wrong"}
             </Typography>
           )}
           {/* Form part start */}
