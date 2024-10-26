@@ -248,7 +248,7 @@ import {
 
 export const adminNavMenu = [
   {
-    id: "ad1",
+    id: "ad0",
     title: "Overview",
     link: "/dashboard",
     icon: HiOutlineHome,
@@ -274,7 +274,7 @@ export const adminNavMenu = [
   {
     id: "ad4",
     title: "Settings",
-    link: "/dashboard/setting",
+    link: "/dashboard/settings",
     icon: HiOutlineCog,
   },
   {

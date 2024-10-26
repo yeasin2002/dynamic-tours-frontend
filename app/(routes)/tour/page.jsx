@@ -8,12 +8,20 @@ import { getFilteredData } from "@/app/libs/getFilteredTour";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { HiOutlineAdjustments, HiOutlineChevronUp } from "react-icons/hi";
-import { Button, Select, Option, Chip, Card } from "@material-tailwind/react";
+import {
+  Button,
+  Select,
+  Option,
+  Chip,
+  Card,
+  Typography,
+} from "@material-tailwind/react";
 import { filterSort } from "@/app/constant/constant";
 import FilterTour from "@/app/util/FilterTour";
 import filterManager from "@/app/util/FilterManager";
 import Loading from "@/app/ui/Loading";
 import NotFound from "../../components/Tour/NotFound";
+import Link from "next/link";
 
 export default function Tour({ pageType }) {
   const [tourData, setTourData] = useState(null);
@@ -89,7 +97,7 @@ export default function Tour({ pageType }) {
                   <HiOutlineChevronUp
                     className={`w-5 h-5 ${
                       !showFilter ? "rotate-0" : "rotate-180"
-                    }  duration-300`}
+                    }`}
                   />
                   <HiOutlineAdjustments className=" w-5 h-5 " />
                 </Button>
@@ -112,8 +120,23 @@ export default function Tour({ pageType }) {
                   </div>
                 </div>
               </div>
-              <Search />
+              <div className="flex-grow">
+                <Search />
+              </div>
+              {pageType === "admin" && (
+                <div className="">
+                  <Link href={`${pathName}/create-tour`}>
+                    <Button
+                      size="md"
+                      className=" bg-actionBlue font-medium p-3 tracking-wide"
+                    >
+                      Create Tour
+                    </Button>
+                  </Link>
+                </div>
+              )}
             </div>
+
             <div className=" flex justify-between gap-3">
               {showFilter && (
                 <div
