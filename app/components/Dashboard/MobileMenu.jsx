@@ -2,8 +2,7 @@
 import { useState } from "react";
 import { Drawer } from "@material-tailwind/react";
 import { HiOutlineMenu } from "react-icons/hi";
-import { Button, Typography } from "@/app/ui/materialExport";
-import { IconButton } from "@material-tailwind/react";
+import { Button } from "@/app/ui/materialExport";
 import SideNav from "./SideNav";
 import { ProfileMenu } from "../Header/ProfileMenu";
 import { usePathname } from "next/navigation";
@@ -28,9 +27,9 @@ export default function MobileMenu() {
             <ProfileMenu />
           </div>
         </div>
-        <div className=" bg-red-200">
+        <div className="">
           <Drawer open={open} onClose={closeDrawer} className="">
-            <div className=" bg-green-400">
+            <div className="">
               <SideNav type={"mobile"} closeDrawer={closeDrawer} />
             </div>
           </Drawer>

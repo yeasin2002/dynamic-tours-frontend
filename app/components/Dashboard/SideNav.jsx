@@ -15,11 +15,11 @@ export default function SideNav({ type, closeDrawer }) {
         }   min-h-screen bg-white p-4`}
       >
         <div className=" pb-2 border-b border-[#D5D5D5]">
-          <Link href={"/"}>
-            <div className="py-4">
+          <div className="py-4">
+            <Link onClick={closeDrawer} href={"/"}>
               <img src={BrandLogo.src} alt="logo" className=" w-40 h-auto" />
-            </div>
-          </Link>
+            </Link>
+          </div>
         </div>
         <ul className=" pt-4">
           {adminNavMenu.map((menu) => (
