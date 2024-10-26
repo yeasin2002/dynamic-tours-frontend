@@ -14,22 +14,13 @@ import { ProfileMenu } from "./ProfileMenu";
 
 export default function Nav() {
   const [isNavShowed, setIsNavShowed] = useState(false);
-  const [AuthUser, setAuthUser] = useState(null);
-  const [AuthStatus, setAuthStatus] = useState(null);
-
   const session = useSession();
+
   const [dropNav, setDropNav] = useState(false);
   const pathName = usePathname();
 
   useEffect(() => {
     // setting up auth state
-    getSession();
-    setAuthStatus(session.status);
-    if (session.status === "authenticated") {
-      setAuthUser(session.data.user);
-    } else {
-      setAuthUser(null);
-    }
 
     let scrollPosition = 0;
     const scrollHandler = function (event) {
@@ -116,23 +107,7 @@ export default function Nav() {
                 </ul>
               </div>
             </div>
-            {session.status === "unauthenticated" && (
-              <a
-                href="/login"
-                className="bg-textBlack text-white hidden md:block hover:duration-300 hover:scale-95 px-8 py-2 rounded-full"
-              >
-                Join Now
-              </a>
-            )}
-            {AuthStatus === "loading" && <p>Loading...</p>}
-            {AuthStatus === "authenticated" && (
-              <div className=" md:flex gap-2 items-center hidden ">
-                <Typography variant="paragraph" className="text-textBlack">
-                  Welcome Back, {AuthUser.name?.split(" ")[0]}
-                </Typography>
-                <ProfileMenu signOut={signOutAction} user={AuthUser} />
-              </div>
-            )}
+            <ProfileMenu />
           </div>
         </nav>
       </Container>
