@@ -236,7 +236,15 @@ export const filterSort = [
   },
 ];
 
-import { HiOutlineHome, HiOutlineGlobe } from "react-icons/hi";
+import {
+  HiOutlineHome,
+  HiOutlineGlobe,
+  HiOutlineFlag,
+  HiOutlineLogout,
+  HiOutlineCog,
+  HiOutlineMap,
+  HiOutlineChartBar,
+} from "react-icons/hi";
 
 export const adminNavMenu = [
   {
@@ -255,18 +263,24 @@ export const adminNavMenu = [
     id: "ad2",
     title: "Guides",
     link: "/dashboard/guides",
-    icon: HiOutlineHome,
+    icon: HiOutlineMap,
   },
   {
     id: "ad3",
-    title: "Booking",
+    title: "Bookings",
     link: "/dashboard/bookings",
-    icon: HiOutlineHome,
+    icon: HiOutlineChartBar,
   },
   {
     id: "ad4",
+    title: "Settings",
+    link: "/dashboard/setting",
+    icon: HiOutlineCog,
+  },
+  {
+    id: "ad5",
     title: "Sign out",
     link: "/dashboard/signout",
-    icon: HiOutlineHome,
+    icon: HiOutlineLogout,
   },
 ];
