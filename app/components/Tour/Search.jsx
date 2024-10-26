@@ -21,8 +21,8 @@ export default function Search() {
 
   return (
     <>
-      <div className=" p-2 w-full">
-        <div className="relative flex w-full max-w-[30rem] float-end">
+      <div className="p-2 w-full flex justify-end">
+        <div className="relative flex w-full max-w-[30rem]">
           <Input
             type="text"
             label="Search here"

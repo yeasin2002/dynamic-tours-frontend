@@ -2,44 +2,24 @@
 import { adminNavMenu } from "@/app/constant/constant";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
-import Image from "next/image";
-import { Typography } from "@/app/ui/materialExport";
+import BrandLogo from "@/public/logo.svg";
 
 export default function SideNav({ type, closeDrawer }) {
   const pathName = usePathname();
-  const session = useSession();
+
   return (
     <>
       <div
         className={`${
-          type === "mobile" ? "w-full" : "lg:min-w-[330px]"
+          type === "mobile" ? "w-full" : "lg:min-w-[310px]"
         }   min-h-screen bg-white p-4`}
       >
         <div className=" pb-2 border-b border-[#D5D5D5]">
-          <div
-            className={`flex lg:flex-row ${
-              type === "mobile" ? "flex-row text-left" : "flex-col  text-center"
-            }   lg:text-left items-center py-2 gap-4`}
-          >
-            <img
-              src={session?.data?.user?.image}
-              width={60}
-              height={60}
-              className=" object-cover rounded-full h-[60px] w-[60px] border-actionBlue border-2 p-[2px]"
-            />
-            <div>
-              <Typography
-                variant="paragraph"
-                className=" font-bold tracking-wide text-textBlack"
-              >
-                {session?.data?.user?.name}
-              </Typography>
-              <Typography variant="small" className=" text-offGray">
-                Admin
-              </Typography>
+          <Link href={"/"}>
+            <div className="py-4">
+              <img src={BrandLogo.src} alt="logo" className=" w-40 h-auto" />
             </div>
-          </div>
+          </Link>
         </div>
         <ul className=" pt-4">
           {adminNavMenu.map((menu) => (
@@ -51,7 +31,11 @@ export default function SideNav({ type, closeDrawer }) {
                 className={`flex ${
                   type === "mobile" ? "text-base" : "flex-col text-lg"
                 } lg:flex-row  lg:gap gap-2 lg:text-lg font-medium tracking-wider text-blue-gray-900 items-center hover:bg-actionBlue my-1 ${
-                  menu.link === pathName
+                  (
+                    menu.link.split("/").length < 3
+                      ? pathName === menu.link
+                      : pathName.startsWith(menu.link)
+                  )
                     ? "bg-actionBlue text-white rounded-md"
                     : "text-admin_text"
                 } hover:text-white transition  p-2.5 hover:rounded-md  `}
