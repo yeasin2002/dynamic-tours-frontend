@@ -142,7 +142,11 @@ export default function Tour({ pageType }) {
                 </div>
 
                 {tourData?.total > 0 && !loading && (
-                  <TourList activeFilter={showFilter} tourData={tourData} />
+                  <TourList
+                    pageType={pageType}
+                    activeFilter={showFilter}
+                    tourData={tourData}
+                  />
                 )}
                 {tourData?.total < 1 && !loading && <NotFound />}
                 {loading && (

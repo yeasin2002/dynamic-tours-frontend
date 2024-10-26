@@ -16,15 +16,25 @@ import {
   HiFlag,
 } from "react-icons/hi";
 import { IoIosPricetag } from "react-icons/io";
-export default function TourList({ tourData, activeFilter }) {
+export default function TourList({ tourData, activeFilter, pageType }) {
   // grid-cols-[repeat(auto-fit,minmax(350px,1fr))]
+  const deactiveAdminStyle = `${
+    pageType === "admin"
+      ? "lg:grid-cols-2 2xl:grid-cols-3"
+      : "lg:grid-cols-3 2xl:grid-cols-4"
+  }`;
+
+  const activeAdminStyle = `${
+    pageType === "admin"
+      ? "lg:grid-cols-1 2xl:grid-cols-2"
+      : "lg:grid-cols-2 2xl:grid-cols-3"
+  }`;
+
   return (
     <>
       <div
         className={`grid grid-cols-1 sm:grid-cols-2 ${
-          activeFilter
-            ? "lg:grid-cols-2 2xl:grid-cols-3"
-            : "lg:grid-cols-3 2xl:grid-cols-4"
+          activeFilter ? activeAdminStyle : deactiveAdminStyle
         }  justify-items-center  gap-x-4 gap-y-6  py-4 `}
       >
         {tourData?.tour?.map((item) => (
