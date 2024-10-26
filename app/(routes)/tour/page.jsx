@@ -15,7 +15,7 @@ import filterManager from "@/app/util/FilterManager";
 import Loading from "@/app/ui/Loading";
 import NotFound from "../../components/Tour/NotFound";
 
-export default function Tour() {
+export default function Tour({ pageType }) {
   const [tourData, setTourData] = useState(null);
   const [selectedSort, setSelectedSort] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -60,11 +60,10 @@ export default function Tour() {
     setSelectedSort(selectedValue);
   };
 
-  console.log(filteredEntry);
   return (
     <>
       <div>
-        <Nav />
+        {pageType !== "admin" && <Nav />}
         <Container>
           <div id="main" className=" flex flex-col">
             <div className=" flex justify-between items-center">
@@ -98,12 +97,12 @@ export default function Tour() {
               </div>
               <Search />
             </div>
-            <div className=" flex justify-between gap-4">
-              <div className="lg:flex hidden w-[300px] sticky px-2 top-0 overflow-auto h-screen ">
+            <div className=" flex justify-between gap-3">
+              <div className="lg:flex hidden w-[340px] sticky px-2 top-0 overflow-auto h-screen ">
                 <Filter filteredEntry={filteredEntry} />
               </div>
 
-              <div className=" flex-grow ">
+              <div className="w-full">
                 <div className=" hidden md:flex px-2.5  gap-4 items-center">
                   {Object.keys(activeFilter)?.map((item) => (
                     <Chip

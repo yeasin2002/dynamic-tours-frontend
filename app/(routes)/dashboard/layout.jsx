@@ -7,14 +7,14 @@ import MobileMenu from "@/app/components/Dashboard/MobileMenu";
 export default function layout({ children }) {
   return (
     <>
-      <div className="dashboardGradient w-full min-h-screen md:flex">
+      <div className="bg-offWhite w-full min-h-screen md:flex">
         <div className="hidden md:block h-full">
           <SideNav />
         </div>
         <div className=" md:hidden ">
           <MobileMenu />
         </div>
-        <div className=" p-3 py-0  w-full h-screen overflow-auto">
+        <div className=" p-3 py-0 md:py-3  w-full h-screen overflow-auto">
           {children}
         </div>
       </div>
