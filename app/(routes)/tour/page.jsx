@@ -20,6 +20,17 @@ export default function Tour({ pageType }) {
   const [selectedSort, setSelectedSort] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const [showFilter, setShowFilter] = useState(true);
+  const [animate, setAnimte] = useState(true);
+  const toggleFilter = () => {
+    if (animate) {
+      setAnimte(false);
+    } else {
+      setAnimte(true);
+    }
+    setShowFilter((prev) => (!prev ? !prev : prev));
+  };
+
   const searchParams = useSearchParams();
   const pathName = usePathname();
   const { replace } = useRouter();
@@ -60,6 +71,8 @@ export default function Tour({ pageType }) {
     setSelectedSort(selectedValue);
   };
 
+  console.log(showFilter);
+
   return (
     <>
       <div>
@@ -69,6 +82,7 @@ export default function Tour({ pageType }) {
             <div className=" flex justify-between items-center">
               <div className=" hidden  md:flex gap-3 ">
                 <Button
+                  onClick={toggleFilter}
                   className=" flex items-center px-4 gap-1 "
                   size="md"
                   variant="gradient"
@@ -98,9 +112,16 @@ export default function Tour({ pageType }) {
               <Search />
             </div>
             <div className=" flex justify-between gap-3">
-              <div className="lg:flex hidden w-[340px] sticky px-2 top-0 overflow-auto h-screen ">
-                <Filter filteredEntry={filteredEntry} />
-              </div>
+              {showFilter && (
+                <div
+                  onAnimationEnd={() => (animate ? "" : setShowFilter(false))}
+                  className={`lg:flex hidden ${
+                    animate ? "showfilter" : "hidefilter"
+                  } w-[340px] sticky px-2 top-0 overflow-auto h-screen `}
+                >
+                  <Filter filteredEntry={filteredEntry} />
+                </div>
+              )}
 
               <div className="w-full">
                 <div className=" hidden md:flex px-2.5  gap-4 items-center">

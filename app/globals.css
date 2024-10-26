@@ -38,8 +38,6 @@ body {
   }
 }
 
-
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -64,7 +62,36 @@ body {
   }
 }
 
-
 .circleAnim {
   animation: circleAnim 10s linear infinite forwards;
+}
+
+
+@keyframes hideFilter {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+@keyframes showFilter {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+}
+
+.showfilter {
+  animation: showFilter .5s forwards;
+}
+.hidefilter{
+  animation: hideFilter .5s forwards ;
 }
