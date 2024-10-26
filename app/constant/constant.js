@@ -255,13 +255,13 @@ export const adminNavMenu = [
   },
   {
     id: "ad1",
-    title: "Tours",
+    title: "Manage Tours",
     link: "/dashboard/tour-management",
     icon: HiOutlineGlobe,
   },
   {
     id: "ad2",
-    title: "Guides",
+    title: "Manage Guides",
     link: "/dashboard/guides",
     icon: HiOutlineMap,
   },
