@@ -16,10 +16,17 @@ import {
   HiFlag,
 } from "react-icons/hi";
 import { IoIosPricetag } from "react-icons/io";
-export default function TourList({ tourData }) {
+export default function TourList({ tourData, activeFilter }) {
+  // grid-cols-[repeat(auto-fit,minmax(350px,1fr))]
   return (
     <>
-      <div className=" grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] justify-items-center  gap-x-4 gap-y-6  py-4 ">
+      <div
+        className={`grid grid-cols-1 sm:grid-cols-2 ${
+          activeFilter
+            ? "lg:grid-cols-2 2xl:grid-cols-3"
+            : "lg:grid-cols-3 2xl:grid-cols-4"
+        }  justify-items-center  gap-x-4 gap-y-6  py-4 `}
+      >
         {tourData?.tour?.map((item) => (
           <Card
             key={item?.id}

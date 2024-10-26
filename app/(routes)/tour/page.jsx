@@ -7,7 +7,7 @@ import Container from "@/app/components/extra/Container";
 import { getFilteredData } from "@/app/libs/getFilteredTour";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { HiFilter } from "react-icons/hi";
+import { HiOutlineAdjustments, HiOutlineChevronUp } from "react-icons/hi";
 import { Button, Select, Option, Chip, Card } from "@material-tailwind/react";
 import { filterSort } from "@/app/constant/constant";
 import FilterTour from "@/app/util/FilterTour";
@@ -83,12 +83,15 @@ export default function Tour({ pageType }) {
               <div className=" hidden  md:flex gap-3 ">
                 <Button
                   onClick={toggleFilter}
-                  className=" flex items-center px-4 gap-1 "
-                  size="md"
-                  variant="gradient"
+                  className=" flex items-center gap-1 bg-gray-900 "
+                  size="sm"
                 >
-                  Filter
-                  <HiFilter />
+                  <HiOutlineChevronUp
+                    className={`w-5 h-5 ${
+                      !showFilter ? "rotate-0" : "rotate-180"
+                    }  duration-300`}
+                  />
+                  <HiOutlineAdjustments className=" w-5 h-5 " />
                 </Button>
 
                 <div className="  md:flex">
@@ -139,7 +142,7 @@ export default function Tour({ pageType }) {
                 </div>
 
                 {tourData?.total > 0 && !loading && (
-                  <TourList tourData={tourData} />
+                  <TourList activeFilter={showFilter} tourData={tourData} />
                 )}
                 {tourData?.total < 1 && !loading && <NotFound />}
                 {loading && (
