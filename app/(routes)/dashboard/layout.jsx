@@ -1,8 +1,7 @@
-import { adminNavMenu } from "@/app/constant/constant";
-import Link from "next/link";
-import { Typography } from "@/app/ui/materialExport";
 import SideNav from "@/app/components/Dashboard/SideNav";
 import MobileMenu from "@/app/components/Dashboard/MobileMenu";
+import { ProfileMenu } from "@/app/components/Header/ProfileMenu";
+import LargeHeading from "@/app/components/Dashboard/LargeHeading";
 
 export default function layout({ children }) {
   return (
@@ -15,6 +14,10 @@ export default function layout({ children }) {
           <MobileMenu />
         </div>
         <div className=" p-3 py-0 md:py-3  w-full h-screen overflow-auto">
+          <div className=" hidden lg:flex items-center border-b mb-2 justify-between py-1 ">
+            <LargeHeading />
+            <ProfileMenu />
+          </div>
           {children}
         </div>
       </div>

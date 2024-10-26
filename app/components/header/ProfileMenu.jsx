@@ -11,10 +11,9 @@ import { getSession, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import defaultProfile from "@/public/default_profile.png";
-import { HiOutlineChatAlt2 } from "react-icons/hi";
 import { signOutAction } from "@/app/action/AuthAction";
-
 import { HiOutlineChevronDown } from "react-icons/hi";
+import Loading from "@/app/ui/Loading";
 
 export function ProfileMenu({ signOut, user }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,7 +46,7 @@ export function ProfileMenu({ signOut, user }) {
           Join Now
         </a>
       )}
-      {session.status === "loading" && <p>Loading...</p>}
+      {session.status === "loading" && <p className=" py-4">Loading...</p>}
       {AuthStatus === "authenticated" && (
         <Menu>
           <MenuHandler>

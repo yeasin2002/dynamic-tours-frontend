@@ -9,7 +9,6 @@ import { Typography } from "@material-tailwind/react";
 import Container from "../extra/Container";
 import { usePathname } from "next/navigation";
 import { getSession, useSession } from "next-auth/react";
-import { signOutAction } from "@/app/action/AuthAction";
 import { ProfileMenu } from "./ProfileMenu";
 
 export default function Nav() {

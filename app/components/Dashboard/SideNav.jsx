@@ -6,7 +6,6 @@ import BrandLogo from "@/public/logo.svg";
 
 export default function SideNav({ type, closeDrawer }) {
   const pathName = usePathname();
-
   return (
     <>
       <div
