@@ -194,10 +194,127 @@ export default function CreateTour() {
                 </Typography>
               )}
             </div>
+
+            <div className=" w-full">
+              <label htmlFor="price">
+                <Typography
+                  variant="small"
+                  color="blue-gray"
+                  className="block font-medium mb-2"
+                >
+                  Tour price
+                </Typography>
+              </label>
+              <Input
+                id="price"
+                color="gray"
+                size="lg"
+                type="number"
+                name="price"
+                {...register("price", {
+                  required: "Insert tour price",
+                  min: { value: 1, message: "Price must be at least 1" },
+                })}
+                placeholder="Enter tour price"
+                className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack !bg-senseWhite border-none rounded-none "
+                labelProps={{
+                  className: "hidden",
+                }}
+              />
+              {errors?.price && (
+                <Typography
+                  variant="small"
+                  className="opacity-90 tracking-wide text-red-600 mt-1"
+                >
+                  {errors.price?.message}
+                </Typography>
+              )}
+            </div>
+
+            <div className=" w-full">
+              <label htmlFor="discountPrice">
+                <Typography
+                  variant="small"
+                  color="blue-gray"
+                  className="block font-medium mb-2"
+                >
+                  Discount Price (Optional)
+                </Typography>
+              </label>
+              <Input
+                id="discountPrice"
+                color="gray"
+                size="lg"
+                type="number"
+                name="discountPrice"
+                {...register("discountPrice", {
+                  min: {
+                    value: 1,
+                    message: "discountPrice must be at least 1",
+                  },
+                })}
+                placeholder="Enter discount price"
+                className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack !bg-senseWhite border-none rounded-none "
+                labelProps={{
+                  className: "hidden",
+                }}
+              />
+              {errors?.discountPrice && (
+                <Typography
+                  variant="small"
+                  className="opacity-90 tracking-wide text-red-600 mt-1"
+                >
+                  {errors.discountPrice?.message}
+                </Typography>
+              )}
+            </div>
+
+            <div className=" w-full">
+              <label htmlFor="totalParticipants">
+                <Typography
+                  variant="small"
+                  color="blue-gray"
+                  className="block font-medium mb-2"
+                >
+                  Total Participants
+                </Typography>
+              </label>
+              <Input
+                id="totalParticipants"
+                color="gray"
+                size="lg"
+                type="number"
+                name="totalParticipants"
+                {...register("totalParticipants", {
+                  required: "Insert total participants",
+                  min: {
+                    value: 1,
+                    message: "total participant must be at least 1 people",
+                  },
+                  max: {
+                    value: 100,
+                    message: "total participant must not exceed  100 people",
+                  },
+                })}
+                placeholder="Enter total participants"
+                className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack !bg-senseWhite border-none rounded-none "
+                labelProps={{
+                  className: "hidden",
+                }}
+              />
+              {errors?.totalParticipants && (
+                <Typography
+                  variant="small"
+                  className="opacity-90 tracking-wide text-red-600 mt-1"
+                >
+                  {errors.totalParticipants?.message}
+                </Typography>
+              )}
+            </div>
           </div>
 
           <Button
-            className="bg-actionBlue mt-2 rounded-none font-medium shadow-none normal-case text-white text-[15px] tracking-wide"
+            className="bg-actionBlue my-6 w-full rounded-none font-medium shadow-none normal-case text-white text-[15px] tracking-wide"
             type="submit"
           >
             Create Tour
