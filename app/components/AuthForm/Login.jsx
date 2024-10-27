@@ -52,7 +52,6 @@ export function Login({ pathName }) {
         return { ...prev, loading: true };
       });
       const response = await credentialsRegisterHandler(inputData);
-      console.log(response, "res-------");
       // checking if account created successfully
       if (response.data?.token && response.status === "success") {
         // if succeed login as created user
@@ -76,8 +75,6 @@ export function Login({ pathName }) {
   const googleSignInHandler = async function () {
     const isSignedIn = await signInWithGoogleAction();
   };
-
-  console.log(status);
 
   return (
     <div className="p-8 py-4 h-full w-full">

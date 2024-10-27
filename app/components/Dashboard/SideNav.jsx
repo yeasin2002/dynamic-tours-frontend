@@ -10,7 +10,7 @@ export default function SideNav({ type, closeDrawer }) {
     <>
       <div
         className={`${
-          type === "mobile" ? "w-full" : "lg:min-w-[310px]"
+          type === "mobile" ? "w-full" : "lg:min-w-[310px] "
         }   min-h-screen bg-white p-4`}
       >
         <div className=" pb-2 border-b border-[#D5D5D5]">
