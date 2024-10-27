@@ -128,6 +128,14 @@ export default function CreateTour() {
                 name="description"
                 {...register("description", {
                   required: "Insert your description",
+                  minLength: {
+                    value: 100,
+                    message: "Description should be at least 100 characters",
+                  },
+                  maxLength: {
+                    value: 1000,
+                    message: "Description cannot exceed 1000 characters",
+                  },
                 })}
                 placeholder="Enter tour description"
                 className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack !bg-senseWhite border-none rounded-none "
@@ -141,6 +149,48 @@ export default function CreateTour() {
                   className="opacity-90 tracking-wide text-red-600 mt-1"
                 >
                   {errors.description?.message}
+                </Typography>
+              )}
+            </div>
+            <div className=" w-full">
+              <label htmlFor="summery">
+                <Typography
+                  variant="small"
+                  color="blue-gray"
+                  className="block font-medium mb-2"
+                >
+                  Tour Summery
+                </Typography>
+              </label>
+              <Textarea
+                id="summery"
+                color="gray"
+                size="lg"
+                type="text"
+                name="summery"
+                {...register("summery", {
+                  required: "Insert your summery",
+                  minLength: {
+                    value: 30,
+                    message: "Summary should be at least 30 characters",
+                  },
+                  maxLength: {
+                    value: 200,
+                    message: "Summary cannot exceed 200 characters",
+                  },
+                })}
+                placeholder="Enter tour summery"
+                className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack !bg-senseWhite border-none rounded-none "
+                labelProps={{
+                  className: "hidden",
+                }}
+              />
+              {errors?.summery && (
+                <Typography
+                  variant="small"
+                  className="opacity-90 tracking-wide text-red-600 mt-1"
+                >
+                  {errors.summery?.message}
                 </Typography>
               )}
             </div>
