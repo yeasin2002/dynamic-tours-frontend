@@ -1,11 +1,18 @@
 "use client";
 import React, { useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  useMapEvents,
+} from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import markerIcon from "@/public/marker.png";
 import RoutingMachine from "./RoutingMachine";
 import SearchControll from "./SearchControll";
+import { OpenStreetMapProvider } from "leaflet-geosearch";
 
 const customIcon = new L.Icon({
   iconUrl: markerIcon?.src, // Replace with your icon path
@@ -21,6 +28,34 @@ const TourMap = ({ locations, pageType }) => {
   ];
 
   const [position, setPosition] = useState(defaultPosition);
+  const [address, setAddress] = useState("");
+
+  const reverseGeoCode = async function (lat, lng) {
+    const provider = new OpenStreetMapProvider();
+    const result = await provider.search({ query: `${lat},${lng}` });
+    if (result && result.length > 0) {
+      setAddress(result[0].raw.display_name);
+      console.log(result);
+    } else {
+      setAddress("no address found");
+    }
+  };
+
+  const LocationMarker = () => {
+    useMapEvents({
+      click(e) {
+        const { lat, lng } = e.latlng;
+        setPosition([lat, lng]);
+        reverseGeoCode(lat, lng);
+      },
+    });
+
+    return position ? (
+      <Marker icon={customIcon} position={position}>
+        <Popup>{address || "Searching adress..."}</Popup>
+      </Marker>
+    ) : null;
+  };
 
   return (
     <MapContainer
@@ -50,6 +85,7 @@ const TourMap = ({ locations, pageType }) => {
 
       <RoutingMachine locations={locations} />
       {pageType === "admin" && <SearchControll />}
+      {pageType === "admin" && <LocationMarker />}
     </MapContainer>
   );
 };
