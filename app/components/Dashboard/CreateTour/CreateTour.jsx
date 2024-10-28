@@ -1,8 +1,16 @@
 "use client";
-import { Input, Typography, Button, Textarea } from "@material-tailwind/react";
+import {
+  Input,
+  Typography,
+  Button,
+  Textarea,
+  Select,
+  Option,
+} from "@material-tailwind/react";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiOutlinePhotograph } from "react-icons/hi";
+import AddTourGuide from "./AddTourGuide";
 
 export default function CreateTour() {
   const {
@@ -74,25 +82,41 @@ export default function CreateTour() {
                 />
               </div>
             )}
-
             <input
+              id="coverImage"
+              name="coverImage"
               onChange={handleFile}
               type="file"
+              {...register("coverImage", {
+                required: "cover image is required",
+              })}
               ref={inputRef}
               className="hidden"
               accept="image/*"
             />
-            <HiOutlinePhotograph className=" w-16 h-16 text-actionBlue" />
-            <Typography className=" p-2 text-shadeBlack ">
-              Drop your cover image here or{" "}
-              <span
-                onClick={() => inputRef?.current?.click()}
-                className=" cursor-pointer text-actionBlue"
-              >
-                browse
-              </span>
-            </Typography>
+            {!selectedImage && (
+              <>
+                <HiOutlinePhotograph className=" w-16 h-16 text-actionBlue" />
+                <Typography className=" p-2 text-shadeBlack ">
+                  Drop your cover image here or{" "}
+                  <span
+                    onClick={() => inputRef?.current?.click()}
+                    className=" cursor-pointer text-actionBlue"
+                  >
+                    browse
+                  </span>
+                </Typography>
+              </>
+            )}
           </div>
+          {errors?.coverImage && (
+            <Typography
+              variant="small"
+              className="opacity-90 tracking-wide text-red-600 mt-1"
+            >
+              {errors.coverImage?.message}
+            </Typography>
+          )}
 
           {/* main */}
           <div className="grid md:grid-cols-2 grid-cols-1 gap-4 py-4 md:py-0  lg:gap-y-6 gap-x-8 ">
@@ -363,6 +387,30 @@ export default function CreateTour() {
                   className: "hidden",
                 }}
               />
+              {errors?.totalParticipants && (
+                <Typography
+                  variant="small"
+                  className="opacity-90 tracking-wide text-red-600 mt-1"
+                >
+                  {errors.totalParticipants?.message}
+                </Typography>
+              )}
+            </div>
+
+            <div className=" w-full">
+              <label htmlFor="totalParticipants">
+                <Typography
+                  variant="small"
+                  color="blue-gray"
+                  className="block font-medium mb-2"
+                >
+                  Tour Guides
+                </Typography>
+              </label>
+              <div>
+                <AddTourGuide />
+              </div>
+
               {errors?.totalParticipants && (
                 <Typography
                   variant="small"
