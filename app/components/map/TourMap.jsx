@@ -5,6 +5,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import markerIcon from "@/public/marker.png";
 import RoutingMachine from "./RoutingMachine";
+import SearchControll from "./SearchControll";
 
 const customIcon = new L.Icon({
   iconUrl: markerIcon?.src, // Replace with your icon path
@@ -13,7 +14,7 @@ const customIcon = new L.Icon({
   popupAnchor: [0, -46], // Adjust popup position if using popups
 });
 
-const TourMap = ({ locations }) => {
+const TourMap = ({ locations, pageType }) => {
   const defaultPosition = [
     locations[0].coordinates[1],
     locations[0].coordinates[0],
@@ -48,6 +49,7 @@ const TourMap = ({ locations }) => {
       ))}
 
       <RoutingMachine locations={locations} />
+      {pageType === "admin" && <SearchControll />}
     </MapContainer>
   );
 };

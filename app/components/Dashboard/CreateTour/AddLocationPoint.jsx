@@ -6,7 +6,7 @@ export default function AddLocationPoint() {
   return (
     <>
       <div className=" bg-green-300">
-        <TourMap locations={locations} />
+        <TourMap locations={locations} pageType={"admin"} />
       </div>
     </>
   );
