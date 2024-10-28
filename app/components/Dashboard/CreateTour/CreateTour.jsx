@@ -11,6 +11,7 @@ import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiOutlinePhotograph } from "react-icons/hi";
 import AddTourGuide from "./AddTourGuide";
+import AddLocationPoint from "./AddLocationPoint";
 
 export default function CreateTour() {
   const {
@@ -96,7 +97,7 @@ export default function CreateTour() {
             />
             {!selectedImage && (
               <>
-                <HiOutlinePhotograph className=" w-16 h-16 text-actionBlue" />
+                <HiOutlinePhotograph className=" w-16 h-16 text-actionBlue opacity-80" />
                 <Typography className=" p-2 text-shadeBlack ">
                   Drop your cover image here or{" "}
                   <span
@@ -421,6 +422,63 @@ export default function CreateTour() {
               )}
             </div>
           </div>
+
+          <div
+            onDragOver={dragOver}
+            onDrop={dropHandler}
+            onDragLeave={() => setDragStart(false)}
+            className={` bg-senseWhite py-4 border-dashed ${
+              dragStart ? "opacity-60" : "opacity-100"
+            } flex duration-300 items-center justify-center border-2  my-4 p-4`}
+          >
+            {selectedImage && (
+              <div className=" bg-green-200">
+                <img
+                  onClick={clearImage}
+                  src={selectedImage}
+                  alt=""
+                  width={200}
+                  height={"auto"}
+                  className=" object-cover"
+                />
+              </div>
+            )}
+            <input
+              id="coverImage"
+              name="coverImage"
+              onChange={handleFile}
+              type="file"
+              {...register("coverImage", {
+                required: "cover image is required",
+              })}
+              ref={inputRef}
+              className="hidden"
+              accept="image/*"
+            />
+            {!selectedImage && (
+              <>
+                <HiOutlinePhotograph className=" w-16 h-16 text-actionBlue opacity-80" />
+                <Typography className=" p-2 text-shadeBlack ">
+                  Drop your feature image here or{" "}
+                  <span
+                    onClick={() => inputRef?.current?.click()}
+                    className=" cursor-pointer text-actionBlue"
+                  >
+                    browse
+                  </span>
+                </Typography>
+              </>
+            )}
+          </div>
+          {errors?.coverImage && (
+            <Typography
+              variant="small"
+              className="opacity-90 tracking-wide text-red-600 mt-1"
+            >
+              {errors.coverImage?.message}
+            </Typography>
+          )}
+          <AddLocationPoint />
 
           <Button
             className="bg-actionBlue my-6 w-full rounded-none font-medium shadow-none normal-case text-white text-[15px] tracking-wide"

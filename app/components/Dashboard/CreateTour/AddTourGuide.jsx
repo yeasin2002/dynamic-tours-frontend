@@ -10,6 +10,8 @@ import { useState } from "react";
 
 export default function AddTourGuide() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [selectedGuide, setSelectedGuide] = useState(null);
+
   return (
     <>
       <Menu
