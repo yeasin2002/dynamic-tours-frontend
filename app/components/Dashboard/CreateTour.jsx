@@ -1,7 +1,8 @@
 "use client";
 import { Input, Typography, Button, Textarea } from "@material-tailwind/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { HiOutlinePhotograph } from "react-icons/hi";
 
 export default function CreateTour() {
   const {
@@ -9,28 +10,88 @@ export default function CreateTour() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  const [dragStart, setDragStart] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
   const inputRef = useRef(null);
 
   const createTourHandler = function (inputData) {
     console.log(inputData);
   };
 
+  const makeLocalUrl = function (file) {
+    if (file && file.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        setSelectedImage(event.target.result);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      alert("Please select valid image");
+    }
+  };
+
   const handleFile = (event) => {
-    console.log(event.target.files);
+    makeLocalUrl(event.target.files[0]);
+  };
+
+  const dragOver = function (event) {
+    event.preventDefault();
+    setDragStart(true);
+  };
+
+  const dropHandler = function (event) {
+    event.preventDefault();
+    setDragStart(false);
+    const imageFile = event.dataTransfer.files[0];
+    makeLocalUrl(imageFile);
+  };
+  const clearImage = function () {
+    inputRef.current.value = null;
+    setSelectedImage(null);
   };
 
   return (
     <>
       <div className=" ">
         <form onSubmit={handleSubmit(createTourHandler)}>
-          <div className=" bg-pink-100 py-2">
-            <Input
+          <div
+            onDragOver={dragOver}
+            onDrop={dropHandler}
+            onDragLeave={() => setDragStart(false)}
+            className={` bg-senseWhite py-4 border-dashed ${
+              dragStart ? "opacity-60" : "opacity-100"
+            } flex duration-300 items-center justify-center border-2  my-2 p-4`}
+          >
+            {selectedImage && (
+              <div className=" bg-green-200">
+                <img
+                  onClick={clearImage}
+                  src={selectedImage}
+                  alt=""
+                  width={200}
+                  height={"auto"}
+                  className=" object-cover"
+                />
+              </div>
+            )}
+
+            <input
               onChange={handleFile}
-              ref={inputRef}
               type="file"
+              ref={inputRef}
+              className="hidden"
               accept="image/*"
             />
+            <HiOutlinePhotograph className=" w-16 h-16 text-actionBlue" />
+            <Typography className=" p-2 text-shadeBlack ">
+              Drop your cover image here or{" "}
+              <span
+                onClick={() => inputRef?.current?.click()}
+                className=" cursor-pointer text-actionBlue"
+              >
+                browse
+              </span>
+            </Typography>
           </div>
 
           {/* main */}
