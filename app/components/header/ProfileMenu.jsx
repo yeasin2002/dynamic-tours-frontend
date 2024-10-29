@@ -30,8 +30,10 @@ export function ProfileMenu({ signOut, user }) {
     setAuthStatus(session.status);
     if (session.status === "authenticated") {
       setAuthUser(session.data.user);
+      setAuthStatus(session.status);
     } else {
       setAuthUser(null);
+      setAuthStatus(session.status);
     }
   }, [session.status]);
   console.log(AuthStatus);

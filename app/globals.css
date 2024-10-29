@@ -22,6 +22,10 @@
 .dashboardGradient {
   background: linear-gradient(111.4deg, rgb(122, 192, 233) 18.8%, rgb(4, 161, 255) 100.2%);
 }
+/* leaflet custom css */
+.leaflet-popup-close-button {
+  display: none;
+}
 
 .leaflet-routing-container {
   display: none !important;  /* Hides the directions panel */

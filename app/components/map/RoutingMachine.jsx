@@ -42,6 +42,6 @@ export default function RoutingMachine({ locations }) {
     });
 
     return () => map.removeControl(routingControl.getContainer());
-  }, [map]);
+  }, [map, locations]);
   return null;
 }

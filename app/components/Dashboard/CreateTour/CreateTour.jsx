@@ -478,6 +478,17 @@ export default function CreateTour() {
               {errors.coverImage?.message}
             </Typography>
           )}
+
+          <label htmlFor="totalParticipants">
+            <Typography
+              variant="small"
+              color="blue-gray"
+              className="block font-medium mb-2"
+            >
+              Add Tour Locations
+            </Typography>
+          </label>
+
           <AddLocationPoint />
 
           <Button
