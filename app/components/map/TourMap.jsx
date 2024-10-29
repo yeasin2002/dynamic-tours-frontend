@@ -14,6 +14,7 @@ import RoutingMachine from "./RoutingMachine";
 import SearchControll from "./SearchControll";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
 import { Button } from "@/app/ui/materialExport";
+import AddLocationDetails from "./AddLocationDetails";
 
 const customIcon = new L.Icon({
   iconUrl: markerIcon?.src, // Replace with your icon path
@@ -59,20 +60,13 @@ const TourMap = ({ locations, pageType }) => {
     useEffect(() => {
       if (markerRef.current) {
         markerRef.current.togglePopup();
-        console.log(markerRef.current);
       }
     }, [position]);
 
     return position ? (
       <Marker ref={markerRef} icon={customIcon} position={position}>
         <Popup minWidth={300} className="p-0">
-          <div className=" bg-green-300 p-0 w-full ">
-            <h2>This is custom</h2>
-            <div className=" flex flex-col gap-2 items-center justify-center">
-              <Button size="sm">Add Location</Button>
-              <Button size="sm">Remove Location</Button>
-            </div>
-          </div>
+          <AddLocationDetails />
         </Popup>
       </Marker>
     ) : null;

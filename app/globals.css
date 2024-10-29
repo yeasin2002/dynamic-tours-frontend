@@ -26,6 +26,13 @@
 .leaflet-popup-close-button {
   display: none;
 }
+.added-location-style{
+  background: green;
+  padding: 4px;
+}
+.leaflet-popup-content p{
+  margin: 0px 0px !important;
+}
 
 .leaflet-routing-container {
   display: none !important;  /* Hides the directions panel */

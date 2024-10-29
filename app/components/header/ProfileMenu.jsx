@@ -36,7 +36,6 @@ export function ProfileMenu({ signOut, user }) {
       setAuthStatus(session.status);
     }
   }, [session.status]);
-  console.log(AuthStatus);
 
   return (
     <>
