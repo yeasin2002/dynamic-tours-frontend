@@ -63,14 +63,32 @@ const TourMap = ({ locations, pageType }) => {
       }
     }, [position]);
 
+    const cancelMarker = function (e) {
+      setSelectedLocation((prev) => {
+        return prev?.slice(0, -1);
+      });
+
+      setPosition(
+        selectLocation[selectLocation.length - 1]?.coordinates
+          ? [
+              selectLocation[selectLocation.length - 1]?.coordinates[1],
+              selectLocation[selectLocation.length - 1]?.coordinates[0],
+            ]
+          : null
+      );
+      markerRef.current.closePopup();
+      e.stopPropagation();
+    };
     return position ? (
       <Marker ref={markerRef} icon={customIcon} position={position}>
         <Popup minWidth={300} className="p-0">
-          <AddLocationDetails />
+          <AddLocationDetails address={address} cancelMaker={cancelMarker} />
         </Popup>
       </Marker>
     ) : null;
   };
+  console.log(selectLocation, "location");
+  console.log(position, "position");
 
   return (
     <MapContainer

@@ -2,7 +2,7 @@
 import { Button, Typography } from "@/app/ui/materialExport";
 import { Input, Textarea } from "@material-tailwind/react";
 
-export default function AddLocationDetails() {
+export default function AddLocationDetails({ address, cancelMaker }) {
   return (
     <>
       <div className="p-0 w-full ">
@@ -51,6 +51,7 @@ export default function AddLocationDetails() {
               color="gray"
               size="lg"
               type="text"
+              defaultValue={address}
               placeholder="Enter tour ldescription"
               className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack !bg-senseWhite border-none rounded-none "
               labelProps={{
@@ -98,7 +99,9 @@ export default function AddLocationDetails() {
           </div>
           <div className=" mt-3 flex justify-between itec">
             <Button size="sm">Add Location</Button>
-            <Button size="sm">Cancel</Button>
+            <Button onClick={cancelMaker} size="sm">
+              Cancel
+            </Button>
           </div>
         </div>
       </div>

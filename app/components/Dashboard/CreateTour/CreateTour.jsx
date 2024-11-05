@@ -20,28 +20,34 @@ export default function CreateTour() {
     formState: { errors },
   } = useForm();
   const [dragStart, setDragStart] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const inputRef = useRef(null);
+  const [selectedCoverImage, setSelectedCoverImage] = useState(null);
+  const [selectedFeatureImage, setSelectedFeatureImage] = useState(null);
+
+  const coverImageRef = useRef(null);
+  const featureImageRef = useRef(null);
 
   const createTourHandler = function (inputData) {
     console.log(inputData);
   };
 
-  const makeLocalUrl = function (file) {
+  const makeLocalUrl = function (file, imageType) {
     if (file && file.type.startsWith("image/")) {
       const reader = new FileReader();
       reader.onload = function (event) {
-        setSelectedImage(event.target.result);
+        imageType === "coverImage"
+          ? setSelectedCoverImage(event.target.result)
+          : setSelectedFeatureImage(event.target.result);
       };
       reader.readAsDataURL(file);
     } else {
       alert("Please select valid image");
     }
   };
-
-  const handleFile = (event) => {
-    makeLocalUrl(event.target.files[0]);
+  const handlerCoverImage = function (event) {
+    makeLocalUrl(event.target.files[0], "coverImage");
   };
+
+  const handleFeatureImage = function (event) {};
 
   const dragOver = function (event) {
     event.preventDefault();
@@ -54,9 +60,20 @@ export default function CreateTour() {
     const imageFile = event.dataTransfer.files[0];
     makeLocalUrl(imageFile);
   };
-  const clearImage = function () {
-    inputRef.current.value = null;
-    setSelectedImage(null);
+
+  const clearImage = function (actiontype) {
+    if (actiontype === "featureImage") {
+      return () => {
+        featureImageRef.current.value = null;
+        setSelectedFeatureImage(null);
+      };
+    }
+    if (actiontype === "coverImage") {
+      return () => {
+        coverImageRef.current.value = null;
+        setSelectedCoverImage(null);
+      };
+    }
   };
 
   return (
@@ -71,11 +88,11 @@ export default function CreateTour() {
               dragStart ? "opacity-60" : "opacity-100"
             } flex duration-300 items-center justify-center border-2  my-2 p-4`}
           >
-            {selectedImage && (
+            {selectedCoverImage && (
               <div className=" bg-green-200">
                 <img
-                  onClick={clearImage}
-                  src={selectedImage}
+                  onClick={clearImage("coverImage")}
+                  src={selectedCoverImage}
                   alt=""
                   width={200}
                   height={"auto"}
@@ -86,22 +103,22 @@ export default function CreateTour() {
             <input
               id="coverImage"
               name="coverImage"
-              onChange={handleFile}
+              onChangeCapture={handlerCoverImage}
               type="file"
               {...register("coverImage", {
                 required: "cover image is required",
               })}
-              ref={inputRef}
+              ref={coverImageRef}
               className="hidden"
               accept="image/*"
             />
-            {!selectedImage && (
+            {!selectedCoverImage && (
               <>
                 <HiOutlinePhotograph className=" w-16 h-16 text-actionBlue opacity-80" />
                 <Typography className=" p-2 text-shadeBlack ">
                   Drop your cover image here or{" "}
                   <span
-                    onClick={() => inputRef?.current?.click()}
+                    onClick={() => coverImageRef?.current?.click()}
                     className=" cursor-pointer text-actionBlue"
                   >
                     browse
@@ -431,11 +448,11 @@ export default function CreateTour() {
               dragStart ? "opacity-60" : "opacity-100"
             } flex duration-300 items-center justify-center border-2  my-4 p-4`}
           >
-            {selectedImage && (
+            {selectedFeatureImage && (
               <div className=" bg-green-200">
                 <img
-                  onClick={clearImage}
-                  src={selectedImage}
+                  onClick={clearImage("featureImage")}
+                  src={selectedFeatureImage}
                   alt=""
                   width={200}
                   height={"auto"}
@@ -446,22 +463,22 @@ export default function CreateTour() {
             <input
               id="coverImage"
               name="coverImage"
-              onChange={handleFile}
+              onChangeCapture={handleFeatureImage}
               type="file"
               {...register("coverImage", {
                 required: "cover image is required",
               })}
-              ref={inputRef}
+              ref={featureImageRef}
               className="hidden"
               accept="image/*"
             />
-            {!selectedImage && (
+            {!selectedFeatureImage && (
               <>
                 <HiOutlinePhotograph className=" w-16 h-16 text-actionBlue opacity-80" />
                 <Typography className=" p-2 text-shadeBlack ">
                   Drop your feature image here or{" "}
                   <span
-                    onClick={() => inputRef?.current?.click()}
+                    onClick={() => featureImageRef?.current?.click()}
                     className=" cursor-pointer text-actionBlue"
                   >
                     browse
