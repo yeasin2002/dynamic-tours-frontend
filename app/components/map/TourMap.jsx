@@ -6,6 +6,7 @@ import {
   Marker,
   Popup,
   useMapEvents,
+  useMap,
 } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -28,11 +29,10 @@ const TourMap = ({ locations, pageType }) => {
     locations[0].coordinates[1],
     locations[0].coordinates[0],
   ];
-
   const [selectLocation, setSelectedLocation] = useState(
     pageType === "admin" ? [] : locations
   );
-
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const [position, setPosition] = useState(null);
   const [address, setAddress] = useState("");
   const markerRef = useRef(null);
@@ -41,19 +41,18 @@ const TourMap = ({ locations, pageType }) => {
     const provider = new OpenStreetMapProvider();
     const result = await provider.search({ query: `${lat},${lng}` });
     if (result && result.length > 0) {
-      setAddress(result[0].raw.display_name);
-      console.log(result);
+      setAddress(result[0].raw.name);
     } else {
       setAddress("no address found");
     }
   };
 
   const LocationMarkerGeoCoded = () => {
+    const map = useMap();
     useMapEvents({
       click(e) {
         const { lat, lng } = e.latlng;
         setPosition([lat, lng]);
-        setSelectedLocation((prev) => [...prev, { coordinates: [lng, lat] }]);
         reverseGeoCode(lat, lng);
       },
     });
@@ -64,31 +63,32 @@ const TourMap = ({ locations, pageType }) => {
     }, [position]);
 
     const cancelMarker = function (e) {
-      setSelectedLocation((prev) => {
-        return prev?.slice(0, -1);
-      });
-
-      setPosition(
-        selectLocation[selectLocation.length - 1]?.coordinates
-          ? [
-              selectLocation[selectLocation.length - 1]?.coordinates[1],
-              selectLocation[selectLocation.length - 1]?.coordinates[0],
-            ]
-          : null
-      );
-      markerRef.current.closePopup();
       e.stopPropagation();
+      setPosition(null);
     };
+
+    const addLocationHandler = function (e) {
+      // stopping from the event to propagate
+      e.stopPropagation();
+      setSelectedLocation((prev) => [
+        ...prev,
+        { coordinates: [position[1], position[0]] },
+      ]);
+      setPosition(null);
+    };
+
     return position ? (
       <Marker ref={markerRef} icon={customIcon} position={position}>
         <Popup minWidth={300} className="p-0">
-          <AddLocationDetails address={address} cancelMaker={cancelMarker} />
+          <AddLocationDetails
+            address={address}
+            addLocation={addLocationHandler}
+            cancelMaker={cancelMarker}
+          />
         </Popup>
       </Marker>
     ) : null;
   };
-  console.log(selectLocation, "location");
-  console.log(position, "position");
 
   return (
     <MapContainer

@@ -2,7 +2,11 @@
 import { Button, Typography } from "@/app/ui/materialExport";
 import { Input, Textarea } from "@material-tailwind/react";
 
-export default function AddLocationDetails({ address, cancelMaker }) {
+export default function AddLocationDetails({
+  address,
+  cancelMaker,
+  addLocation,
+}) {
   return (
     <>
       <div className="p-0 w-full ">
@@ -21,6 +25,7 @@ export default function AddLocationDetails({ address, cancelMaker }) {
               id="adress"
               color="gray"
               size="lg"
+              defaultValue={address}
               type="text"
               placeholder="Enter tour adress"
               className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack !bg-senseWhite border-none rounded-none "
@@ -51,7 +56,6 @@ export default function AddLocationDetails({ address, cancelMaker }) {
               color="gray"
               size="lg"
               type="text"
-              defaultValue={address}
               placeholder="Enter tour ldescription"
               className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack !bg-senseWhite border-none rounded-none "
               labelProps={{
@@ -97,8 +101,30 @@ export default function AddLocationDetails({ address, cancelMaker }) {
               there might be and error
             </Typography> */}
           </div>
+          <div className=" flex flex-col gap-2  ">
+            <label htmlFor="locationImage">
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="block font-medium "
+              >
+                Location Image
+              </Typography>
+            </label>
+            <input
+              id="locationImage"
+              color="gray"
+              size="lg"
+              type="file"
+              accept="image/*"
+              multiple
+            />
+            {/* <input type="file" accept="image/*" max={3} /> */}
+          </div>
           <div className=" mt-3 flex justify-between itec">
-            <Button size="sm">Add Location</Button>
+            <Button onClick={addLocation} size="sm">
+              Add Location
+            </Button>
             <Button onClick={cancelMaker} size="sm">
               Cancel
             </Button>
