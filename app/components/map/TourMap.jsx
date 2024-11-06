@@ -14,7 +14,6 @@ import markerIcon from "@/public/marker.png";
 import RoutingMachine from "./RoutingMachine";
 import SearchControll from "./SearchControll";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
-import { Button } from "@/app/ui/materialExport";
 import AddLocationDetails from "./AddLocationDetails";
 
 const customIcon = new L.Icon({
@@ -29,26 +28,31 @@ const TourMap = ({ locations, pageType }) => {
     locations[0].coordinates[1],
     locations[0].coordinates[0],
   ];
+
+  // the main state of location data
   const [selectLocation, setSelectedLocation] = useState(
     pageType === "admin" ? [] : locations
   );
-  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+  // the position of the marker and popup
   const [position, setPosition] = useState(null);
+
+  // address of selected point getting by reverseGeoCoding
   const [address, setAddress] = useState("");
+
   const markerRef = useRef(null);
 
   const reverseGeoCode = async function (lat, lng) {
     const provider = new OpenStreetMapProvider();
     const result = await provider.search({ query: `${lat},${lng}` });
+    console.log(result);
     if (result && result.length > 0) {
-      setAddress(result[0].raw.name);
+      setAddress(result[0].label);
     } else {
       setAddress("no address found");
     }
   };
 
   const LocationMarkerGeoCoded = () => {
-    const map = useMap();
     useMapEvents({
       click(e) {
         const { lat, lng } = e.latlng;
@@ -70,10 +74,14 @@ const TourMap = ({ locations, pageType }) => {
     const addLocationHandler = function (e) {
       // stopping from the event to propagate
       e.stopPropagation();
-      setSelectedLocation((prev) => [
-        ...prev,
-        { coordinates: [position[1], position[0]] },
-      ]);
+      // creating the location data format
+      const locationData = {
+        coordinates: [position[1], position[0]],
+        address: address,
+        dayNumber: 0,
+        image: [],
+      };
+      setSelectedLocation((prev) => [...prev, locationData]);
       setPosition(null);
     };
 

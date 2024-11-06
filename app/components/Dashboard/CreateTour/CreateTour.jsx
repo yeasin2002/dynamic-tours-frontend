@@ -26,6 +26,7 @@ export default function CreateTour() {
   const coverImageRef = useRef(null);
   const featureImageRef = useRef(null);
 
+  // the main submit function
   const createTourHandler = function (inputData) {
     console.log(inputData);
   };
@@ -78,7 +79,7 @@ export default function CreateTour() {
 
   return (
     <>
-      <div className=" ">
+      <div className="">
         <form onSubmit={handleSubmit(createTourHandler)}>
           <div
             onDragOver={dragOver}
@@ -191,7 +192,10 @@ export default function CreateTour() {
                 name="duration"
                 {...register("duration", {
                   required: "Insert tour duration",
-                  min: { value: 1, message: "Duration must be at least 1 day" },
+                  min: {
+                    value: 1,
+                    message: "Duration must be at least 1 day",
+                  },
                   max: {
                     value: 60,
                     message: "Duration must be no more than 60 days",
