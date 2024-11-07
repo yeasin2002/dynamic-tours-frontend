@@ -89,27 +89,13 @@ const TourMap = ({ locations, pageType }) => {
       setPosition(null);
     };
 
-    const addLocationHandler = function (e) {
-      // stopping from the event to propagate
-      e.stopPropagation();
-      // creating the location data format
-      const locationData = {
-        coordinates: [position[1], position[0]],
-        address: address,
-        dayNumber: 0,
-        image: [],
-      };
-      // setSelectedLocation((prev) => [...prev, locationData]);
-      dispatch({ type: "ADD_NEW_LOCATION", payload: locationData });
-      setPosition(null);
-    };
-
     return position ? (
       <Marker ref={markerRef} icon={customIcon} position={position}>
         <Popup minWidth={300} className="p-0">
           <AddLocationDetails
             address={address}
-            addLocation={addLocationHandler}
+            setPosition={setPosition}
+            position={position}
             cancelMaker={cancelMarker}
           />
         </Popup>

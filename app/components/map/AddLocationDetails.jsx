@@ -1,13 +1,38 @@
 "use client";
 import { Button, Typography } from "@/app/ui/materialExport";
 import { Input, Textarea } from "@material-tailwind/react";
+import { useMapContext } from "../Dashboard/CreateTour/MapContext";
 import { useState } from "react";
 
 export default function AddLocationDetails({
   address,
   cancelMaker,
-  addLocation,
+  position,
+  setPosition,
 }) {
+  const { state, dispatch } = useMapContext();
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [dayNumber, setDayNumber] = useState(null);
+
+  const addNewLocationPoint = function (e) {
+    // stopping from the event to propagate
+    e.stopPropagation();
+    // creating the location data format
+    const locationData = {
+      coordinates: [position[1], position[0]],
+      address: address,
+      description,
+      dayNumber: 0,
+      image: selectedImage,
+    };
+
+    console.log(locationData);
+    // setSelectedLocation((prev) => [...prev, locationData]);
+    dispatch({ type: "ADD_NEW_LOCATION", payload: locationData });
+    setPosition(null);
+  };
+
   return (
     <>
       <div className="p-0 w-full ">
@@ -56,6 +81,7 @@ export default function AddLocationDetails({
               id="ldescription"
               color="gray"
               size="lg"
+              onChange={(e) => setDescription(e.target.value)}
               type="text"
               placeholder="Enter tour ldescription"
               className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack !bg-senseWhite border-none rounded-none "
@@ -85,6 +111,7 @@ export default function AddLocationDetails({
               id="day_no"
               color="gray"
               size="lg"
+              onChange={(e) => setDayNumber(e.target.value)}
               type="number"
               min={1}
               max={100}
@@ -115,6 +142,7 @@ export default function AddLocationDetails({
             <input
               id="locationImage"
               color="gray"
+              onChange={(e) => setSelectedImage(e.target.files)}
               size="lg"
               type="file"
               accept="image/*"
@@ -123,7 +151,7 @@ export default function AddLocationDetails({
             {/* <input type="file" accept="image/*" max={3} /> */}
           </div>
           <div className=" mt-3 flex justify-between itec">
-            <Button onClick={addLocation} size="sm">
+            <Button onClick={addNewLocationPoint} size="sm">
               Add Location
             </Button>
             <Button onClick={cancelMaker} size="sm">
