@@ -15,10 +15,11 @@ import AddLocationPoint from "./AddLocationPoint";
 
 export default function CreateTour() {
   const {
-    register,
-    handleSubmit,
-    formState: { errors },
+    register: registerTour,
+    handleSubmit: handleSubmitTour,
+    formState: { errors: errorsTour },
   } = useForm();
+
   const [dragStart, setDragStart] = useState(false);
   const [selectedCoverImage, setSelectedCoverImage] = useState(null);
   const [selectedFeatureImage, setSelectedFeatureImage] = useState(null);
@@ -80,7 +81,7 @@ export default function CreateTour() {
   return (
     <>
       <div className="">
-        <form onSubmit={handleSubmit(createTourHandler)}>
+        <form>
           <div
             onDragOver={dragOver}
             onDrop={dropHandler}
@@ -106,7 +107,7 @@ export default function CreateTour() {
               name="coverImage"
               onChangeCapture={handlerCoverImage}
               type="file"
-              {...register("coverImage", {
+              {...registerTour("coverImage", {
                 required: "cover image is required",
               })}
               ref={coverImageRef}
@@ -128,12 +129,12 @@ export default function CreateTour() {
               </>
             )}
           </div>
-          {errors?.coverImage && (
+          {errorsTour?.coverImage && (
             <Typography
               variant="small"
               className="opacity-90 tracking-wide text-red-600 mt-1"
             >
-              {errors.coverImage?.message}
+              {errorsTour.coverImage?.message}
             </Typography>
           )}
 
@@ -155,7 +156,7 @@ export default function CreateTour() {
                 size="lg"
                 type="text"
                 name="title"
-                {...register("title", {
+                {...registerTour("title", {
                   required: "Insert tour title",
                 })}
                 placeholder="Enter tour title"
@@ -164,12 +165,12 @@ export default function CreateTour() {
                   className: "hidden",
                 }}
               />
-              {errors?.title && (
+              {errorsTour?.title && (
                 <Typography
                   variant="small"
                   className="opacity-90 tracking-wide text-red-600 mt-1"
                 >
-                  {errors.title?.message}
+                  {errorsTour.title?.message}
                 </Typography>
               )}
             </div>
@@ -190,7 +191,7 @@ export default function CreateTour() {
                 size="lg"
                 type="number"
                 name="duration"
-                {...register("duration", {
+                {...registerTour("duration", {
                   required: "Insert tour duration",
                   min: {
                     value: 1,
@@ -207,12 +208,12 @@ export default function CreateTour() {
                   className: "hidden",
                 }}
               />
-              {errors?.duration && (
+              {errorsTour?.duration && (
                 <Typography
                   variant="small"
                   className="opacity-90 tracking-wide text-red-600 mt-1"
                 >
-                  {errors.duration?.message}
+                  {errorsTour.duration?.message}
                 </Typography>
               )}
             </div>
@@ -233,7 +234,7 @@ export default function CreateTour() {
                 size="lg"
                 type="text"
                 name="description"
-                {...register("description", {
+                {...registerTour("description", {
                   required: "Insert your description",
                   minLength: {
                     value: 100,
@@ -250,12 +251,12 @@ export default function CreateTour() {
                   className: "hidden",
                 }}
               />
-              {errors?.description && (
+              {errorsTour?.description && (
                 <Typography
                   variant="small"
                   className="opacity-90 tracking-wide text-red-600 mt-1"
                 >
-                  {errors.description?.message}
+                  {errorsTour.description?.message}
                 </Typography>
               )}
             </div>
@@ -275,7 +276,7 @@ export default function CreateTour() {
                 size="lg"
                 type="text"
                 name="summery"
-                {...register("summery", {
+                {...registerTour("summery", {
                   required: "Insert your summery",
                   minLength: {
                     value: 30,
@@ -292,12 +293,12 @@ export default function CreateTour() {
                   className: "hidden",
                 }}
               />
-              {errors?.summery && (
+              {errorsTour?.summery && (
                 <Typography
                   variant="small"
                   className="opacity-90 tracking-wide text-red-600 mt-1"
                 >
-                  {errors.summery?.message}
+                  {errorsTour.summery?.message}
                 </Typography>
               )}
             </div>
@@ -318,7 +319,7 @@ export default function CreateTour() {
                 size="lg"
                 type="number"
                 name="price"
-                {...register("price", {
+                {...registerTour("price", {
                   required: "Insert tour price",
                   min: { value: 1, message: "Price must be at least 1" },
                 })}
@@ -328,12 +329,12 @@ export default function CreateTour() {
                   className: "hidden",
                 }}
               />
-              {errors?.price && (
+              {errorsTour?.price && (
                 <Typography
                   variant="small"
                   className="opacity-90 tracking-wide text-red-600 mt-1"
                 >
-                  {errors.price?.message}
+                  {errorsTour.price?.message}
                 </Typography>
               )}
             </div>
@@ -354,7 +355,7 @@ export default function CreateTour() {
                 size="lg"
                 type="number"
                 name="discountPrice"
-                {...register("discountPrice", {
+                {...registerTour("discountPrice", {
                   min: {
                     value: 1,
                     message: "discountPrice must be at least 1",
@@ -366,12 +367,12 @@ export default function CreateTour() {
                   className: "hidden",
                 }}
               />
-              {errors?.discountPrice && (
+              {errorsTour?.discountPrice && (
                 <Typography
                   variant="small"
                   className="opacity-90 tracking-wide text-red-600 mt-1"
                 >
-                  {errors.discountPrice?.message}
+                  {errorsTour.discountPrice?.message}
                 </Typography>
               )}
             </div>
@@ -392,7 +393,7 @@ export default function CreateTour() {
                 size="lg"
                 type="number"
                 name="totalParticipants"
-                {...register("totalParticipants", {
+                {...registerTour("totalParticipants", {
                   required: "Insert total participants",
                   min: {
                     value: 1,
@@ -409,12 +410,12 @@ export default function CreateTour() {
                   className: "hidden",
                 }}
               />
-              {errors?.totalParticipants && (
+              {errorsTour?.totalParticipants && (
                 <Typography
                   variant="small"
                   className="opacity-90 tracking-wide text-red-600 mt-1"
                 >
-                  {errors.totalParticipants?.message}
+                  {errorsTour.totalParticipants?.message}
                 </Typography>
               )}
             </div>
@@ -433,12 +434,12 @@ export default function CreateTour() {
                 <AddTourGuide />
               </div>
 
-              {errors?.totalParticipants && (
+              {errorsTour?.totalParticipants && (
                 <Typography
                   variant="small"
                   className="opacity-90 tracking-wide text-red-600 mt-1"
                 >
-                  {errors.totalParticipants?.message}
+                  {errorsTour.totalParticipants?.message}
                 </Typography>
               )}
             </div>
@@ -469,7 +470,7 @@ export default function CreateTour() {
               name="coverImage"
               onChangeCapture={handleFeatureImage}
               type="file"
-              {...register("coverImage", {
+              {...registerTour("coverImage", {
                 required: "cover image is required",
               })}
               ref={featureImageRef}
@@ -491,12 +492,12 @@ export default function CreateTour() {
               </>
             )}
           </div>
-          {errors?.coverImage && (
+          {errorsTour?.coverImage && (
             <Typography
               variant="small"
               className="opacity-90 tracking-wide text-red-600 mt-1"
             >
-              {errors.coverImage?.message}
+              {errorsTour.coverImage?.message}
             </Typography>
           )}
 
@@ -514,7 +515,7 @@ export default function CreateTour() {
 
           <Button
             className="bg-actionBlue my-6 w-full rounded-none font-medium shadow-none normal-case text-white text-[15px] tracking-wide"
-            type="submit"
+            onClick={handleSubmitTour(createTourHandler)}
           >
             Create Tour
           </Button>
