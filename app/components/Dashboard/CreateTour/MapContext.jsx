@@ -1,5 +1,6 @@
 "use client";
-import { createContext, useContext } from "react";
+import { data } from "autoprefixer";
+import { createContext, useContext, useReducer } from "react";
 
 export const MapContext = createContext();
 
@@ -9,6 +10,32 @@ export const useMapContext = function () {
 };
 
 export const MapContextProvider = function ({ children }) {
-  const data = { name: "sabbir hossain ", role: "admin" };
-  return <MapContext.Provider value={data}>{children}</MapContext.Provider>;
+  const initialState = {
+    selectedLocation: [],
+  };
+
+  const mapReducer = function (state, action) {
+    switch (action.type) {
+      case "ADD_NEW_LOCATION":
+        console.log(action.payload);
+        return {
+          ...state,
+          selectedLocation: [...state.selectedLocation, action.payload],
+        };
+      case "LOAD_LOCATION":
+        return [...action.payload];
+      case "DELETE_LOCATION":
+        return { ...state, selectedLocation: [] };
+      default: {
+        return state;
+      }
+    }
+  };
+  const [state, dispatch] = useReducer(mapReducer, initialState);
+
+  return (
+    <MapContext.Provider value={{ state, dispatch }}>
+      {children}
+    </MapContext.Provider>
+  );
 };

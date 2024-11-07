@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -15,6 +15,7 @@ import RoutingMachine from "./RoutingMachine";
 import SearchControll from "./SearchControll";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
 import AddLocationDetails from "./AddLocationDetails";
+import { useMapContext } from "../Dashboard/CreateTour/MapContext";
 
 const customIcon = new L.Icon({
   iconUrl: markerIcon?.src, // Replace with your icon path
@@ -24,15 +25,29 @@ const customIcon = new L.Icon({
 });
 
 const TourMap = ({ locations, pageType }) => {
+  // the map state for location
+  const contextData = pageType === "admin" && useMapContext();
+  console.log(contextData);
+
+  const selectedLocation =
+    pageType === "admin" ? contextData?.state?.selectedLocation : locations;
+  console.log(selectedLocation, "location adming");
+
   const defaultPosition = [
     locations[0].coordinates[1],
     locations[0].coordinates[0],
   ];
 
   // the main state of location data
-  const [selectLocation, setSelectedLocation] = useState(
-    pageType === "admin" ? [] : locations
-  );
+  // const [selectedLocation, setSelectedLocation] = useState(
+  //   pageType === "admin" ? [] : locations
+  // );
+
+  // useEffect(() => {
+  //   if (pageType === "admin") return;
+  //   dispatch({ type: "LOAD_LOCATION", payload: locations });
+  // }, [locations]);
+
   // the position of the marker and popup
   const [position, setPosition] = useState(null);
 
@@ -53,6 +68,8 @@ const TourMap = ({ locations, pageType }) => {
   };
 
   const LocationMarkerGeoCoded = () => {
+    const dispatch = contextData?.dispatch;
+
     useMapEvents({
       click(e) {
         const { lat, lng } = e.latlng;
@@ -60,6 +77,7 @@ const TourMap = ({ locations, pageType }) => {
         reverseGeoCode(lat, lng);
       },
     });
+
     useEffect(() => {
       if (markerRef.current) {
         markerRef.current.togglePopup();
@@ -81,7 +99,8 @@ const TourMap = ({ locations, pageType }) => {
         dayNumber: 0,
         image: [],
       };
-      setSelectedLocation((prev) => [...prev, locationData]);
+      // setSelectedLocation((prev) => [...prev, locationData]);
+      dispatch({ type: "ADD_NEW_LOCATION", payload: locationData });
       setPosition(null);
     };
 
@@ -110,8 +129,8 @@ const TourMap = ({ locations, pageType }) => {
         url="https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png"
         attribution='Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      {selectLocation &&
-        selectLocation?.map((item, index) => (
+      {selectedLocation &&
+        selectedLocation?.map((item, index) => (
           <Marker
             key={index}
             position={[item?.coordinates[1], item?.coordinates[0]]}
@@ -125,7 +144,7 @@ const TourMap = ({ locations, pageType }) => {
           </Marker>
         ))}
 
-      <RoutingMachine locations={selectLocation} />
+      <RoutingMachine locations={selectedLocation} />
       {pageType === "admin" && <SearchControll />}
       {pageType === "admin" && <LocationMarkerGeoCoded />}
     </MapContainer>
