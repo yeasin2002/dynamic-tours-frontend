@@ -1,5 +1,4 @@
 "use client";
-import { data } from "autoprefixer";
 import { createContext, useContext, useReducer } from "react";
 
 export const MapContext = createContext();
@@ -17,7 +16,6 @@ export const MapContextProvider = function ({ children }) {
   const mapReducer = function (state, action) {
     switch (action.type) {
       case "ADD_NEW_LOCATION":
-        console.log(action.payload);
         return {
           ...state,
           selectedLocation: [...state.selectedLocation, action.payload],

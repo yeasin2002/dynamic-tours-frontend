@@ -12,45 +12,31 @@ export default function AddLocationDetails({
   setPosition,
 }) {
   const { state, dispatch } = useMapContext();
-
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [description, setDescription] = useState(null);
-  const [dayNumber, setDayNumber] = useState(null);
-
   const {
     register: registerDetails,
     handleSubmit: handleSubmitDetails,
     formState: { errors: errorsDetails },
+    watch,
   } = useForm();
-
   // the main submit fucntion that getting the input data from RHF
   const locationSubmitHandler = function (inputData) {
-    console.log(inputData);
-    // stopping from the event to propagate
-    // e.stopPropagation();
-    // creating the location data format
     const locationData = {
       coordinates: [position[1], position[0]],
-      address: address,
-      description,
-      dayNumber: 0,
-      image: selectedImage,
+      ...inputData,
+      dayNumber: +inputData.dayNumber,
     };
-
-    // setSelectedLocation((prev) => [...prev, locationData]);
     dispatch({ type: "ADD_NEW_LOCATION", payload: locationData });
     setPosition(null);
   };
-
   // generating the callback function for calling it when the button get clicked
   const submitFormCB = handleSubmitDetails(locationSubmitHandler);
-
   // Add button triggering the function the stop the Propagation and getting clicked on the map again
   const locationFromHandler = function (event) {
     event.stopPropagation();
     // calling it later when the button clicked
     submitFormCB();
   };
+  console.log(watch());
 
   return (
     <>
@@ -185,7 +171,7 @@ export default function AddLocationDetails({
                 size="lg"
                 type="file"
                 accept="image/*"
-                multiple
+                // multiple
               />
               {errorsDetails?.images && (
                 <Typography

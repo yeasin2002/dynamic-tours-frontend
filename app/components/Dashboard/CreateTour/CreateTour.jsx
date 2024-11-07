@@ -12,12 +12,14 @@ import { useForm } from "react-hook-form";
 import { HiOutlinePhotograph } from "react-icons/hi";
 import AddTourGuide from "./AddTourGuide";
 import AddLocationPoint from "./AddLocationPoint";
+import { useMapContext } from "./MapContext";
 
 export default function CreateTour() {
   const {
     register: registerTour,
     handleSubmit: handleSubmitTour,
     formState: { errors: errorsTour },
+    watch,
   } = useForm();
 
   const [dragStart, setDragStart] = useState(false);
@@ -26,6 +28,8 @@ export default function CreateTour() {
 
   const coverImageRef = useRef(null);
   const featureImageRef = useRef(null);
+  // const { state, dispatch } = useMapContext();
+  // console.log(state);
 
   // the main submit function
   const createTourHandler = function (inputData) {
@@ -77,6 +81,7 @@ export default function CreateTour() {
       };
     }
   };
+  console.log(watch());
 
   return (
     <>
@@ -104,15 +109,15 @@ export default function CreateTour() {
             )}
             <input
               id="coverImage"
-              name="coverImage"
-              onChangeCapture={handlerCoverImage}
-              type="file"
+              color="gray"
               {...registerTour("coverImage", {
-                required: "cover image is required",
+                required: "Please select a cover image",
               })}
+              size="lg"
+              type="file"
               ref={coverImageRef}
-              className="hidden"
               accept="image/*"
+              className="hidden"
             />
             {!selectedCoverImage && (
               <>
@@ -466,16 +471,24 @@ export default function CreateTour() {
               </div>
             )}
             <input
-              id="coverImage"
-              name="coverImage"
-              onChangeCapture={handleFeatureImage}
-              type="file"
-              {...registerTour("coverImage", {
-                required: "cover image is required",
+              id="locationImage"
+              color="gray"
+              {...registerTour("images", {
+                validate: {
+                  minFile: (image) =>
+                    (image && image.length >= 1) ||
+                    "Please select at least 1 feature image.",
+                  maxFile: (image) =>
+                    (image && image.length <= 20) ||
+                    "You can only select up to 20 feature image.",
+                },
               })}
+              size="lg"
+              type="file"
               ref={featureImageRef}
               className="hidden"
               accept="image/*"
+              multiple
             />
             {!selectedFeatureImage && (
               <>
@@ -492,12 +505,12 @@ export default function CreateTour() {
               </>
             )}
           </div>
-          {errorsTour?.coverImage && (
+          {errorsTour?.images && (
             <Typography
               variant="small"
               className="opacity-90 tracking-wide text-red-600 mt-1"
             >
-              {errorsTour.coverImage?.message}
+              {errorsTour.images?.message}
             </Typography>
           )}
 
