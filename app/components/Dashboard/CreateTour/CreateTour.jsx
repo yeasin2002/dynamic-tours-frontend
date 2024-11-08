@@ -1,31 +1,28 @@
 "use client";
-import {
-  Input,
-  Typography,
-  Button,
-  Textarea,
-  Select,
-  Option,
-} from "@material-tailwind/react";
+import { Input, Typography, Button, Textarea } from "@material-tailwind/react";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiOutlinePhotograph } from "react-icons/hi";
 import AddTourGuide from "./AddTourGuide";
 import AddLocationPoint from "./AddLocationPoint";
+import { convertToDataURL } from "@/app/util/helper";
 import { useMapContext } from "./MapContext";
+import { HiOutlineX } from "react-icons/hi";
 
 export default function CreateTour() {
   const {
     register: registerTour,
     handleSubmit: handleSubmitTour,
     formState: { errors: errorsTour },
+    setValue,
     watch,
   } = useForm();
 
   const [dragStart, setDragStart] = useState(false);
   const [selectedCoverImage, setSelectedCoverImage] = useState(null);
   const [selectedFeatureImage, setSelectedFeatureImage] = useState(null);
-
+  const formData = watch();
+  console.log(formData);
   const coverImageRef = useRef(null);
   const featureImageRef = useRef(null);
   // const { state, dispatch } = useMapContext();
@@ -49,6 +46,7 @@ export default function CreateTour() {
       alert("Please select valid image");
     }
   };
+
   const handlerCoverImage = function (event) {
     makeLocalUrl(event.target.files[0], "coverImage");
   };
@@ -81,12 +79,20 @@ export default function CreateTour() {
       };
     }
   };
-  console.log(watch());
 
   return (
     <>
       <div className="">
         <form>
+          <label htmlFor="coverImage">
+            <Typography
+              variant="small"
+              color="blue-gray"
+              className="block font-medium mb-2"
+            >
+              Cover Image
+            </Typography>
+          </label>
           <div
             onDragOver={dragOver}
             onDrop={dropHandler}
@@ -95,31 +101,25 @@ export default function CreateTour() {
               dragStart ? "opacity-60" : "opacity-100"
             } flex duration-300 items-center justify-center border-2  my-2 p-4`}
           >
-            {selectedCoverImage && (
-              <div className=" bg-green-200">
+            {formData.coverImage && (
+              <div className="  h-[220px] w-full relative">
+                <div className=" absolute top-1 right-1">
+                  <HiOutlineX
+                    onClick={() => setValue("coverImage", undefined)}
+                    className=" w-7 h-7 p-1 rounded-full text-shadeBlack bg-offWhite cursor-pointer"
+                  />
+                </div>
                 <img
                   onClick={clearImage("coverImage")}
-                  src={selectedCoverImage}
-                  alt=""
+                  src={convertToDataURL(formData.coverImage[0])}
+                  alt="cover-image"
                   width={200}
                   height={"auto"}
-                  className=" object-cover"
+                  className=" object-cover w-full h-full "
                 />
               </div>
             )}
-            <input
-              id="coverImage"
-              color="gray"
-              {...registerTour("coverImage", {
-                required: "Please select a cover image",
-              })}
-              size="lg"
-              type="file"
-              ref={coverImageRef}
-              accept="image/*"
-              className="hidden"
-            />
-            {!selectedCoverImage && (
+            {!formData.coverImage && (
               <>
                 <HiOutlinePhotograph className=" w-16 h-16 text-actionBlue opacity-80" />
                 <Typography className=" p-2 text-shadeBlack ">
@@ -128,11 +128,24 @@ export default function CreateTour() {
                     onClick={() => coverImageRef?.current?.click()}
                     className=" cursor-pointer text-actionBlue"
                   >
-                    browse
+                    <label htmlFor="coverImage">browse</label>
                   </span>
                 </Typography>
               </>
             )}
+            <input
+              id="coverImage"
+              name="coverImage"
+              color="gray"
+              {...registerTour("coverImage", {
+                required: "Please select a cover image",
+              })}
+              size="lg"
+              type="file"
+              // ref={coverImageRef}
+              accept="image/*"
+              className="hidden"
+            />
           </div>
           {errorsTour?.coverImage && (
             <Typography

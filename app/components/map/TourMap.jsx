@@ -91,7 +91,7 @@ const TourMap = ({ locations, pageType }) => {
 
     return position ? (
       <Marker ref={markerRef} icon={customIcon} position={position}>
-        <Popup minWidth={300} className="p-0">
+        <Popup minWidth={250} className="p-0">
           <AddLocationDetails
             address={address}
             setPosition={setPosition}
