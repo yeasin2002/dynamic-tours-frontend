@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { HiOutlinePhotograph } from "react-icons/hi";
 import AddTourGuide from "./AddTourGuide";
 import AddLocationPoint from "./AddLocationPoint";
-import { convertToDataURL } from "@/app/util/helper";
+import { convertToDataURL, convertToDataURLmultiple } from "@/app/util/helper";
 import { useMapContext } from "./MapContext";
 import { HiOutlineX } from "react-icons/hi";
 
@@ -18,7 +18,11 @@ export default function CreateTour() {
     watch,
   } = useForm();
 
-  const [dragStart, setDragStart] = useState(false);
+  const [dragStart, setDragStart] = useState({
+    coverImage: false,
+    featureImage: false,
+  });
+
   const [selectedCoverImage, setSelectedCoverImage] = useState(null);
   const [selectedFeatureImage, setSelectedFeatureImage] = useState(null);
   const formData = watch();
@@ -33,51 +37,37 @@ export default function CreateTour() {
     console.log(inputData);
   };
 
-  const makeLocalUrl = function (file, imageType) {
-    if (file && file.type.startsWith("image/")) {
-      const reader = new FileReader();
-      reader.onload = function (event) {
-        imageType === "coverImage"
-          ? setSelectedCoverImage(event.target.result)
-          : setSelectedFeatureImage(event.target.result);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      alert("Please select valid image");
-    }
+  const dragOver = function (inputType) {
+    return (event) => {
+      event.preventDefault();
+      if (inputType === "coverImage") {
+        setDragStart((prev) => {
+          return {
+            ...prev,
+            coverImage: true,
+          };
+        });
+      } else if (inputType === "featureImage") {
+        setDragStart((prev) => {
+          return {
+            ...prev,
+            featureImage: true,
+          };
+        });
+      }
+    };
   };
 
-  const handlerCoverImage = function (event) {
-    makeLocalUrl(event.target.files[0], "coverImage");
-  };
-
-  const handleFeatureImage = function (event) {};
-
-  const dragOver = function (event) {
-    event.preventDefault();
-    setDragStart(true);
-  };
-
-  const dropHandler = function (event) {
-    event.preventDefault();
-    setDragStart(false);
-    const imageFile = event.dataTransfer.files[0];
-    makeLocalUrl(imageFile);
-  };
-
-  const clearImage = function (actiontype) {
-    if (actiontype === "featureImage") {
-      return () => {
-        featureImageRef.current.value = null;
-        setSelectedFeatureImage(null);
-      };
-    }
-    if (actiontype === "coverImage") {
-      return () => {
-        coverImageRef.current.value = null;
-        setSelectedCoverImage(null);
-      };
-    }
+  const dropHandler = function (inputType) {
+    return (event) => {
+      event.preventDefault();
+      setDragStart({ coverImage: false, featureImage: false });
+      if (inputType === "coverImage") {
+        setValue("coverImage", [event.dataTransfer.files[0]]);
+      } else if (inputType === "featureImage") {
+        setValue("images", event.dataTransfer.files);
+      }
+    };
   };
 
   return (
@@ -94,15 +84,17 @@ export default function CreateTour() {
             </Typography>
           </label>
           <div
-            onDragOver={dragOver}
-            onDrop={dropHandler}
-            onDragLeave={() => setDragStart(false)}
+            onDragOver={dragOver("coverImage")}
+            onDrop={dropHandler("coverImage")}
+            onDragLeave={() =>
+              setDragStart({ coverImage: false, featureImage: false })
+            }
             className={` bg-senseWhite py-4 border-dashed ${
-              dragStart ? "opacity-60" : "opacity-100"
-            } flex duration-300 items-center justify-center border-2  my-2 p-4`}
+              dragStart.coverImage ? "opacity-60" : "opacity-100"
+            } flex duration-300 items-center justify-center border-2  my-2  p-4`}
           >
-            {formData.coverImage && (
-              <div className="  h-[220px] w-full relative">
+            {formData.coverImage?.length > 0 && (
+              <div className="  h-[140px] w-[300px]  relative">
                 <div className=" absolute top-1 right-1">
                   <HiOutlineX
                     onClick={() => setValue("coverImage", undefined)}
@@ -110,7 +102,6 @@ export default function CreateTour() {
                   />
                 </div>
                 <img
-                  onClick={clearImage("coverImage")}
                   src={convertToDataURL(formData.coverImage[0])}
                   alt="cover-image"
                   width={200}
@@ -119,10 +110,10 @@ export default function CreateTour() {
                 />
               </div>
             )}
-            {!formData.coverImage && (
+            {!formData.coverImage?.length > 0 && (
               <>
                 <HiOutlinePhotograph className=" w-16 h-16 text-actionBlue opacity-80" />
-                <Typography className=" p-2 text-shadeBlack ">
+                <Typography className=" p-2 py-6 text-shadeBlack ">
                   Drop your cover image here or{" "}
                   <span
                     onClick={() => coverImageRef?.current?.click()}
@@ -139,6 +130,11 @@ export default function CreateTour() {
               color="gray"
               {...registerTour("coverImage", {
                 required: "Please select a cover image",
+                validate: {
+                  maxFile: (image) =>
+                    (image && image.length < 2) ||
+                    "You can only select up to 1 cover image.",
+                },
               })}
               size="lg"
               type="file"
@@ -157,7 +153,7 @@ export default function CreateTour() {
           )}
 
           {/* main */}
-          <div className="grid md:grid-cols-2 grid-cols-1 gap-4 py-4 md:py-0  lg:gap-y-6 gap-x-8 ">
+          <div className="grid md:grid-cols-2 grid-cols-1 gap-4 py-4 md:py-0  lg:gap-y-4 gap-x-8 ">
             <div className=" w-full">
               <label htmlFor="title">
                 <Typography
@@ -463,28 +459,30 @@ export default function CreateTour() {
             </div>
           </div>
 
+          <label htmlFor="featureImage">
+            <Typography
+              variant="small"
+              color="blue-gray"
+              className="block font-medium pt-4 mb-2"
+            >
+              Feature Image
+            </Typography>
+          </label>
+
           <div
-            onDragOver={dragOver}
-            onDrop={dropHandler}
-            onDragLeave={() => setDragStart(false)}
+            onDragOver={dragOver("featureImage")}
+            onDrop={dropHandler("featureImage")}
+            onDragLeave={() =>
+              setDragStart({ coverImage: false, featureImage: false })
+            }
             className={` bg-senseWhite py-4 border-dashed ${
-              dragStart ? "opacity-60" : "opacity-100"
-            } flex duration-300 items-center justify-center border-2  my-4 p-4`}
+              dragStart.featureImage ? "opacity-60" : "opacity-100"
+            } flex duration-300 items-center ${
+              formData.images?.length > 0 ? "" : "justify-center"
+            } border-2 overflow-auto   p-4`}
           >
-            {selectedFeatureImage && (
-              <div className=" bg-green-200">
-                <img
-                  onClick={clearImage("featureImage")}
-                  src={selectedFeatureImage}
-                  alt=""
-                  width={200}
-                  height={"auto"}
-                  className=" object-cover"
-                />
-              </div>
-            )}
             <input
-              id="locationImage"
+              id="featureImage"
               color="gray"
               {...registerTour("images", {
                 validate: {
@@ -492,27 +490,47 @@ export default function CreateTour() {
                     (image && image.length >= 1) ||
                     "Please select at least 1 feature image.",
                   maxFile: (image) =>
-                    (image && image.length <= 20) ||
-                    "You can only select up to 20 feature image.",
+                    (image && image.length <= 15) ||
+                    "You can only select up to 15 feature image.",
                 },
               })}
               size="lg"
               type="file"
-              ref={featureImageRef}
               className="hidden"
               accept="image/*"
               multiple
             />
-            {!selectedFeatureImage && (
+            {formData.images?.length > 0 && (
+              <div className="">
+                <div className=" flex gap-4">
+                  {[...formData.images].map((item) => (
+                    <div className="h-[140px] w-[180px] relative">
+                      <div className=" absolute top-1 right-1">
+                        <HiOutlineX
+                          onClick={() => setValue("coverImage", undefined)}
+                          className=" w-7 h-7 p-1 rounded-full text-shadeBlack bg-offWhite cursor-pointer"
+                        />
+                      </div>
+                      <img
+                        src={convertToDataURL(item)}
+                        alt="cover-image"
+                        width={200}
+                        height={"auto"}
+                        className=" object-cover w-full h-full "
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {!formData.images?.length > 0 && (
               <>
                 <HiOutlinePhotograph className=" w-16 h-16 text-actionBlue opacity-80" />
-                <Typography className=" p-2 text-shadeBlack ">
+                <Typography className=" p-2 py-6 text-shadeBlack ">
                   Drop your feature image here or{" "}
-                  <span
-                    onClick={() => featureImageRef?.current?.click()}
-                    className=" cursor-pointer text-actionBlue"
-                  >
-                    browse
+                  <span className=" cursor-pointer text-actionBlue">
+                    <label htmlFor="featureImage">browse</label>
                   </span>
                 </Typography>
               </>
@@ -531,7 +549,7 @@ export default function CreateTour() {
             <Typography
               variant="small"
               color="blue-gray"
-              className="block font-medium mb-2"
+              className="block font-medium pt-4 mb-2"
             >
               Add Tour Locations
             </Typography>
