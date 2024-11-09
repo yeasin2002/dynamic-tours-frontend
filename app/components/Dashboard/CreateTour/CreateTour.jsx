@@ -16,6 +16,7 @@ export default function CreateTour() {
     formState: { errors: errorsTour },
     setValue,
     watch,
+    setFocus,
   } = useForm();
 
   const [dragStart, setDragStart] = useState({
@@ -35,6 +36,16 @@ export default function CreateTour() {
   // the main submit function
   const createTourHandler = function (inputData) {
     console.log(inputData);
+  };
+
+  // for focusing to the error input
+
+  const onError = function () {
+    console.log("error found");
+    const firstError = Object.keys(errorsTour)[0];
+    if (firstError) {
+      setFocus(firstError);
+    }
   };
 
   const dragOver = function (inputType) {
@@ -63,11 +74,23 @@ export default function CreateTour() {
       event.preventDefault();
       setDragStart({ coverImage: false, featureImage: false });
       if (inputType === "coverImage") {
-        setValue("coverImage", [event.dataTransfer.files[0]]);
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(event.dataTransfer.files[0]);
+        const coverImageFileList = dataTransfer.files;
+        setValue("coverImage", coverImageFileList);
       } else if (inputType === "featureImage") {
         setValue("images", event.dataTransfer.files);
       }
     };
+  };
+
+  const featureImageEditHandler = function (event) {
+    const modifiedTime = +event.target.id;
+    console.log(modifiedTime);
+    const newImageList = [...formData.images]?.filter(
+      (item) => item.lastModified !== modifiedTime
+    );
+    setValue("images", newImageList);
   };
 
   return (
@@ -94,7 +117,7 @@ export default function CreateTour() {
             } flex duration-300 items-center justify-center border-2  my-2  p-4`}
           >
             {formData.coverImage?.length > 0 && (
-              <div className="  h-[140px] w-[300px]  relative">
+              <div className="  h-[220px] xl:h-[320px] w-full relative">
                 <div className=" absolute top-1 right-1">
                   <HiOutlineX
                     onClick={() => setValue("coverImage", undefined)}
@@ -507,7 +530,8 @@ export default function CreateTour() {
                     <div className="h-[140px] w-[180px] relative">
                       <div className=" absolute top-1 right-1">
                         <HiOutlineX
-                          onClick={() => setValue("coverImage", undefined)}
+                          id={item.lastModified}
+                          onClick={featureImageEditHandler}
                           className=" w-7 h-7 p-1 rounded-full text-shadeBlack bg-offWhite cursor-pointer"
                         />
                       </div>
@@ -559,7 +583,7 @@ export default function CreateTour() {
 
           <Button
             className="bg-actionBlue my-6 w-full rounded-none font-medium shadow-none normal-case text-white text-[15px] tracking-wide"
-            onClick={handleSubmitTour(createTourHandler)}
+            onClick={handleSubmitTour(createTourHandler, onError)}
           >
             Create Tour
           </Button>
