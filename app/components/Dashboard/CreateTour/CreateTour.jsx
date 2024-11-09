@@ -27,7 +27,6 @@ export default function CreateTour() {
   const [selectedCoverImage, setSelectedCoverImage] = useState(null);
   const [selectedFeatureImage, setSelectedFeatureImage] = useState(null);
   const formData = watch();
-  console.log(formData);
   const coverImageRef = useRef(null);
   const featureImageRef = useRef(null);
   // const { state, dispatch } = useMapContext();

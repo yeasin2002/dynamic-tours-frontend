@@ -27,11 +27,9 @@ const customIcon = new L.Icon({
 const TourMap = ({ locations, pageType }) => {
   // the map state for location
   const contextData = pageType === "admin" && useMapContext();
-  console.log(contextData);
 
   const selectedLocation =
     pageType === "admin" ? contextData?.state?.selectedLocation : locations;
-  console.log(selectedLocation, "location adming");
 
   const defaultPosition = [
     locations[0].coordinates[1],

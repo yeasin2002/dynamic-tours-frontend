@@ -15,6 +15,7 @@ export default function AddTourGuide() {
   return (
     <>
       <Menu
+        placement="bottom-start"
         open={isMenuOpen}
         handler={(value) => (value === true ? setIsMenuOpen(value) : null)}
       >

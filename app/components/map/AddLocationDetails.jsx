@@ -36,7 +36,6 @@ export default function AddLocationDetails({
     // calling it later when the button clicked
     submitFormCB();
   };
-  console.log(watch());
 
   return (
     <>
