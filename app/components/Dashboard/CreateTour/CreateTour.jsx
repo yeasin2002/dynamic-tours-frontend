@@ -1,6 +1,6 @@
 "use client";
 import { Input, Typography, Button, Textarea } from "@material-tailwind/react";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiOutlinePhotograph } from "react-icons/hi";
 import AddTourGuide from "./AddTourGuide";
@@ -8,8 +8,9 @@ import AddLocationPoint from "./AddLocationPoint";
 import { convertToDataURL } from "@/app/util/helper";
 import { HiOutlineX } from "react-icons/hi";
 
-export default function CreateTour({ actionType }) {
+export default function CreateTour({ actionType, tourData }) {
   const isUpdate = actionType === "update";
+
   const {
     register: registerTour,
     handleSubmit: handleSubmitTour,
@@ -38,6 +39,11 @@ export default function CreateTour({ actionType }) {
     if (firstError) {
       setFocus(firstError);
     }
+  };
+
+  // feel the form with existing data
+  const fillExistingData = function () {
+    // logic here
   };
 
   const dragOver = function (inputType) {

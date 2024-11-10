@@ -112,7 +112,9 @@ export default function TourList({ tourData, activeFilter, pageType }) {
                       <HiHeart className="w-4 h-4" />
                     </Button>
 
-                    <Link href={`/dashboard/tour-management/update-tour`}>
+                    <Link
+                      href={`/dashboard/tour-management/update-tour/${item?.id}`}
+                    >
                       <Button size="sm" className=" bg-actionBlue font-light">
                         Update
                       </Button>
