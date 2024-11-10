@@ -25,17 +25,14 @@ export default function SelectedLocation({ places, pageType }) {
     const coordinates = [e.target.dataset?.lat, e.target.dataset?.lng];
     console.log(map);
     e.stopPropagation();
-    map?.flyTo(coordinates, 16);
+    map?.flyTo(coordinates, 15);
     // closing the menu
     setIsOpen(false);
   };
 
-  console.log(selectedLocation, "data ");
-
-  // selectedLocation.length > 0;
   return (
     <>
-      {selectedLocation?.length > -1 && (
+      {selectedLocation?.length > 0 && (
         <Menu open={isOpen} placement="top-start">
           <MenuHandler>
             <div className=" pointer-events-none">
