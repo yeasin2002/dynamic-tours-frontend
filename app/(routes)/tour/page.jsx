@@ -22,6 +22,7 @@ import filterManager from "@/app/util/FilterManager";
 import Loading from "@/app/ui/Loading";
 import NotFound from "../../components/Tour/NotFound";
 import Link from "next/link";
+import { HiOutlinePencilAlt } from "react-icons/hi";
 
 export default function Tour({ pageType }) {
   const [tourData, setTourData] = useState(null);
@@ -126,11 +127,9 @@ export default function Tour({ pageType }) {
               {pageType === "admin" && (
                 <div className="">
                   <Link href={`${pathName}/create-tour`}>
-                    <Button
-                      size="md"
-                      className=" bg-actionBlue font-medium p-3 tracking-wide"
-                    >
-                      Create Tour
+                    <Button className="flex items-center gap-2 shadow-md font-normal py-2.5 px-3 ml-2 tracking-wide bg-actionBlue">
+                      <HiOutlinePencilAlt className="w-5 h-5 " />
+                      New Tour
                     </Button>
                   </Link>
                 </div>

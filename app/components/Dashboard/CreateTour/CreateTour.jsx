@@ -5,11 +5,11 @@ import { useForm } from "react-hook-form";
 import { HiOutlinePhotograph } from "react-icons/hi";
 import AddTourGuide from "./AddTourGuide";
 import AddLocationPoint from "./AddLocationPoint";
-import { convertToDataURL, convertToDataURLmultiple } from "@/app/util/helper";
-import { useMapContext } from "./MapContext";
+import { convertToDataURL } from "@/app/util/helper";
 import { HiOutlineX } from "react-icons/hi";
 
-export default function CreateTour() {
+export default function CreateTour({ actionType }) {
+  const isUpdate = actionType === "update";
   const {
     register: registerTour,
     handleSubmit: handleSubmitTour,
@@ -24,13 +24,7 @@ export default function CreateTour() {
     featureImage: false,
   });
 
-  const [selectedCoverImage, setSelectedCoverImage] = useState(null);
-  const [selectedFeatureImage, setSelectedFeatureImage] = useState(null);
   const formData = watch();
-  const coverImageRef = useRef(null);
-  const featureImageRef = useRef(null);
-  // const { state, dispatch } = useMapContext();
-  // console.log(state);
 
   // the main submit function
   const createTourHandler = function (inputData) {
@@ -38,7 +32,6 @@ export default function CreateTour() {
   };
 
   // for focusing to the error input
-
   const onError = function () {
     console.log("error found");
     const firstError = Object.keys(errorsTour)[0];
@@ -137,10 +130,7 @@ export default function CreateTour() {
                 <HiOutlinePhotograph className=" w-16 h-16 text-actionBlue opacity-80" />
                 <Typography className=" p-2 py-6 text-shadeBlack ">
                   Drop your cover image here or{" "}
-                  <span
-                    onClick={() => coverImageRef?.current?.click()}
-                    className=" cursor-pointer text-actionBlue"
-                  >
+                  <span className=" cursor-pointer text-actionBlue">
                     <label htmlFor="coverImage">browse</label>
                   </span>
                 </Typography>

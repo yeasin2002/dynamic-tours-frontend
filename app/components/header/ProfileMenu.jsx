@@ -49,9 +49,15 @@ export function ProfileMenu({ signOut, user }) {
       )}
       {session.status === "loading" && <p className=" py-4">Loading...</p>}
       {AuthStatus === "authenticated" && (
-        <Menu>
+        <Menu placement="bottom-end">
           <MenuHandler>
             <div className="flex cursor-pointer items-center p-1 px-3 rounded-lg">
+              <p
+                className=" mr-2.5 
+              hidden xl:block"
+              >
+                Welcome Back, {AuthUser?.name?.split(" ")[0]}
+              </p>
               <Avatar
                 variant="circular"
                 alt={AuthUser?.name}

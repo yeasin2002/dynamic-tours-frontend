@@ -6,7 +6,6 @@ import {
   Marker,
   Popup,
   useMapEvents,
-  useMap,
 } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -16,7 +15,6 @@ import SearchControll from "./SearchControll";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
 import AddLocationDetails from "./AddLocationDetails";
 import { useMapContext } from "../Dashboard/CreateTour/MapContext";
-import CustomButtonControl from "./CustomButtonControl";
 import SelectedLocation from "./SelectedLocation";
 
 const customIcon = new L.Icon({
@@ -37,17 +35,6 @@ const TourMap = ({ locations, pageType }) => {
     locations[0].coordinates[1],
     locations[0].coordinates[0],
   ];
-
-  // the main state of location data
-  // const [selectedLocation, setSelectedLocation] = useState(
-  //   pageType === "admin" ? [] : locations
-  // );
-
-  // useEffect(() => {
-  //   if (pageType === "admin") return;
-  //   dispatch({ type: "LOAD_LOCATION", payload: locations });
-  // }, [locations]);
-
   // the position of the marker and popup
   const [position, setPosition] = useState(null);
 
@@ -144,7 +131,6 @@ const TourMap = ({ locations, pageType }) => {
           </div>
 
           <RoutingMachine locations={selectedLocation} />
-          {/* <CustomButtonControl pageType={pageType} places={selectedLocation} /> */}
           {pageType === "admin" && <SearchControll />}
           {pageType === "admin" && <LocationMarkerGeoCoded />}
         </MapContainer>

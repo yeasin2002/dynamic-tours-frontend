@@ -18,14 +18,16 @@ import {
 import { IoIosPricetag } from "react-icons/io";
 export default function TourList({ tourData, activeFilter, pageType }) {
   // grid-cols-[repeat(auto-fit,minmax(350px,1fr))]
+  const isAdmin = pageType === "admin";
+
   const deactiveFilterAdminStyle = `${
-    pageType === "admin"
+    isAdmin
       ? "lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
       : "lg:grid-cols-3 2xl:grid-cols-4"
   }`;
 
   const activeFilterAdminStyle = `${
-    pageType === "admin"
+    isAdmin
       ? "lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3"
       : "lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3"
   }`;
@@ -102,17 +104,33 @@ export default function TourList({ tourData, activeFilter, pageType }) {
                   <IoIosPricetag className="w-6 h-6 mr-0.5 text-green-600" />
                   {`$ ${item?.price}`}
                 </Typography>
-                <div>
-                  <Button size="sm" color="blue-gray" className=" mr-3">
-                    <HiHeart className="w-4 h-4" />
-                  </Button>
 
-                  <Link href={`/tour/${item?.id}`}>
-                    <Button size="sm" className=" bg-actionBlue font-light">
-                      Details
+                {/* Conditional render depending on pageType */}
+                {isAdmin ? (
+                  <div className="bg-light-green-200">
+                    <Button size="sm" color="blue-gray" className=" mr-3">
+                      <HiHeart className="w-4 h-4" />
                     </Button>
-                  </Link>
-                </div>
+
+                    <Link href={`/dashboard/tour-management/update-tour`}>
+                      <Button size="sm" className=" bg-actionBlue font-light">
+                        Update
+                      </Button>
+                    </Link>
+                  </div>
+                ) : (
+                  <div className="bg-light-green-200">
+                    <Button size="sm" color="blue-gray" className=" mr-3">
+                      <HiHeart className="w-4 h-4" />
+                    </Button>
+
+                    <Link href={`/tour/${item?.id}`}>
+                      <Button size="sm" className=" bg-actionBlue font-light">
+                        Details
+                      </Button>
+                    </Link>
+                  </div>
+                )}
               </div>
             </CardFooter>
           </Card>
