@@ -1,5 +1,5 @@
 export const convertToDataURL = function (file) {
-  if (!file || !file?.type?.startsWith("image/")) return;
+  if (!file || !file?.type?.startsWith("image/")) return file;
   const imageUrl = URL.createObjectURL(file);
   return imageUrl;
 };

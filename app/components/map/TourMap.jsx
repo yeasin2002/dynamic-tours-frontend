@@ -16,6 +16,8 @@ import SearchControll from "./SearchControll";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
 import AddLocationDetails from "./AddLocationDetails";
 import { useMapContext } from "../Dashboard/CreateTour/MapContext";
+import CustomButtonControl from "./CustomButtonControl";
+import SelectedLocation from "./SelectedLocation";
 
 const customIcon = new L.Icon({
   iconUrl: markerIcon?.src, // Replace with your icon path
@@ -57,7 +59,6 @@ const TourMap = ({ locations, pageType }) => {
   const reverseGeoCode = async function (lat, lng) {
     const provider = new OpenStreetMapProvider();
     const result = await provider.search({ query: `${lat},${lng}` });
-    console.log(result);
     if (result && result.length > 0) {
       setAddress(result[0].label);
     } else {
@@ -70,6 +71,8 @@ const TourMap = ({ locations, pageType }) => {
 
     useMapEvents({
       click(e) {
+        // checking it clicked on the map only not on the overlay elements
+        if (e.originalEvent.target !== e.sourceTarget.getContainer()) return;
         const { lat, lng } = e.latlng;
         setPosition([lat, lng]);
         reverseGeoCode(lat, lng);
@@ -102,36 +105,51 @@ const TourMap = ({ locations, pageType }) => {
   };
 
   return (
-    <MapContainer
-      center={defaultPosition}
-      zoom={14}
-      maxZoom={18}
-      minZoom={8}
-      style={{ height: "550px", width: "100%" }}
-    >
-      <TileLayer
-        url="https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png"
-        attribution='Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      />
-      {selectedLocation &&
-        selectedLocation?.map((item, index) => (
-          <Marker
-            key={index}
-            position={[item?.coordinates[1], item?.coordinates[0]]}
-            icon={customIcon}
-          >
-            <Popup>
-              <div>
-                <h3>{item?.address}</h3>
-              </div>
-            </Popup>
-          </Marker>
-        ))}
+    <>
+      <div className=" relative">
+        <MapContainer
+          center={defaultPosition}
+          zoom={14}
+          maxZoom={18}
+          minZoom={8}
+          style={{ height: "550px", width: "100%" }}
+        >
+          <TileLayer
+            url="https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png"
+            attribution='Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          />
+          {selectedLocation &&
+            selectedLocation?.map((item, index) => (
+              <Marker
+                key={index}
+                position={[item?.coordinates[1], item?.coordinates[0]]}
+                icon={customIcon}
+              >
+                <Popup>
+                  <div>
+                    <h3>{item?.address}</h3>
+                  </div>
+                </Popup>
+              </Marker>
+            ))}
+          <div className=" absolute bottom-1 left-2 z-[999] pointer-events-none">
+            <SelectedLocation
+              places={
+                pageType === "admin"
+                  ? contextData?.state?.selectedLocation
+                  : selectedLocation
+              }
+              pageType={pageType}
+            />
+          </div>
 
-      <RoutingMachine locations={selectedLocation} />
-      {pageType === "admin" && <SearchControll />}
-      {pageType === "admin" && <LocationMarkerGeoCoded />}
-    </MapContainer>
+          <RoutingMachine locations={selectedLocation} />
+          {/* <CustomButtonControl pageType={pageType} places={selectedLocation} /> */}
+          {pageType === "admin" && <SearchControll />}
+          {pageType === "admin" && <LocationMarkerGeoCoded />}
+        </MapContainer>
+      </div>
+    </>
   );
 };
 
