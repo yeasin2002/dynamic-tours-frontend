@@ -3,6 +3,7 @@ import { Input, Typography, Button, Textarea } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiOutlinePhotograph } from "react-icons/hi";
+import { HiOutlineFolderPlus } from "react-icons/hi2";
 import AddTourGuide from "./AddTourGuide";
 import AddLocationPoint from "./AddLocationPoint";
 import { convertToDataURL } from "@/app/util/helper";
@@ -78,6 +79,14 @@ export default function CreateTour({ actionType, tourData }) {
         });
       }
     };
+  };
+
+  //
+  const featureImageHandler = function (e) {
+    const newImageList = [...e.target.files];
+    formData?.images &&
+      formData.images.forEach((item) => newImageList.unshift(item));
+    setValue("images", newImageList);
   };
 
   const dropHandler = function (inputType) {
@@ -527,15 +536,16 @@ export default function CreateTour({ actionType, tourData }) {
               })}
               size="lg"
               type="file"
+              onChange={featureImageHandler}
               className="hidden"
               accept="image/*"
               multiple
             />
             {formData.images?.length > 0 && (
               <div className="">
-                <div className=" flex gap-4">
+                <div className=" flex gap-4 items-center justify-center">
                   {[...formData.images].map((item, i) => (
-                    <div className="h-[140px] w-[180px] relative">
+                    <div key={i} className="h-[140px] w-[180px] relative">
                       <div className=" absolute top-1 right-1">
                         <HiOutlineX
                           id={item.lastModified}
@@ -548,10 +558,25 @@ export default function CreateTour({ actionType, tourData }) {
                         alt="cover-image"
                         width={200}
                         height={"auto"}
-                        className=" object-cover w-full h-full "
+                        className=" object-cover w-full h-full rounded-md "
                       />
                     </div>
                   ))}
+                  <div className=" w-[190px] h-full">
+                    <div className=" ">
+                      <label htmlFor="featureImage">
+                        <div className=" bg-white cursor-pointer text-offGray hover:opacity-80 py-4 duration-200 rounded-xl flex items-center flex-col">
+                          <HiOutlineFolderPlus
+                            className=" w-14 h-14 mb-1.5"
+                            strokeWidth={1}
+                          />
+                          <Typography variant="small" className="normal-case">
+                            Add more image
+                          </Typography>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
