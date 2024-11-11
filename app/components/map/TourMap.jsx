@@ -96,14 +96,14 @@ const TourMap = ({ locations, pageType }) => {
       <div className=" relative">
         <MapContainer
           center={defaultPosition}
-          zoom={14}
+          zoom={15}
           maxZoom={18}
-          minZoom={8}
+          minZoom={7}
           style={{ height: "550px", width: "100%" }}
         >
           <TileLayer
-            url="https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png"
-            attribution='Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=5a1f7bce059b4f25aec08e4a8a50524c"
+            attribution="&copy; Stamen Design, &copy; OpenStreetMap contributors"
           />
           {selectedLocation &&
             selectedLocation?.map((item, index) => (

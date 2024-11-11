@@ -25,7 +25,7 @@ export default function SelectedLocation({ places, pageType }) {
     const coordinates = [e.target.dataset?.lat, e.target.dataset?.lng];
     console.log(map);
     e.stopPropagation();
-    map?.flyTo(coordinates, 15);
+    map?.flyTo(coordinates, 17);
     // closing the menu
     setIsOpen(false);
   };
