@@ -1,16 +1,18 @@
 "use client";
 import { Input, Typography, Button, Textarea } from "@material-tailwind/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiOutlinePhotograph } from "react-icons/hi";
 import AddTourGuide from "./AddTourGuide";
 import AddLocationPoint from "./AddLocationPoint";
 import { convertToDataURL } from "@/app/util/helper";
 import { HiOutlineX } from "react-icons/hi";
+import { useMapContext } from "./MapContext";
 
 export default function CreateTour({ actionType, tourData }) {
   const isUpdate = actionType === "update";
 
+  const { state, dispatch } = useMapContext();
   const {
     register: registerTour,
     handleSubmit: handleSubmitTour,
@@ -27,6 +29,22 @@ export default function CreateTour({ actionType, tourData }) {
 
   const formData = watch();
 
+  useEffect(() => {
+    if (!tourData && !isUpdate) return;
+    // key of formElement
+
+    const formInputKeys = Object.keys(watch());
+    formInputKeys.forEach((item) => {
+      if (item === "coverImage") {
+        setValue(item, [tourData[item]]);
+      } else {
+        setValue(item, tourData[item]);
+      }
+      dispatch({ type: "LOAD_LOCATION", payload: tourData.locations });
+    });
+  }, [actionType]);
+  console.log(formData);
+
   // the main submit function
   const createTourHandler = function (inputData) {
     console.log(inputData);
@@ -39,11 +57,6 @@ export default function CreateTour({ actionType, tourData }) {
     if (firstError) {
       setFocus(firstError);
     }
-  };
-
-  // feel the form with existing data
-  const fillExistingData = function () {
-    // logic here
   };
 
   const dragOver = function (inputType) {
@@ -214,7 +227,7 @@ export default function CreateTour({ actionType, tourData }) {
                   color="blue-gray"
                   className="block font-medium mb-2"
                 >
-                  Tour Duration
+                  Tour Duration (Days)
                 </Typography>
               </label>
               <Input
@@ -425,7 +438,7 @@ export default function CreateTour({ actionType, tourData }) {
                 size="lg"
                 type="number"
                 name="totalParticipants"
-                {...registerTour("totalParticipants", {
+                {...registerTour("totalParticipant", {
                   required: "Insert total participants",
                   min: {
                     value: 1,
@@ -521,7 +534,7 @@ export default function CreateTour({ actionType, tourData }) {
             {formData.images?.length > 0 && (
               <div className="">
                 <div className=" flex gap-4">
-                  {[...formData.images].map((item) => (
+                  {[...formData.images].map((item, i) => (
                     <div className="h-[140px] w-[180px] relative">
                       <div className=" absolute top-1 right-1">
                         <HiOutlineX
@@ -580,7 +593,7 @@ export default function CreateTour({ actionType, tourData }) {
             className="bg-actionBlue my-6 w-full rounded-none font-medium shadow-none normal-case text-white text-[15px] tracking-wide"
             onClick={handleSubmitTour(createTourHandler, onError)}
           >
-            Create Tour
+            {isUpdate ? "Update Tour" : "Create Tour"}
           </Button>
         </form>
       </div>

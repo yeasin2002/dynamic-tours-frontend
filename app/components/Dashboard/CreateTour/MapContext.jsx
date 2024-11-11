@@ -21,7 +21,11 @@ export const MapContextProvider = function ({ children }) {
           selectedLocation: [...state.selectedLocation, action.payload],
         };
       case "LOAD_LOCATION":
-        return [...action.payload];
+        return {
+          ...state,
+          selectedLocation: [...action.payload],
+        };
+
       case "DELETE_LOCATION":
         return { ...state, selectedLocation: [] };
       default: {
