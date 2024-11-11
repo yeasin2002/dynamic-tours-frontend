@@ -44,7 +44,6 @@ export default function CreateTour({ actionType, tourData }) {
       dispatch({ type: "LOAD_LOCATION", payload: tourData.locations });
     });
   }, [actionType]);
-  console.log(formData);
 
   // the main submit function
   const createTourHandler = function (inputData) {
@@ -83,9 +82,8 @@ export default function CreateTour({ actionType, tourData }) {
 
   //
   const featureImageHandler = function (e) {
-    const newImageList = [...e.target.files];
-    formData?.images &&
-      formData.images.forEach((item) => newImageList.unshift(item));
+    const newImageList = formData?.images ? [...formData.images] : [];
+    [...e.target.files].forEach((item) => newImageList.push(item));
     setValue("images", newImageList);
   };
 
@@ -105,13 +103,19 @@ export default function CreateTour({ actionType, tourData }) {
   };
 
   const featureImageEditHandler = function (event) {
-    const modifiedTime = +event.target.id;
-    console.log(modifiedTime);
-    const newImageList = [...formData.images]?.filter(
-      (item) => item.lastModified !== modifiedTime
-    );
+    const imageId = event.target.id;
+    console.log(imageId);
+    const newImageList = [...formData.images]?.filter((item) => {
+      if (item?.lastModified) {
+        return item.lastModified !== +imageId;
+      } else {
+        return item.split("/")[item.split("/").length - 1] !== imageId;
+      }
+    });
     setValue("images", newImageList);
   };
+
+  console.log(watch());
 
   return (
     <>
@@ -191,7 +195,6 @@ export default function CreateTour({ actionType, tourData }) {
               {errorsTour.coverImage?.message}
             </Typography>
           )}
-
           {/* main */}
           <div className="grid md:grid-cols-2 grid-cols-1 gap-4 py-4 md:py-0  lg:gap-y-4 gap-x-8 ">
             <div className=" w-full">
@@ -498,7 +501,6 @@ export default function CreateTour({ actionType, tourData }) {
               )}
             </div>
           </div>
-
           <label htmlFor="featureImage">
             <Typography
               variant="small"
@@ -508,7 +510,6 @@ export default function CreateTour({ actionType, tourData }) {
               Feature Image
             </Typography>
           </label>
-
           <div
             onDragOver={dragOver("featureImage")}
             onDrop={dropHandler("featureImage")}
@@ -546,12 +547,16 @@ export default function CreateTour({ actionType, tourData }) {
                 <div className=" flex gap-4 items-center justify-center">
                   {[...formData.images].map((item, i) => (
                     <div key={i} className="h-[140px] w-[180px] relative">
-                      <div className=" absolute top-1 right-1">
-                        <HiOutlineX
-                          id={item.lastModified}
-                          onClick={featureImageEditHandler}
-                          className=" w-7 h-7 p-1 rounded-full text-shadeBlack bg-offWhite cursor-pointer"
-                        />
+                      <div
+                        onClick={featureImageEditHandler}
+                        id={
+                          item.lastModified
+                            ? item.lastModified
+                            : item.split("/")[item?.split("/").length - 1]
+                        }
+                        className=" absolute top-1 right-1 cursor-pointer"
+                      >
+                        <HiOutlineX className=" w-7 h-7 pointer-events-none  p-1 rounded-full text-shadeBlack bg-offWhite " />
                       </div>
                       <img
                         src={convertToDataURL(item)}
@@ -601,7 +606,6 @@ export default function CreateTour({ actionType, tourData }) {
               {errorsTour.images?.message}
             </Typography>
           )}
-
           <label htmlFor="totalParticipants">
             <Typography
               variant="small"
@@ -611,9 +615,7 @@ export default function CreateTour({ actionType, tourData }) {
               Add Tour Locations
             </Typography>
           </label>
-
           <AddLocationPoint />
-
           <Button
             className="bg-actionBlue my-6 w-full rounded-none font-medium shadow-none normal-case text-white text-[15px] tracking-wide"
             onClick={handleSubmitTour(createTourHandler, onError)}
