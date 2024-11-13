@@ -2,10 +2,22 @@
 import TourMap from "../../Map/TourMap";
 import SelectedLocation from "../../Map/SelectedLocation";
 import { useMapContext } from "./MapContext";
+import { useEffect } from "react";
 
-export default function AddLocationPoint() {
+export default function AddLocationPoint({ registerTour, setValue }) {
   const locations = [{ coordinates: [89.251608, 24.003675] }];
-  const { state, dispatch } = useMapContext();
+  const { state } = useMapContext();
+  useEffect(() => {
+    console.log("chenges");
+    setValue("locations", state?.selectedLocation);
+  }, [state?.selectedLocation]);
+
+  registerTour("locations", {
+    validate: (value) =>
+      (value && value.length > 0) ||
+      "Please select at least one location on the map",
+  });
+
   return (
     <>
       <div>

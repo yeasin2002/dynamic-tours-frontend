@@ -121,7 +121,7 @@ export default function TourList({ tourData, activeFilter, pageType }) {
                     </Link>
                   </div>
                 ) : (
-                  <div className="bg-light-green-200">
+                  <div className="">
                     <Button size="sm" color="blue-gray" className=" mr-3">
                       <HiHeart className="w-4 h-4" />
                     </Button>

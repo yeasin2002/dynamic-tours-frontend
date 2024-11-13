@@ -5,7 +5,7 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { HiChevronUp } from "react-icons/hi";
 import { convertToDataURL } from "@/app/util/helper";
 import { useMap } from "react-leaflet";
@@ -16,16 +16,14 @@ export default function SelectedLocation({ places, pageType }) {
 
   const map = useMap();
   const openMenu = (e) => {
-    console.log(e.target, e.currentTarget);
     e.stopPropagation();
     setIsOpen(true);
   };
 
   const flyHandler = function (e) {
     const coordinates = [e.target.dataset?.lat, e.target.dataset?.lng];
-    console.log(map);
     e.stopPropagation();
-    map?.flyTo(coordinates, 17);
+    map?.flyTo(coordinates, 17, { duration: 3.5 });
     // closing the menu
     setIsOpen(false);
   };

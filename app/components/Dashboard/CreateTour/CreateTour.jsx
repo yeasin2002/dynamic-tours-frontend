@@ -80,6 +80,8 @@ export default function CreateTour({ actionType, tourData }) {
     };
   };
 
+  // this one is for custom register form
+
   //
   const featureImageHandler = function (e) {
     const newImageList = formData?.images ? [...formData.images] : [];
@@ -606,7 +608,7 @@ export default function CreateTour({ actionType, tourData }) {
               {errorsTour.images?.message}
             </Typography>
           )}
-          <label htmlFor="totalParticipants">
+          <label htmlFor="locations">
             <Typography
               variant="small"
               color="blue-gray"
@@ -615,9 +617,18 @@ export default function CreateTour({ actionType, tourData }) {
               Add Tour Locations
             </Typography>
           </label>
-          <AddLocationPoint />
+          {/* this is required for validation */}
+          <AddLocationPoint registerTour={registerTour} setValue={setValue} />
+          {errorsTour?.locations && (
+            <Typography
+              variant="small"
+              className="opacity-90 tracking-wide text-red-600 my-2"
+            >
+              {errorsTour.locations?.message}
+            </Typography>
+          )}
           <Button
-            className="bg-actionBlue my-6 w-full rounded-none font-medium shadow-none normal-case text-white text-[15px] tracking-wide"
+            className="bg-actionBlue my-8 mt-3 w-full rounded-none font-medium shadow-none normal-case text-white text-[15px] tracking-wide"
             onClick={handleSubmitTour(createTourHandler, onError)}
           >
             {isUpdate ? "Update Tour" : "Create Tour"}
