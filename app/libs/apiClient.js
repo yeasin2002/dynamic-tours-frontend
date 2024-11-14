@@ -19,14 +19,14 @@ const getToken = async function () {
   }
 };
 
-export async function apiRequest(method, url, data = {}) {
+export async function apiRequest(method, url, data = {}, headers = {}) {
   const token = await getToken();
   try {
     const response = await apiClient.request({
       method,
       url,
       data,
-      headers: token ? { Authorization: `Bearer ${token}` } : {},
+      headers: token ? { Authorization: `Bearer ${token}` } : headers,
     });
     return response.data;
   } catch (error) {

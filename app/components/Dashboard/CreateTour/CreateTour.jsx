@@ -15,7 +15,6 @@ import AddLocationPoint from "./AddLocationPoint";
 import { convertToDataURL } from "@/app/util/helper";
 import { HiOutlineX } from "react-icons/hi";
 import { useMapContext } from "./MapContext";
-import API from "@/app/libs/API";
 import updateTour from "@/app/libs/updateTour";
 
 export default function CreateTour({ actionType, tourData }) {
