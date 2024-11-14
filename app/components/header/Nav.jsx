@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import Container from "../extra/Container";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { ProfileMenu } from "./ProfileMenu";
+import ProfileMenu from "@/app/components/Header/ProfileMenu";
 
 export default function Nav() {
   const [isNavShowed, setIsNavShowed] = useState(false);

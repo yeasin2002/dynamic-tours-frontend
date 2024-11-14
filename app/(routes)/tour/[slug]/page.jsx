@@ -10,13 +10,13 @@ import Review from "@/app/components/Tour/TourDetails/Reviews";
 import SubDetails from "@/app/components/Tour/TourDetails/SubDetails";
 import SmallGuide from "@/app/components/Tour/TourDetails/SmallGuide";
 import FaqSection from "@/app/components/Tour/TourDetails/FaqSection";
-
 import BookingMenu from "@/app/components/Tour/TourDetails/BookingMenu";
 import Location from "@/app/components/Map/Location";
 
 export default async function SingleTour({ params }) {
   const tourData = await getTour(params.slug);
-  let tour = tourData?.tour;
+  const tour = tourData?.tour;
+
   return (
     <>
       <Nav />
