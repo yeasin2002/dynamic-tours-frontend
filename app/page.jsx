@@ -7,6 +7,7 @@ import Discover from "@/app/components/LandingPage/Discover";
 import Reviews from "@/app/components/LandingPage/Reviews";
 import Explore from "@/app/components/LandingPage/Explore";
 import Footer from "@/app/components/LandingPage/Footer";
+import Container from "./components/extra/Container";
 
 export default function Home() {
   return (
@@ -18,27 +19,31 @@ export default function Home() {
         <section>
           <Hero />
         </section>
-        <section className=" py-10 container">
-          <Destination />
-        </section>
-        <section className=" py-10 container">
-          <Unleash />
-        </section>
-        <section id="about" className=" py-10 container">
-          <About />
-        </section>
-        <section className=" py-10 container">
-          <Discover />
-        </section>
-        <section className=" py-10 container 0">
-          <Reviews />
-        </section>
-        <section className=" py-20 container">
-          <Explore />
-        </section>
+        <Container>
+          <section className=" py-10 container">
+            <Destination />
+          </section>
+          <section className=" py-10 container">
+            <Unleash />
+          </section>
+          <section id="about" className=" py-10 container">
+            <About />
+          </section>
+          <section className=" py-10 container">
+            <Discover />
+          </section>
+          <section className=" py-10 container 0">
+            <Reviews />
+          </section>
+          <section className=" py-20 container">
+            <Explore />
+          </section>
+        </Container>
       </main>
       <footer className=" pt-10  bg-offWhite">
-        <Footer />
+        <Container>
+          <Footer />
+        </Container>
       </footer>
     </>
   );

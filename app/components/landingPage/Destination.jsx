@@ -8,15 +8,14 @@ import "swiper/css/navigation";
 
 import { journeyData } from "../../constant/constant";
 import { getAllTours } from "../../libs/getAllTours";
+import Container from "../extra/Container";
 
 export default async function Destination() {
   const allTours = await getAllTours();
 
   return (
     <>
-      {/* {tourslider here} */}
       <TourSlider bestTours={allTours} />
-
       <div className=" flex flex-col items-center py-3">
         <h3 className=" text-4xl text-center pb-4 font-bold text-black">
           Journey To The Sky Made Simple!
