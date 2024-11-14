@@ -5,10 +5,9 @@ import Image from "next/image";
 import logo from "@/public/logo.svg";
 import { navMenu } from "../../constant/constant";
 import { useEffect, useState } from "react";
-import { Typography } from "@material-tailwind/react";
 import Container from "../extra/Container";
 import { usePathname } from "next/navigation";
-import { getSession, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { ProfileMenu } from "./ProfileMenu";
 
 export default function Nav() {

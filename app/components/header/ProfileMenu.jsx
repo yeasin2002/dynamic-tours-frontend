@@ -13,9 +13,8 @@ import { useEffect, useState } from "react";
 import defaultProfile from "@/public/default_profile.png";
 import { signOutAction } from "@/app/action/AuthAction";
 import { HiOutlineChevronDown } from "react-icons/hi";
-import Loading from "@/app/ui/Loading";
 
-export function ProfileMenu({ signOut, user }) {
+export default function ProfileMenu({ signOut, user }) {
   const [isOpen, setIsOpen] = useState(false);
   const openMenu = () => setIsOpen(true);
   const closeMenu = () => setIsOpen(false);
