@@ -1,5 +1,11 @@
 "use client";
-import { Input, Typography, Button, Textarea } from "@material-tailwind/react";
+import {
+  Input,
+  Typography,
+  Button,
+  Textarea,
+  input,
+} from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiOutlinePhotograph } from "react-icons/hi";
@@ -9,10 +15,11 @@ import AddLocationPoint from "./AddLocationPoint";
 import { convertToDataURL } from "@/app/util/helper";
 import { HiOutlineX } from "react-icons/hi";
 import { useMapContext } from "./MapContext";
+import API from "@/app/libs/API";
+import updateTour from "@/app/libs/updateTour";
 
 export default function CreateTour({ actionType, tourData }) {
   const isUpdate = actionType === "update";
-
   const { state, dispatch } = useMapContext();
   const {
     register: registerTour,
@@ -30,6 +37,49 @@ export default function CreateTour({ actionType, tourData }) {
 
   const formData = watch();
 
+  // the main submit function
+  const createTourHandler = async function (inputData) {
+    const formData = new FormData();
+
+    // for (let key in inputData) {
+    //   console.log(inputData[key]);
+    //   if (key === "coverImage") {
+    //     formData.append(key, inputData[key][0]);
+    //   } else if (key === "locations") {
+    //     input[key]?.forEach((item, i) => formData.append(`${key}[${i}]`, item));
+    //   } else if (key === "images") {
+    //     input[key]?.forEach((item, i) => formData.append(`${key}[${i}]`, item));
+    //   } else {
+    //     formData.append(key, inputData[key]);
+    //   }
+    // }
+    formData.append("coverImage", inputData.coverImage[0]);
+
+    console.log(formData.get("coverImage"));
+
+    // sending api request when form is ready
+    // try {
+    //   const updateRes = await updateTour(tourData?.id, formData);
+    //   console.log(updateRes);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
+    console.log();
+
+    try {
+      const res = await API.patch(
+        `http://localhost:4000/api/v1/tour/${tourData?.id}`,
+        formData
+      );
+      return res.data?.data;
+    } catch (error) {
+      console.log(error);
+      throw new Error("Something Went Wrong");
+    }
+    console.log(formData.get("images"));
+  };
+
   useEffect(() => {
     if (!tourData && !isUpdate) return;
     // key of formElement
@@ -44,11 +94,6 @@ export default function CreateTour({ actionType, tourData }) {
       dispatch({ type: "LOAD_LOCATION", payload: tourData.locations });
     });
   }, [actionType]);
-
-  // the main submit function
-  const createTourHandler = function (inputData) {
-    console.log(inputData);
-  };
 
   // for focusing to the error input
   const onError = function () {
@@ -95,6 +140,7 @@ export default function CreateTour({ actionType, tourData }) {
       setDragStart({ coverImage: false, featureImage: false });
       if (inputType === "coverImage") {
         const dataTransfer = new DataTransfer();
+        console.log(event.dataTransfer.files);
         dataTransfer.items.add(event.dataTransfer.files[0]);
         const coverImageFileList = dataTransfer.files;
         setValue("coverImage", coverImageFileList);
@@ -175,11 +221,10 @@ export default function CreateTour({ actionType, tourData }) {
               name="coverImage"
               color="gray"
               {...registerTour("coverImage", {
-                required: "Please select a cover image",
                 validate: {
-                  maxFile: (image) =>
-                    (image && image.length < 2) ||
-                    "You can only select up to 1 cover image.",
+                  minFile: (image) =>
+                    (image && image.length >= 1) ||
+                    "Please select a cover image.",
                 },
               })}
               size="lg"
@@ -414,12 +459,7 @@ export default function CreateTour({ actionType, tourData }) {
                 size="lg"
                 type="number"
                 name="discountPrice"
-                {...registerTour("discountPrice", {
-                  min: {
-                    value: 1,
-                    message: "discountPrice must be at least 1",
-                  },
-                })}
+                {...registerTour("discountPrice")}
                 placeholder="Enter discount price"
                 className="!w-full placeholder:!opacity-100 placeholder:text-shadeBlack !bg-senseWhite border-none rounded-none "
                 labelProps={{

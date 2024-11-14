@@ -58,7 +58,6 @@ export function Login({ pathName }) {
         await signInAction(loginForm);
       }
     } catch (error) {
-      console.log(error.message, "error-------");
       setStatus((prev) => {
         return { ...prev, error: error.message, loading: false };
       });
