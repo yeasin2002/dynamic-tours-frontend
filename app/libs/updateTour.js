@@ -1,15 +1,12 @@
-"use server";
-
-import axios from "axios";
-import API from "./API";
-export default async function updateTour(tourId, updateData) {
-  console.log(tourId);
+import { apiRequest } from "./apiClient";
+export default async function updateTour(tourId, formData) {
   try {
-    const tourData = await API.patch(
-      `http://localhost:4000/api/v1/tour/${tourId}`,
-      updateData
+    const tourData = await apiRequest(
+      "patch",
+      `/api/v1/tour/${tourId}`,
+      formData
     );
-    return tourData.data?.data;
+    return tourData?.data;
   } catch (error) {
     console.log(error);
     throw new Error("Something Went Wrong");

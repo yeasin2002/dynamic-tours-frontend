@@ -65,17 +65,12 @@ export default function CreateTour({ actionType, tourData }) {
     //   console.log(error);
     // }
 
-    console.log();
-
     try {
-      const res = await API.patch(
-        `http://localhost:4000/api/v1/tour/${tourData?.id}`,
-        formData
-      );
+      const res = await updateTour(tourData?.id, formData);
       return res.data?.data;
     } catch (error) {
       console.log(error);
-      throw new Error("Something Went Wrong");
+      // throw new Error("Something Went Wrong");
     }
     console.log(formData.get("images"));
   };

@@ -17,7 +17,6 @@ import Location from "@/app/components/Map/Location";
 export default async function SingleTour({ params }) {
   const tourData = await getTour(params.slug);
   let tour = tourData?.tour;
-  console.log(tour);
   return (
     <>
       <Nav />

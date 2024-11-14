@@ -3,6 +3,8 @@ import axios from "axios";
 import { getSession } from "next-auth/react";
 
 // creating apiClient
+console.log("Host : ", process.env.NEXT_PUBLIC_BACKEND_URL);
+
 const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
 });

@@ -32,7 +32,7 @@ export default function Nav() {
       }
     };
     if (window) {
-      window.addEventListener("scroll", scrollHandler);
+      window?.addEventListener("scroll", scrollHandler);
     }
     return () => window.removeEventListener("scroll", scrollHandler);
   }, [session.status]);

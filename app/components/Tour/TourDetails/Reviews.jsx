@@ -2,7 +2,6 @@ import { Typography, Button, Avatar } from "@/app/ui/materialExport";
 import { HiOutlinePencilAlt, HiStar } from "react-icons/hi";
 
 export default function Review({ totalRating, ratingsAverage, reviews }) {
-  console.log(reviews);
   return (
     <>
       <div className="bg-gray-100 p-8 px-4 md:p-12 my-12 rounded-lg text-3xl flex flex-col text-center md:text-left gap-2 md:flex-row  items-center justify-between">
@@ -61,8 +60,8 @@ export default function Review({ totalRating, ratingsAverage, reviews }) {
       {reviews?.map((item) => (
         <div className=" border-b border-[#99999981] py-4 flex flex-col gap-3 ">
           <div className="rating flex gap-0.5">
-            {new Array(Math.round(item.rating)).fill(1).map((item) => (
-              <HiStar className="text-yellow-900 w-6 h-6" />
+            {new Array(Math.round(item.rating)).fill(1).map((item, i) => (
+              <HiStar key={i} className="text-yellow-900 w-6 h-6" />
             ))}
             <Typography
               variant="small"
