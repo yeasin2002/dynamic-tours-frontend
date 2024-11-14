@@ -4,7 +4,7 @@ import Credentials from "next-auth/providers/credentials";
 import {
   credentialsLoginHandler,
   googleSignInHandler,
-} from "./app/libs/authenticate";
+} from "@/app/libs/authenticate";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [

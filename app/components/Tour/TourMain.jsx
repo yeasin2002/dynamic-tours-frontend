@@ -13,7 +13,7 @@ import { filterSort } from "@/app/constant/constant";
 import FilterTour from "@/app/util/FilterTour";
 import filterManager from "@/app/util/FilterManager";
 import Loading from "@/app/ui/Loading";
-import NotFound from "../../components/Tour/NotFound";
+import NotFound from "@/app/components/Tour/NotFound";
 import Link from "next/link";
 import { HiOutlinePencilAlt } from "react-icons/hi";
 

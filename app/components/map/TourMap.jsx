@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -14,7 +14,7 @@ import RoutingMachine from "./RoutingMachine";
 import SearchControll from "./SearchControll";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
 import AddLocationDetails from "./AddLocationDetails";
-import { useMapContext } from "../Dashboard/CreateTour/MapContext";
+import { useMapContext } from "@/app/components/Dashboard/CreateTour/MapContext";
 import SelectedLocation from "./SelectedLocation";
 
 const customIcon = new L.Icon({

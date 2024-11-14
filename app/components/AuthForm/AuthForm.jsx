@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
-import Login from "./Login";
+import Login from "@/app/components/AuthForm/Login";
 import authImage from "@/public/image/auth_form.png";
 
 export function AuthForm() {
