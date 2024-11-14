@@ -22,7 +22,7 @@ export const credentialsLoginHandler = async function (
 ) {
   let user;
   try {
-    const res = await apiRequest("get", "/api/v1/login", {
+    const res = await apiRequest("post", "/api/v1/login", {
       emailOrUsername,
       password,
     });

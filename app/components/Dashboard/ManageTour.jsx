@@ -1,3 +1,4 @@
+"use client";
 import Tour from "@/app/(routes)/tour/page";
 export default function ManageTour() {
   return (

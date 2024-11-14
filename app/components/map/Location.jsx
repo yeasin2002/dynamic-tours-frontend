@@ -1,5 +1,8 @@
 import { Typography } from "@/app/ui/materialExport";
-import TourMap from "./TourMap";
+import dynamic from "next/dynamic";
+const TourMap = dynamic(() => import("@/app/components/Map/TourMap"), {
+  ssr: false,
+});
 
 export default function Location({ places }) {
   console.log(places);
