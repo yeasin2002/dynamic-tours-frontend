@@ -1,7 +1,7 @@
 "use client";
 import { Button, Typography } from "@/app/ui/materialExport";
 import { Input, Textarea } from "@material-tailwind/react";
-import { useMapContext } from "../Dashboard/CreateTour/map-context";
+import { useMapContext } from "../Dashboard/map-context";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 

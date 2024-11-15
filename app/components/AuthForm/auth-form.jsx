@@ -1,3 +1,4 @@
+"use client";
 import { usePathname } from "next/navigation";
 import Login from "./login";
 import authImage from "@/public/image/auth_form.png";

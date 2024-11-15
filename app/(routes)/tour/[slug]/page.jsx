@@ -6,11 +6,11 @@ import { Button, Typography } from "@/app/ui/materialExport";
 import Container from "@/app/components/Extra/container";
 import { HiOutlineHeart, HiOutlineShare, HiStar } from "react-icons/hi";
 import Link from "next/link";
-import Review from "@/app/components/Tour/Details/reviews";
-import SubDetails from "@/app/components/Tour/Details/sub-details";
-import SmallGuide from "@/app/components/Tour/Details/small-guide";
-import FaqSection from "@/app/components/Tour/Details/faq-section";
-import BookingMenu from "@/app/components/Tour/Details/booking-menu";
+import Review from "@/app/components/Tour/reviews";
+import SubDetails from "@/app/components/Tour/sub-details";
+import SmallGuide from "@/app/components/Tour/small-guide";
+import FaqSection from "@/app/components/Tour/faq-section";
+import BookingMenu from "@/app/components/Tour/booking-menu";
 import Location from "@/app/components/Map/location";
 
 export default async function SingleTour({ params }) {
