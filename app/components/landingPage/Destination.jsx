@@ -1,14 +1,12 @@
-import { FaCaretRight } from "react-icons/fa";
-
 import Link from "next/link";
-import TourSlider from "../extra/TourSlider";
+import TourSlider from "../Extra/tour-slider";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import { FaCaretRight } from "react-icons/fa";
 
 import { journeyData } from "../../constant/constant";
 import { getAllTours } from "../../libs/getAllTours";
-import Container from "../extra/Container";
 
 export default async function Destination() {
   const allTours = await getAllTours();

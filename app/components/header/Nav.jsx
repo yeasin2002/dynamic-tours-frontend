@@ -5,10 +5,10 @@ import Image from "next/image";
 import logo from "@/public/logo.svg";
 import { navMenu } from "../../constant/constant";
 import { useEffect, useState } from "react";
-import Container from "../extra/Container";
+import Container from "../Extra/container";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
-import ProfileMenu from "@/app/components/Header/ProfileMenu";
+import ProfileMenu from "@/app/components/Header/profile-menu";
 
 export default function Nav() {
   const [isNavShowed, setIsNavShowed] = useState(false);

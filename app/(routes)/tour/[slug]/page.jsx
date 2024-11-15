@@ -1,17 +1,17 @@
 import { getTour } from "@/app/libs/getTour";
-import Nav from "@/app/components/Header/Nav";
-import Footer from "@/app/components/LandingPage/Footer";
+import Nav from "@/app/components/Header/nav";
+import Footer from "@/app/components/LandingPage/footer";
 import Image from "next/image";
 import { Button, Typography } from "@/app/ui/materialExport";
-import Container from "@/app/components/extra/Container";
+import Container from "@/app/components/Extra/container";
 import { HiOutlineHeart, HiOutlineShare, HiStar } from "react-icons/hi";
 import Link from "next/link";
-import Review from "@/app/components/Tour/TourDetails/Reviews";
-import SubDetails from "@/app/components/Tour/TourDetails/SubDetails";
-import SmallGuide from "@/app/components/Tour/TourDetails/SmallGuide";
-import FaqSection from "@/app/components/Tour/TourDetails/FaqSection";
-import BookingMenu from "@/app/components/Tour/TourDetails/BookingMenu";
-import Location from "@/app/components/Map/Location";
+import Review from "@/app/components/Tour/Details/reviews";
+import SubDetails from "@/app/components/Tour/Details/sub-details";
+import SmallGuide from "@/app/components/Tour/Details/small-guide";
+import FaqSection from "@/app/components/Tour/Details/faq-section";
+import BookingMenu from "@/app/components/Tour/Details/booking-menu";
+import Location from "@/app/components/Map/location";
 
 export default async function SingleTour({ params }) {
   const tourData = await getTour(params.slug);

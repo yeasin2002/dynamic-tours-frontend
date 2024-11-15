@@ -1,6 +1,6 @@
 import { Typography } from "@/app/ui/materialExport";
 import dynamic from "next/dynamic";
-const TourMap = dynamic(() => import("@/app/components/Map/TourMap"), {
+const TourMap = dynamic(() => import("@/app/components/Map/tour-map"), {
   ssr: false,
 });
 

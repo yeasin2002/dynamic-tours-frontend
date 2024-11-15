@@ -1,4 +1,4 @@
-import ManageTour from "@/app/components/Dashboard/ManageTour";
+import ManageTour from "@/app/components/Dashboard/manage-tour";
 export default function Page() {
   return (
     <>

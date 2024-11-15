@@ -10,12 +10,12 @@ import {
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import markerIcon from "@/public/marker.png";
-import RoutingMachine from "./RoutingMachine";
-import SearchControll from "./SearchControll";
+import RoutingMachine from "./routing-machine";
+import SearchControll from "./search-controll";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
-import AddLocationDetails from "./AddLocationDetails";
-import { useMapContext } from "@/app/components/Dashboard/CreateTour/MapContext";
-import SelectedLocation from "./SelectedLocation";
+import AddLocationDetails from "./add-location-details";
+import { useMapContext } from "@/app/components/Dashboard/CreateTour/map-context";
+import SelectedLocation from "./selected-location";
 
 const customIcon = new L.Icon({
   iconUrl: markerIcon?.src, // Replace with your icon path

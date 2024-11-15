@@ -11,7 +11,7 @@ import googleLogo from "@/public/google_icon.svg";
 import { credentialsRegisterHandler } from "@/app/libs/authenticate";
 import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 
-export function Login({ pathName }) {
+export default function Login({ pathName }) {
   const [status, setStatus] = useState({ loading: false, error: null });
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const isLogin = pathName === "/login";
@@ -426,5 +426,3 @@ export function Login({ pathName }) {
     </div>
   );
 }
-
-export default Login;

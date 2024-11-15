@@ -1,4 +1,4 @@
-import AuthForm from "@/app/components/AuthForm/AuthForm";
+import AuthForm from "@/app/components/AuthForm/auth-form";
 
 export const metadata = {
   title: "Dynamic Travel - Sign up to open account",

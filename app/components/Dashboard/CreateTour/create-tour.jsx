@@ -10,11 +10,11 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiOutlinePhotograph } from "react-icons/hi";
 import { HiOutlineFolderPlus } from "react-icons/hi2";
-import AddTourGuide from "@/app/components/Dashboard/CreateTour/AddTourGuide";
-import AddLocationPoint from "@/app/components/Dashboard/CreateTour/AddTourGuide";
+import AddTourGuide from "@/app/components/Dashboard/CreateTour/add-tour-guide";
+import AddLocationPoint from "@/app/components/Dashboard/CreateTour/add-location-point";
 import { convertToDataURL } from "@/app/util/helper";
 import { HiOutlineX } from "react-icons/hi";
-import { useMapContext } from "@/app/components/Dashboard/CreateTour/MapContext";
+import { useMapContext } from "@/app/components/Dashboard/CreateTour/map-context";
 import updateTour from "@/app/libs/updateTour";
 
 export default function CreateTour({ actionType, tourData }) {

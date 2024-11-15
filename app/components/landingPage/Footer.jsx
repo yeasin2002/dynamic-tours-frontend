@@ -1,9 +1,9 @@
 import logo from "@/public/logo.svg";
-import SocialLinks from "../extra/SocialLinks";
+import SocialLinks from "../Extra/social-links";
 import { footerData } from "../../constant/constant";
 import Image from "next/image";
 import Link from "next/link";
-import Container from "../extra/Container";
+import Container from "../Extra/container";
 
 export default function Footer() {
   return (

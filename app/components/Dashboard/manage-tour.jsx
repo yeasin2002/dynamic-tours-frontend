@@ -3,11 +3,12 @@ const TourMain = dynamic(() => import("@/app/components/Tour/tour-main"), {
   ssr: false,
 });
 import { Suspense } from "react";
-export default function page() {
+// import TourMain from "../Tour/tour-main";
+export default function ManageTour() {
   return (
     <>
       <Suspense>
-        <TourMain />
+        <TourMain pageType={"admin"} />
       </Suspense>
     </>
   );

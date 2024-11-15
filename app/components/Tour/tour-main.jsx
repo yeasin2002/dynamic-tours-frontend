@@ -1,19 +1,19 @@
 "use client";
-import Nav from "@/app/components/Header/Nav";
-import Filter from "@/app/components/Tour/Filter";
-import Search from "@/app/components/Tour/Search";
-import TourList from "@/app/components/Tour/TourList";
-import Container from "@/app/components/extra/Container";
+import Nav from "@/app/components/Header/nav";
+import Filter from "@/app/components/Tour/filter";
+import Search from "@/app/components/Tour/search";
+import TourList from "@/app/components/Tour/tour-list";
+import Container from "@/app/components/Extra/container";
 import { getFilteredData } from "@/app/libs/getFilteredTour";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { HiOutlineAdjustments, HiOutlineChevronUp } from "react-icons/hi";
 import { Button, Select, Option, Chip, Card } from "@material-tailwind/react";
 import { filterSort } from "@/app/constant/constant";
 import FilterTour from "@/app/util/FilterTour";
 import filterManager from "@/app/util/FilterManager";
 import Loading from "@/app/ui/Loading";
-import NotFound from "@/app/components/Tour/NotFound";
+import NotFound from "@/app/components/Tour/not-found";
 import Link from "next/link";
 import { HiOutlinePencilAlt } from "react-icons/hi";
 
@@ -153,7 +153,6 @@ export default function TourMain({ pageType }) {
                     />
                   ))}
                 </div>
-
                 {tourData?.total > 0 && !loading && (
                   <TourList
                     pageType={pageType}
@@ -161,6 +160,7 @@ export default function TourMain({ pageType }) {
                     tourData={tourData}
                   />
                 )}
+
                 {tourData?.total < 1 && !loading && <NotFound />}
                 {loading && (
                   <Card className="h-[400px]">

@@ -1,4 +1,4 @@
-import SocialLinks from "./SocialLinks";
+import SocialLinks from "./social-links";
 import { FaArrowRight } from "react-icons/fa";
 
 export default function KnowMore() {
