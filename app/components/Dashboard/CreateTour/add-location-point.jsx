@@ -1,6 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
-const TourMap = dynamic(() => import("./../../Map/tour-map"), {
+const TourMap = dynamic(() => import("@components/Tour/tour-main"), {
   ssr: false,
 });
 import { useMapContext } from "@/app/components/Dashboard/CreateTour/map-context";

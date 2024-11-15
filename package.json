@@ -28,7 +28,6 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",
-    "encoding": "^0.1.13",
     "eslint": "8.57.1",
     "eslint-config-next": "15.0.3",
     "postcss": "^8",
