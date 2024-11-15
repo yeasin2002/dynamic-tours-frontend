@@ -24,7 +24,7 @@ const customIcon = new L.Icon({
   popupAnchor: [0, -46], // Adjust popup position if using popups
 });
 
-const TourMap = ({ locations, pageType }) => {
+export default function TourMap({ locations, pageType }) {
   // the map state for location
   const contextData = pageType === "admin" && useMapContext();
 
@@ -137,6 +137,4 @@ const TourMap = ({ locations, pageType }) => {
       </div>
     </>
   );
-};
-
-export default TourMap;
+}
