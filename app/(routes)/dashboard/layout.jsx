@@ -1,7 +1,7 @@
-import SideNav from "@/app/components/Dashboard/side-nav";
-import MobileMenu from "@/app/components/Dashboard/mobile-menu";
-import ProfileMenu from "@/app/components/Header/profile-menu";
-import LargeHeading from "@/app/components/Dashboard/large-heading";
+import SideNav from "@components/Dashboard/side-nav";
+import MobileMenu from "@components/Dashboard/mobile-menu";
+import ProfileMenu from "@components/Header/profile-menu";
+import LargeHeading from "@components/Dashboard/large-heading";
 
 export default function layout({ children }) {
   return (

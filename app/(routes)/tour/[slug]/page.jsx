@@ -1,17 +1,17 @@
 import { getTour } from "@/app/libs/getTour";
-import Nav from "@/app/components/Header/nav";
-import Footer from "@/app/components/LandingPage/footer";
+import Nav from "@components/Header/nav";
+import Footer from "@components/LandingPage/footer";
 import Image from "next/image";
 import { Button, Typography } from "@/app/ui/materialExport";
-import Container from "@/app/components/Extra/container";
+import Container from "@components/Extra/container";
 import { HiOutlineHeart, HiOutlineShare, HiStar } from "react-icons/hi";
 import Link from "next/link";
-import Review from "@/app/components/Tour/reviews";
-import SubDetails from "@/app/components/Tour/sub-details";
-import SmallGuide from "@/app/components/Tour/small-guide";
-import FaqSection from "@/app/components/Tour/faq-section";
-import BookingMenu from "@/app/components/Tour/booking-menu";
-import Location from "@/app/components/Map/location";
+import Review from "@components/Tour/reviews";
+import SubDetails from "@components/Tour/sub-details";
+import SmallGuide from "@components/Tour/small-guide";
+import FaqSection from "@components/Tour/faq-section";
+import BookingMenu from "@components/Tour/booking-menu";
+import Location from "@components/Map/location";
 
 export default async function SingleTour({ params }) {
   const tourData = await getTour(params.slug);

@@ -1,9 +1,9 @@
 "use client";
-import Nav from "../../components/Header/nav";
-import Filter from "../../components/Tour/filter";
-import Search from "@/app/components/Tour/search";
-import TourList from "@/app/components/Tour/tour-list";
-import Container from "@/app/components/Extra/container";
+import Nav from "@components/Header/nav";
+import Filter from "@components/Tour/filter";
+import Search from "@components/Tour/search";
+import TourList from "@components/Tour/tour-list";
+import Container from "@components/Extra/container";
 import { getFilteredData } from "@/app/libs/getFilteredTour";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -13,7 +13,7 @@ import { filterSort } from "@/app/constant/constant";
 import FilterTour from "@/app/util/FilterTour";
 import filterManager from "@/app/util/FilterManager";
 import Loading from "@/app/ui/Loading";
-import NotFound from "@/app/components/Tour/not-found";
+import NotFound from "@components/Tour/not-found";
 import Link from "next/link";
 import { HiOutlinePencilAlt } from "react-icons/hi";
 

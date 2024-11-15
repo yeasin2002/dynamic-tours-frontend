@@ -1,7 +1,7 @@
 import { SessionProvider } from "next-auth/react";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
-import TopLoader from "@/app/components/Extra/top-loader";
+import TopLoader from "@components/Extra/top-loader";
 
 const dmSans = DM_Sans({
   weight: ["300", "400", "500", "700"],
