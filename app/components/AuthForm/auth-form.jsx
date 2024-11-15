@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
-import Login from "@components/AuthForm/login";
+import LoginForm from "@components/AuthForm/login-form";
 import authImage from "@/public/image/auth_form.png";
 
 export function AuthForm() {
@@ -15,8 +15,8 @@ export function AuthForm() {
           ></div>
 
           <div className=" w-full 2xl:w-[40%] md:w-2/3 flex items-center">
-            {pathName === "/signup" && <Login pathName={pathName} />}
-            {pathName === "/login" && <Login pathName={pathName} />}
+            {pathName === "/signup" && <LoginForm pathName={pathName} />}
+            {pathName === "/login" && <LoginForm pathName={pathName} />}
           </div>
         </div>
       </div>

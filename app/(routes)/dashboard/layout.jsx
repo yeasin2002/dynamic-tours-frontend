@@ -1,6 +1,7 @@
 import SideNav from "@components/Dashboard/side-nav";
 import MobileMenu from "@components/Dashboard/mobile-menu";
-import ProfileMenu from "@components/Header/profile-menu";
+import Profile from "@/app/components/Header/profile-bar";
+
 import LargeHeading from "@components/Dashboard/large-heading";
 
 export default function layout({ children }) {
@@ -16,7 +17,7 @@ export default function layout({ children }) {
         <div className=" p-3 py-0 md:py-3  w-full h-screen overflow-auto">
           <div className=" hidden lg:flex items-center border-b mb-2 justify-between py-1 ">
             <LargeHeading />
-            <ProfileMenu />
+            <Profile />
           </div>
           {children}
         </div>

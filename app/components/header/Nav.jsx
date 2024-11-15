@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import Container from "../Extra/container";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
-import ProfileMenu from "@/app/components/Header/profile-menu";
+import Profile from "@/app/components/Header/profile-bar";
 
 export default function Nav() {
   const [isNavShowed, setIsNavShowed] = useState(false);
@@ -105,7 +105,7 @@ export default function Nav() {
                 </ul>
               </div>
             </div>
-            <ProfileMenu />
+            <Profile />
           </div>
         </nav>
       </Container>

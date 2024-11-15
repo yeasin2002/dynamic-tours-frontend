@@ -4,7 +4,7 @@ import { Drawer } from "@material-tailwind/react";
 import { HiOutlineMenu } from "react-icons/hi";
 import { Button } from "@/app/ui/materialExport";
 import SideNav from "@/app/components/Dashboard/side-nav";
-import ProfileMenu from "@components/Header/profile-menu";
+import Profile from "@/app/components/Header/profile-bar";
 import { usePathname } from "next/navigation";
 export default function MobileMenu() {
   const [open, setOpen] = useState(false);
@@ -24,7 +24,7 @@ export default function MobileMenu() {
           </Button>
           <h4 className=" font-bold text-lg text-blue-gray-900">{heading}</h4>
           <div>
-            <ProfileMenu />
+            <Profile />
           </div>
         </div>
         <div className="">
