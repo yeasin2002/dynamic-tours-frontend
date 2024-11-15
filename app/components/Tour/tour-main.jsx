@@ -1,12 +1,12 @@
 "use client";
-import Nav from "@/app/components/Header/nav";
-import Filter from "@/app/components/Tour/filter";
+import Nav from "../../components/Header/nav";
+import Filter from "../../components/Tour/filter";
 import Search from "@/app/components/Tour/search";
 import TourList from "@/app/components/Tour/tour-list";
 import Container from "@/app/components/Extra/container";
 import { getFilteredData } from "@/app/libs/getFilteredTour";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { HiOutlineAdjustments, HiOutlineChevronUp } from "react-icons/hi";
 import { Button, Select, Option, Chip, Card } from "@material-tailwind/react";
 import { filterSort } from "@/app/constant/constant";
